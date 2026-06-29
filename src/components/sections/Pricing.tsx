@@ -101,7 +101,7 @@ export default function Pricing() {
             )}
           >
             Annual
-            <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-1 py-0.5 rounded uppercase leading-none font-mono">
+            <span className="text-[9px] font-bold text-neutral-600 bg-neutral-100 px-1 py-0.5 rounded uppercase leading-none font-mono dark:text-neutral-300 dark:bg-neutral-800">
               Save 20%
             </span>
           </span>

@@ -16,9 +16,9 @@ export default function Capabilities() {
     >
       <div className="container-wide">
         <SectionHeading
-          badge="Features"
-          title="Everything You Need to Grow Digitally"
-          subtitle="A complete suite of digital services designed to help businesses build stronger brands, attract qualified customers, and achieve sustainable growth."
+          badge="Why AST Digitally"
+          title="Built for Performance & Growth"
+          subtitle="We combine creativity, technology, and strategy to deliver digital solutions that drive real business results."
         />
 
         <div ref={ref} className="grid gap-6 max-w-6xl mx-auto md:grid-cols-3">
@@ -32,7 +32,7 @@ export default function Capabilities() {
             <GlassCard
               variant="solid"
               hover={true}
-              className="p-6 md:p-7 h-[320px] border border-border bg-white flex flex-col items-center justify-center text-center relative overflow-hidden"
+              className="p-6 md:p-7 min-h-[200px] md:h-[320px] border border-border bg-white flex flex-col items-center justify-center text-center relative overflow-hidden"
             >
               {/* Hand-drawn oval around 100% */}
               <div className="relative mb-6 flex items-center justify-center">
@@ -58,7 +58,7 @@ export default function Capabilities() {
             <GlassCard
               variant="solid"
               hover={true}
-              className="p-6 md:p-7 h-[320px] border border-border bg-white flex flex-col items-center justify-between text-center"
+              className="p-6 md:p-7 min-h-[200px] md:h-[320px] border border-border bg-white flex flex-col items-center justify-between text-center"
             >
               {/* Fingerprint graphic */}
               <div className="flex h-20 w-20 items-center justify-center rounded-lg border border-neutral-100 bg-neutral-50 shadow-[0_2px_10px_rgba(0,0,0,0.025)]">
@@ -90,7 +90,7 @@ export default function Capabilities() {
             <GlassCard
               variant="solid"
               hover={true}
-              className="p-6 md:p-7 h-[320px] border border-border bg-white flex flex-col items-center justify-between text-center"
+              className="p-6 md:p-7 min-h-[200px] md:h-[320px] border border-border bg-white flex flex-col items-center justify-between text-center"
             >
               {/* Chart/Download graphic */}
               <div className="w-full">

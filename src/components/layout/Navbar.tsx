@@ -38,16 +38,16 @@ export default function Navbar() {
         className="container-wide flex h-16 items-center justify-between md:h-20"
         aria-label="Main navigation"
       >
-        {/* Logo */}
         <a
           href="#"
-          className="flex items-center gap-1.5 text-lg font-bold tracking-tight text-foreground transition-opacity hover:opacity-90"
+          className="flex items-center gap-1.5 transition-opacity hover:opacity-90"
           aria-label={`${BRAND.name} - Home`}
         >
-          <span>AST Digitally</span>
-          <span className="text-[9px] text-muted-foreground font-mono px-1 py-0.5 border border-border rounded leading-none uppercase select-none">
-            TM
-          </span>
+          <img 
+            src="/AST Logo.png" 
+            alt="AST Digitally" 
+            className="h-12 md:h-14 w-auto object-contain drop-shadow-[0_0_8px_rgba(0,0,0,0.06)] dark:drop-shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:drop-shadow-[0_0_12px_rgba(0,0,0,0.12)] dark:hover:drop-shadow-[0_0_18px_rgba(255,255,255,0.25)] transition-all duration-300" 
+          />
         </a>
 
         {/* Desktop Nav Links */}

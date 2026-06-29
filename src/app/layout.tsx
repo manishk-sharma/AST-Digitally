@@ -72,6 +72,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <head>
         {/* Apply the persisted/system theme before paint to avoid a flash of the wrong theme */}

@@ -3,7 +3,27 @@
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
+import { Target, Palette, MessageSquare, Clock, Users, Rocket } from "lucide-react";
 import { useInView } from "@/lib/hooks/useInView";
+
+const getDiffIcon = (num: string) => {
+  switch (num) {
+    case "01":
+      return Target;
+    case "02":
+      return Palette;
+    case "03":
+      return MessageSquare;
+    case "04":
+      return Clock;
+    case "05":
+      return Users;
+    case "06":
+      return Rocket;
+    default:
+      return Target;
+  }
+};
 
 export default function WhyUs() {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.05 });
@@ -11,39 +31,33 @@ export default function WhyUs() {
   const differentiators = [
     {
       num: "01",
-      title: "AI-First Solutions",
-      desc: "Custom intelligent agents, neural interfaces, and task automations built to reduce operational bottlenecks and cut overhead.",
-      icon: "🤖",
+      title: "Tailor-Made Solutions",
+      desc: "Every business is unique. We craft custom strategies and solutions that align with your specific goals, industry, and budget.",
     },
     {
       num: "02",
-      title: "Data-Driven Decision Making",
-      desc: "No guessing. We configure precise tracking funnels and predictive lead frameworks to optimize ad budgets and scale ROI.",
-      icon: "📊",
+      title: "Creative UI/UX",
+      desc: "We design stunning, user-friendly interfaces that captivate your audience and drive higher engagement and conversions.",
     },
     {
       num: "03",
-      title: "Conversion-Focused Design",
-      desc: "Stunning aesthetic interfaces backed by conversion analytics, heatmaps, and structured SEO-friendly DOM hierarchies.",
-      icon: "⚡",
+      title: "Transparent Communication",
+      desc: "No hidden agendas. We keep you informed at every stage with clear updates, honest feedback, and complete project visibility.",
     },
     {
       num: "04",
-      title: "Transparent Reporting",
-      desc: "Direct access to real-time marketing sheets, weekly metrics audits, and clear analytics dashboards showing real customer growth.",
-      icon: "📋",
+      title: "On-Time Delivery",
+      desc: "We respect your time. Our structured workflows and dedicated teams ensure every project is delivered on schedule without compromising quality.",
     },
     {
       num: "05",
-      title: "Dedicated Project Managers",
-      desc: "A single direct contact point coordinating design, engineering, and advertising channels to deliver on time.",
-      icon: "👤",
+      title: "Long-Term Support",
+      desc: "Our relationship doesn't end at launch. We provide ongoing maintenance, support, and optimization to keep your business growing.",
     },
     {
       num: "06",
-      title: "Long-Term Growth Partnership",
-      desc: "We scale as you scale. Regular post-launch code audits, campaign adjustments, and AI updates to keep you ahead of competitors.",
-      icon: "🤝",
+      title: "End-to-End Services",
+      desc: "From strategy and design to development, marketing, and automation — we handle everything under one roof for a seamless experience.",
     },
   ];
 
@@ -55,33 +69,35 @@ export default function WhyUs() {
     >
       <div className="container-wide">
         <SectionHeading
-          badge="Differentiators"
-          title="More Than a Digital Agency"
-          subtitle="We combine technology, creativity, and data-driven strategies to build digital experiences that generate measurable business results."
+          badge="Why Choose Us"
+          title="Why Businesses Trust AST Digitally"
+          subtitle="We deliver tailor-made digital solutions with creativity, transparency, and a commitment to your long-term success."
         />
 
         <div ref={ref} className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
-          {differentiators.map((diff, i) => (
-            <motion.div
-              key={diff.num}
-              initial={{ opacity: 0, y: 25 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.06 }}
-            >
-              <GlassCard
-                variant="solid"
-                hover={true}
-                className="p-8 h-full flex flex-col justify-between border border-border"
+          {differentiators.map((diff, i) => {
+            const Icon = getDiffIcon(diff.num);
+            return (
+              <motion.div
+                key={diff.num}
+                initial={{ opacity: 0, y: 25 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.06 }}
               >
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="text-2xl" role="img" aria-hidden="true">
-                      {diff.icon}
-                    </span>
-                    <span className="text-[10px] font-mono text-neutral-400 font-bold border border-border rounded px-1.5 py-0.5 leading-none">
-                      {diff.num}
-                    </span>
-                  </div>
+                <GlassCard
+                  variant="solid"
+                  hover={true}
+                  className="p-8 h-full flex flex-col justify-between border border-border"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-neutral-100 dark:bg-neutral-800 text-black dark:text-white border border-neutral-200 dark:border-neutral-700 transition-transform duration-400 group-hover:scale-105">
+                        <Icon className="h-5 w-5 stroke-[1.8]" />
+                      </div>
+                      <span className="text-[10px] font-mono text-neutral-400 font-bold border border-border rounded px-1.5 py-0.5 leading-none">
+                        {diff.num}
+                      </span>
+                    </div>
                   
                   <h3 className="text-lg font-bold text-foreground mb-3 font-sans tracking-wide">
                     {diff.title}
@@ -93,7 +109,8 @@ export default function WhyUs() {
                 </div>
               </GlassCard>
             </motion.div>
-          ))}
+          );
+        })}
         </div>
       </div>
     </section>

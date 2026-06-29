@@ -1,28 +1,29 @@
 "use client";
 
 import SectionHeading from "@/components/ui/SectionHeading";
+import { Sparkles, Code, Terminal, Cpu, FileText, ShoppingBag, Database, Flame, Cloud, PenTool, Activity, Braces, Wind } from "lucide-react";
 
 export default function Integrations() {
   const row1 = [
-    { name: "OpenAI", icon: "🧠" },
-    { name: "React", icon: "⚛️" },
-    { name: "Next.js", icon: "▲" },
-    { name: "Node.js", icon: "🟢" },
-    { name: "TypeScript", icon: "🟦" },
-    { name: "Tailwind CSS", icon: "🎨" },
-    { name: "Laravel", icon: "🟥" },
-    { name: "WordPress", icon: "📝" },
+    { name: "OpenAI", Icon: Sparkles },
+    { name: "React", Icon: Code },
+    { name: "Next.js", Icon: Terminal },
+    { name: "Node.js", Icon: Braces },
+    { name: "TypeScript", Icon: Code },
+    { name: "Tailwind CSS", Icon: Wind },
+    { name: "Laravel", Icon: Cpu },
+    { name: "WordPress", Icon: FileText },
   ];
 
   const row2 = [
-    { name: "Shopify", icon: "🛍️" },
-    { name: "MongoDB", icon: "🍃" },
-    { name: "PostgreSQL", icon: "🐘" },
-    { name: "Supabase", icon: "⚡" },
-    { name: "Firebase", icon: "🔥" },
-    { name: "AWS", icon: "☁️" },
-    { name: "Figma", icon: "✏️" },
-    { name: "Framer Motion", icon: "🌀" },
+    { name: "Shopify", Icon: ShoppingBag },
+    { name: "MongoDB", Icon: Database },
+    { name: "PostgreSQL", Icon: Database },
+    { name: "Supabase", Icon: Flame },
+    { name: "Firebase", Icon: Flame },
+    { name: "AWS", Icon: Cloud },
+    { name: "Figma", Icon: PenTool },
+    { name: "Framer Motion", Icon: Activity },
   ];
 
   return (
@@ -43,30 +44,36 @@ export default function Integrations() {
         {/* Row 1: Sliding Left */}
         <div className="relative flex overflow-x-hidden w-full select-none">
           <div className="animate-marquee-left flex gap-8 pr-8">
-            {[...row1, ...row1, ...row1, ...row1].map((item, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-3 text-xs font-bold uppercase tracking-wider text-foreground shadow-[0_2px_10px_rgba(0,0,0,0.035)]"
-              >
-                <span>{item.icon}</span>
-                <span>{item.name}</span>
-              </div>
-            ))}
+            {[...row1, ...row1, ...row1, ...row1].map((item, index) => {
+              const Icon = item.Icon;
+              return (
+                <div
+                  key={index}
+                  className="flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-3 text-xs font-bold uppercase tracking-wider text-foreground shadow-[0_2px_10px_rgba(0,0,0,0.035)]"
+                >
+                  <Icon className="h-4 w-4 text-black dark:text-white stroke-[1.8]" />
+                  <span>{item.name}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
 
         {/* Row 2: Sliding Right */}
         <div className="relative flex overflow-x-hidden w-full select-none">
           <div className="animate-marquee-right flex gap-8 pr-8">
-            {[...row2, ...row2, ...row2, ...row2].map((item, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-3 text-xs font-bold uppercase tracking-wider text-foreground shadow-[0_2px_10px_rgba(0,0,0,0.035)]"
-              >
-                <span>{item.icon}</span>
-                <span>{item.name}</span>
-              </div>
-            ))}
+            {[...row2, ...row2, ...row2, ...row2].map((item, index) => {
+              const Icon = item.Icon;
+              return (
+                <div
+                  key={index}
+                  className="flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-3 text-xs font-bold uppercase tracking-wider text-foreground shadow-[0_2px_10px_rgba(0,0,0,0.035)]"
+                >
+                  <Icon className="h-4 w-4 text-black dark:text-white stroke-[1.8]" />
+                  <span>{item.name}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

@@ -22,8 +22,8 @@ export default function SceneLoader({ className }: SceneLoaderProps) {
       <div className="flex flex-col items-center gap-4">
         {/* Pulsing orb */}
         <div className="relative h-16 w-16">
-          <div className="absolute inset-0 animate-ping rounded-full bg-[var(--ast-blue)]/20" />
-          <div className="absolute inset-2 animate-pulse rounded-full bg-gradient-to-br from-[var(--ast-blue)] to-[var(--ast-purple)]" />
+          <div className="absolute inset-0 animate-ping rounded-full bg-black/10 dark:bg-white/10" />
+          <div className="absolute inset-2 animate-pulse rounded-full bg-gradient-to-br from-black/20 to-black/40 dark:from-white/20 dark:to-white/40" />
         </div>
         <p className="text-sm text-muted-foreground animate-pulse">
           Loading experience...

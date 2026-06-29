@@ -70,7 +70,7 @@ export default function CaseStudies() {
                   </div>
 
                   {/* Right: Metrics Dashboard */}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {study.metrics.map((metric, j) => (
                       <motion.div
                         key={metric.label}

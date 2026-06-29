@@ -28,17 +28,17 @@ export default function CTA() {
             </div>
 
             {/* Floating Pill: Graphic Design — top-left */}
-            <div className="absolute left-4 md:left-6 top-12 px-4 py-2 rounded-full border border-neutral-200 bg-white text-xs font-semibold text-neutral-600 shadow-sm">
+            <div className="absolute hidden sm:block left-4 md:left-6 top-12 px-4 py-2 rounded-full border border-neutral-200 bg-white text-xs font-semibold text-neutral-600 shadow-sm">
               Graphic Design
             </div>
 
             {/* Floating Pill: Branding — top-center with red cursor */}
-            <div className="absolute left-[38%] top-2 md:top-4 px-4 py-2 rounded-full border border-neutral-200 bg-white text-xs font-semibold text-neutral-600 shadow-sm">
+            <div className="absolute hidden sm:block left-[38%] top-2 md:top-4 px-4 py-2 rounded-full border border-neutral-200 bg-white text-xs font-semibold text-neutral-600 shadow-sm">
               Branding
             </div>
             {/* Red mouse cursor pointer next to Branding */}
             <svg
-              className="absolute left-[55%] top-[52px] md:top-[56px] h-4 w-3 text-red-500 pointer-events-none"
+              className="absolute hidden sm:block left-[55%] top-[52px] md:top-[56px] h-4 w-3 text-neutral-500 pointer-events-none"
               viewBox="0 0 12 18"
               fill="currentColor"
               aria-hidden="true"
@@ -47,12 +47,12 @@ export default function CTA() {
             </svg>
 
             {/* Floating Pill: Web Application — right-center */}
-            <div className="absolute right-2 md:right-6 bottom-[55px] px-4 py-2 rounded-full border border-neutral-200 bg-white text-xs font-semibold text-neutral-600 shadow-sm">
+            <div className="absolute hidden sm:block right-2 md:right-6 bottom-[55px] px-4 py-2 rounded-full border border-neutral-200 bg-white text-xs font-semibold text-neutral-600 shadow-sm">
               Web Application
             </div>
 
             {/* Floating Pill: UI-UX — bottom-left */}
-            <div className="absolute left-10 md:left-16 bottom-4 px-4 py-2 rounded-full border border-neutral-200 bg-white text-xs font-semibold text-neutral-600 shadow-sm">
+            <div className="absolute hidden sm:block left-10 md:left-16 bottom-4 px-4 py-2 rounded-full border border-neutral-200 bg-white text-xs font-semibold text-neutral-600 shadow-sm">
               UI-UX
             </div>
           </div>
@@ -79,7 +79,7 @@ export default function CTA() {
 
               {/* Mail icon button */}
               <a
-                href="mailto:hr@astdigitally.com"
+                href="mailto:astdigitally@gmail.com"
                 className="flex h-11 w-11 items-center justify-center rounded-lg border border-neutral-200 bg-white text-neutral-600 hover:bg-neutral-50 transition-colors shadow-sm"
                 aria-label="Email us"
               >
@@ -94,7 +94,7 @@ export default function CTA() {
                 href="https://wa.me/918084158221"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-11 w-11 items-center justify-center rounded-lg border border-neutral-200 bg-white text-green-500 hover:bg-neutral-50 transition-colors shadow-sm"
+                className="flex h-11 w-11 items-center justify-center rounded-lg border border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 transition-colors shadow-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300"
                 aria-label="WhatsApp us"
               >
                 <svg className="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

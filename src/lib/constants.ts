@@ -12,12 +12,13 @@ import type {
 
 export const BRAND = {
   name: "AST Digitally",
-  tagline: "AI-Powered Digital Growth Partner",
+  tagline: "Transform Your Business with Digital Marketing & Smart Technology Solutions",
   description:
-    "From AI-powered automation and SEO to high-converting websites, branding, video production, and digital marketing, AST Digitally helps businesses attract more customers, increase conversions, and scale with confidence.",
-  email: "hr@astdigitally.com",
+    "AST Digitally is a full-service digital marketing and technology agency founded by Asif Siddique. We help startups, SMEs, and enterprises grow through digital marketing, websites, branding, automation, custom dashboards, app deployment, and business applications.",
+  email: "astdigitally@gmail.com",
   phone: "+91 80841 58221",
   address: "Monday – Saturday, 9:00 AM – 6:00 PM IST",
+  founder: "Asif Siddique",
 } as const;
 
 // ─── Navigation ─────────────────────────────────────────────────────────────
@@ -25,7 +26,7 @@ export const BRAND = {
 export const NAV_LINKS = [
   { label: "Services", href: "#services" },
   { label: "Process", href: "#process" },
-  { label: "Ecosystem", href: "#ecosystem" },
+  { label: "Industries", href: "#industries" },
   { label: "Why Us", href: "#why-us" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
@@ -44,46 +45,18 @@ export const HERO_KPIS: KPI[] = [
 
 export const SERVICES: Service[] = [
   {
-    id: "ai-solutions",
-    title: "AI Solutions",
-    description:
-      "Intelligent chatbots, AI automation, copilots, and custom AI integrations that streamline operations and improve customer experiences.",
-    icon: "🧠",
-    features: [
-      "AI Chatbots & Assistants",
-      "Process Automation",
-      "Custom AI Integrations",
-      "Workflow Copilots",
-    ],
-    gradient: "from-blue-500 to-cyan-500",
-  },
-  {
-    id: "website-development",
-    title: "Website Design & Development",
-    description:
-      "Modern, responsive, SEO-friendly websites and web applications built for speed, scalability, and conversions.",
-    icon: "🌐",
-    features: [
-      "Custom Website Design",
-      "Next.js & React Apps",
-      "E-Commerce & Shopify",
-      "WordPress Solutions",
-    ],
-    gradient: "from-purple-500 to-pink-500",
-  },
-  {
     id: "digital-marketing",
     title: "Digital Marketing",
     description:
-      "Performance marketing campaigns across Google, Meta, LinkedIn, and other platforms to generate measurable business growth.",
+      "Performance marketing campaigns across Google, Meta, and other platforms to generate measurable business growth.",
     icon: "📈",
     features: [
-      "Meta & Google Ads",
+      "Google & Meta Ads",
       "Social Media Marketing",
-      "Lead Generation Tracks",
+      "Lead Generation",
       "Conversion Optimization",
     ],
-    gradient: "from-emerald-500 to-teal-500",
+    gradient: "from-black to-neutral-600 dark:from-white dark:to-neutral-400",
   },
   {
     id: "seo-services",
@@ -95,37 +68,65 @@ export const SERVICES: Service[] = [
       "Technical SEO Audits",
       "On-Page Optimization",
       "Local SEO Rankings",
-      "Content Strategy Guides",
+      "Content Strategy",
     ],
-    gradient: "from-amber-500 to-orange-500",
+    gradient: "from-neutral-800 to-black dark:from-neutral-300 dark:to-white",
+  },
+  {
+    id: "website-development",
+    title: "Website Design & Development",
+    description:
+      "Modern, responsive, SEO-friendly websites and e-commerce solutions built for speed, scalability, and conversions.",
+    icon: "🌐",
+    features: [
+      "Custom Website Design",
+      "E-Commerce Development",
+      "Business Web Applications",
+      "Website Maintenance",
+    ],
+    gradient: "from-black to-neutral-600 dark:from-white dark:to-neutral-400",
   },
   {
     id: "graphic-design",
     title: "Graphic Design",
     description:
-      "Brand identities, marketing creatives, presentations, and visual assets that leave lasting impressions.",
+      "Brand identities, marketing creatives, and visual assets that leave lasting impressions.",
     icon: "🎨",
     features: [
       "Brand Identity Design",
-      "Marketing Visual Assets",
-      "Presentation Decks",
-      "Custom Vector Assets",
+      "Marketing Creatives",
+      "UI/UX Design",
+      "Custom Graphics",
     ],
-    gradient: "from-rose-500 to-red-500",
+    gradient: "from-neutral-800 to-black dark:from-neutral-300 dark:to-white",
   },
   {
     id: "video-editing",
     title: "Video Editing",
     description:
-      "Professional promotional videos, reels, product showcases, corporate content, and motion graphics.",
+      "Professional promotional videos, reels, product showcases, and motion graphics.",
     icon: "🎥",
     features: [
       "Promotional Ad Videos",
       "Reels & Short Content",
       "Corporate Highlights",
-      "Motion Graphics Animations",
+      "Motion Graphics",
     ],
-    gradient: "from-indigo-500 to-violet-500",
+    gradient: "from-black to-neutral-600 dark:from-white dark:to-neutral-400",
+  },
+  {
+    id: "app-deployment",
+    title: "App Deployment & Automation",
+    description:
+      "End-to-end app deployment, custom dashboard design, and business automation solutions.",
+    icon: "⚙️",
+    features: [
+      "App Deployment",
+      "Custom Dashboards",
+      "Business Automation",
+      "ORM Services",
+    ],
+    gradient: "from-neutral-800 to-black dark:from-neutral-300 dark:to-white",
   },
 ];
 
@@ -138,7 +139,8 @@ export const TECH_NODES: TechNode[] = [
     description: "Artificial Intelligence powering every solution",
     useCases: ["Predictive Analytics", "Natural Language Processing", "Computer Vision"],
     technologies: ["TensorFlow", "PyTorch", "OpenAI", "LangChain"],
-    color: "#3b82f6",
+    color: "#000000",
+
     orbitRadius: 3,
     orbitSpeed: 0.3,
   },
@@ -148,7 +150,7 @@ export const TECH_NODES: TechNode[] = [
     description: "Scalable infrastructure for global reach",
     useCases: ["Auto-Scaling", "Global CDN", "Serverless Computing"],
     technologies: ["AWS", "GCP", "Azure", "Vercel"],
-    color: "#06b6d4",
+    color: "#000000",
     orbitRadius: 3,
     orbitSpeed: 0.25,
   },
@@ -158,7 +160,7 @@ export const TECH_NODES: TechNode[] = [
     description: "Modern web applications & immersive experiences",
     useCases: ["SPAs", "3D Experiences", "PWAs", "E-Commerce"],
     technologies: ["Next.js", "React", "Three.js", "TypeScript"],
-    color: "#8b5cf6",
+    color: "#000000",
     orbitRadius: 3,
     orbitSpeed: 0.35,
   },
@@ -168,7 +170,7 @@ export const TECH_NODES: TechNode[] = [
     description: "Data-driven digital marketing at scale",
     useCases: ["Campaign Automation", "A/B Testing", "Audience Segmentation"],
     technologies: ["HubSpot", "Google Ads", "Meta Ads", "Marketo"],
-    color: "#f59e0b",
+    color: "#000000",
     orbitRadius: 3,
     orbitSpeed: 0.2,
   },
@@ -178,7 +180,7 @@ export const TECH_NODES: TechNode[] = [
     description: "Search engine dominance through intelligence",
     useCases: ["Technical SEO", "Content Optimization", "Link Building"],
     technologies: ["Ahrefs", "Semrush", "Screaming Frog", "Surfer SEO"],
-    color: "#10b981",
+    color: "#000000",
     orbitRadius: 3,
     orbitSpeed: 0.28,
   },
@@ -188,7 +190,7 @@ export const TECH_NODES: TechNode[] = [
     description: "Intelligent process automation",
     useCases: ["Workflow Automation", "RPA", "API Integration"],
     technologies: ["Zapier", "n8n", "UiPath", "Custom Bots"],
-    color: "#ec4899",
+    color: "#000000",
     orbitRadius: 3,
     orbitSpeed: 0.32,
   },
@@ -198,7 +200,7 @@ export const TECH_NODES: TechNode[] = [
     description: "Real-time insights for smarter decisions",
     useCases: ["Dashboards", "Reporting", "Data Pipelines"],
     technologies: ["Tableau", "Power BI", "BigQuery", "Snowflake"],
-    color: "#ef4444",
+    color: "#000000",
     orbitRadius: 3,
     orbitSpeed: 0.22,
   },
@@ -208,82 +210,96 @@ export const TECH_NODES: TechNode[] = [
 
 export const GROWTH_STEPS: GrowthStep[] = [
   {
-    id: "discovery",
+    id: "consultation",
     step: 1,
-    title: "Discovery",
+    title: "Consultation",
     description:
-      "Deep-dive into your business objectives, current infrastructure, and growth opportunities through stakeholder interviews and data analysis.",
-    icon: "🔍",
+      "We start by understanding your business goals, challenges, and vision through a detailed consultation to identify the best strategy for your growth.",
+    icon: "💡",
     stats: [
-      { label: "Stakeholder Interviews", value: "15+" },
-      { label: "Data Points Analyzed", value: "10K+" },
+      { label: "Client Meetings", value: "2-3" },
+      { label: "Requirements", value: "100%" },
     ],
-    color: "#3b82f6",
+    color: "#000000",
+
   },
   {
-    id: "strategy",
+    id: "planning",
     step: 2,
-    title: "Strategy",
+    title: "Planning",
     description:
-      "Craft a comprehensive roadmap aligned with your business goals, leveraging AI-driven insights to identify the highest-impact opportunities.",
-    icon: "🎯",
+      "We create a comprehensive project roadmap with clear milestones, timelines, and deliverables tailored to your specific needs and budget.",
+    icon: "📋",
     stats: [
-      { label: "Strategic Initiatives", value: "5-10" },
-      { label: "Expected ROI", value: "300%+" },
+      { label: "Project Plan", value: "100%" },
+      { label: "Milestones", value: "5-10" },
     ],
-    color: "#8b5cf6",
+    color: "#000000",
   },
   {
     id: "design",
     step: 3,
     title: "Design",
     description:
-      "Create stunning, user-centric interfaces and experiences backed by research, prototyping, and iterative refinement.",
+      "Our creative team crafts stunning UI/UX designs that align with your brand identity and deliver an exceptional user experience.",
     icon: "🎨",
     stats: [
-      { label: "Design Iterations", value: "3-5" },
-      { label: "Usability Score", value: "95+" },
+      { label: "Design Concepts", value: "3+" },
+      { label: "Revisions", value: "Unlimited" },
     ],
-    color: "#ec4899",
+    color: "#000000",
   },
   {
-    id: "build",
+    id: "development",
     step: 4,
-    title: "Build",
+    title: "Development",
     description:
-      "Engineer robust, scalable solutions using cutting-edge technologies with agile sprints, continuous integration, and thorough testing.",
-    icon: "🔨",
+      "We build your website or application using modern technologies, ensuring performance, scalability, and a seamless user experience.",
+    icon: "💻",
     stats: [
-      { label: "Sprint Cycles", value: "4-8" },
-      { label: "Test Coverage", value: "95%+" },
+      { label: "Sprint Cycles", value: "2-6" },
+      { label: "Quality Check", value: "100%" },
     ],
-    color: "#10b981",
+    color: "#000000",
   },
   {
-    id: "growth",
+    id: "testing",
     step: 5,
-    title: "Growth",
+    title: "Testing",
     description:
-      "Launch with precision and accelerate growth through data-driven marketing, conversion optimization, and strategic scaling.",
+      "Rigorous testing across devices, browsers, and scenarios to ensure everything works flawlessly before launch.",
+    icon: "🧪",
+    stats: [
+      { label: "Test Cases", value: "100+" },
+      { label: "Bug Fix Rate", value: "99%" },
+    ],
+    color: "#000000",
+  },
+  {
+    id: "launch",
+    step: 6,
+    title: "Launch",
+    description:
+      "We deploy your project with precision, ensuring zero downtime, proper configuration, and a smooth go-live experience.",
     icon: "🚀",
     stats: [
-      { label: "Growth Rate", value: "40%+" },
-      { label: "Channels Activated", value: "8+" },
+      { label: "Uptime", value: "99.9%" },
+      { label: "Launch Success", value: "100%" },
     ],
-    color: "#f59e0b",
+    color: "#000000",
   },
   {
-    id: "optimization",
-    step: 6,
-    title: "Optimization",
+    id: "support",
+    step: 7,
+    title: "Support",
     description:
-      "Continuously refine performance through AI-powered analytics, A/B testing, and iterative improvements that compound over time.",
-    icon: "♻️",
+      "Post-launch support and maintenance to keep your website running smoothly, with ongoing updates and performance monitoring.",
+    icon: "🛠️",
     stats: [
-      { label: "Performance Gain", value: "60%+" },
-      { label: "Cost Reduction", value: "35%+" },
+      { label: "Support Hours", value: "24/7" },
+      { label: "Response Time", value: "< 2hrs" },
     ],
-    color: "#06b6d4",
+    color: "#000000",
   },
 ];
 
@@ -304,7 +320,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { label: "Accuracy Rate", value: "99.2", suffix: "%" },
     ],
     tags: ["AI/ML", "Fintech", "Real-Time Processing"],
-    gradient: "from-blue-500 to-cyan-500",
+    gradient: "from-black to-neutral-600 dark:from-white dark:to-neutral-400",
   },
   {
     id: "ecommerce-3d",
@@ -320,7 +336,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { label: "Session Duration", value: "4.5", suffix: "min" },
     ],
     tags: ["3D/WebGL", "E-Commerce", "UX Design"],
-    gradient: "from-purple-500 to-pink-500",
+    gradient: "from-neutral-800 to-black dark:from-neutral-300 dark:to-white",
   },
   {
     id: "saas-growth",
@@ -336,7 +352,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { label: "Pipeline Value", value: "8", prefix: "$", suffix: "M" },
     ],
     tags: ["Marketing Automation", "Analytics", "Growth"],
-    gradient: "from-emerald-500 to-teal-500",
+    gradient: "from-black to-neutral-600 dark:from-white dark:to-neutral-400",
   },
 ];
 
@@ -381,32 +397,37 @@ export const FAQS: FAQ[] = [
   {
     question: "What services does AST Digitally offer?",
     answer:
-      "We provide custom AI Solutions, Website Design & Development, Digital Marketing, Technical SEO Services, Graphic Design, Video Editing, and Business Automation to accelerate customer conversions and scale operations.",
+      "We offer Digital Marketing, SEO, Google & Meta Ads, Social Media Marketing, Website Design & Development, E-commerce Development, Graphic Design, Video Editing, Custom Dashboard Designing, Business Web Applications, App Deployment, Online Reputation Management (ORM), and Website Maintenance & Support.",
   },
   {
-    question: "How long does a website development project take?",
+    question: "Do you redesign existing websites?",
     answer:
-      "A typical Next.js/React website or e-commerce solution takes between 6 to 12 weeks, following our structured growth framework: from discover and roadmap design to launch and scale operations.",
+      "Yes, we redesign and revamp existing websites to improve performance, user experience, and conversion rates while retaining your brand identity.",
   },
   {
-    question: "How does AST Digitally implement AI automation?",
+    question: "Do you provide SEO services?",
     answer:
-      "We build intelligent chatbots, workflow copilots, and custom data processing models. We integrate these tools directly into your active CRM, Slack, and database systems to reduce manual actions.",
-  },
-  {
-    question: "What is your search engine optimization (SEO) strategy?",
-    answer:
-      "We build a solid SEO foundation with technical speed audits, clear heading hierarchies, semantic HTML schemas, local SEO listings, and continuous content authority scaling.",
-  },
-  {
-    question: "What is your pricing model for campaigns and designs?",
-    answer:
-      "We offer flexible billing based on the project scope and monthly campaign support retainers. Each proposal clearly outlines project deliverables, timelines, and projected growth outcomes.",
+      "Yes, we provide comprehensive SEO services including technical audits, on-page optimization, local SEO, and content strategy to improve your search rankings and organic traffic.",
   },
   {
     question: "Do you provide ongoing support after launch?",
     answer:
-      "Yes, we provide long-term maintenance contracts, continuous performance logs monitoring, regular A/B testing adjustments, and continuous AI optimizations to ensure high-performance operations.",
+      "Yes, we offer long-term maintenance contracts, continuous performance monitoring, regular updates, and dedicated support to ensure your website and applications run smoothly.",
+  },
+  {
+    question: "What is your pricing model?",
+    answer:
+      "We offer flexible pricing based on project scope and requirements. Each proposal clearly outlines deliverables, timelines, and costs with no hidden charges.",
+  },
+  {
+    question: "How long does a typical project take?",
+    answer:
+      "Timelines vary based on complexity. A standard website takes 2-4 weeks, while more complex projects with custom dashboards or e-commerce functionality may take 6-12 weeks.",
+  },
+  {
+    question: "What industries do you serve?",
+    answer:
+      "We serve Healthcare, Education, Fashion, Real Estate, Travel, BPO/KPO, E-commerce, Finance, Manufacturing, and Startups & SMEs across various sectors.",
   },
 ];
 

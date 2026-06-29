@@ -46,7 +46,7 @@ export default function Hero() {
               className="flex items-center gap-2 text-xs font-mono tracking-wider text-muted-foreground uppercase mb-6"
             >
               <span className="h-px w-8 bg-muted-foreground/30" />
-              AI-Powered Digital Growth Studio
+              Digital Marketing & Smart Technology Solutions
             </motion.div>
 
             {/* Stark Display Heading */}
@@ -56,8 +56,8 @@ export default function Hero() {
               transition={{ duration: 0.7, delay: 0.1 }}
               className="mb-8 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-foreground leading-[1.1] max-w-2xl"
             >
-              Helping Businesses Grow Faster with{" "}
-              <span className="underline-highlight">AI & Performance</span>
+              Transform Your Business with Digital Marketing &{" "}
+              <span className="underline-highlight">Smart Technology Solutions</span>
             </motion.h1>
 
             {/* Description Subtitle */}
@@ -67,9 +67,7 @@ export default function Hero() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="mb-8 max-w-xl text-base leading-relaxed text-neutral-700 md:text-lg font-normal"
             >
-              From AI-powered automation and SEO to high-converting websites,
-              branding, video production, and digital marketing, AST Digitally helps
-              businesses attract more customers, increase conversions, and scale.
+              We design, market, automate, and scale businesses with creative strategies and custom digital solutions that deliver real results.
             </motion.p>
 
             {/* CTAs */}

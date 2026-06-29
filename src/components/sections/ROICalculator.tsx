@@ -8,6 +8,22 @@ import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { Label } from "@/components/ui/label";
 import { ROI_DEFAULTS } from "@/lib/constants";
 import { useInView } from "@/lib/hooks/useInView";
+import { TrendingUp, DollarSign, Target, Zap } from "lucide-react";
+
+const getResultIcon = (id: string) => {
+  switch (id) {
+    case "revenue":
+      return TrendingUp;
+    case "savings":
+      return DollarSign;
+    case "roi":
+      return Target;
+    case "conversion":
+      return Zap;
+    default:
+      return TrendingUp;
+  }
+};
 
 /**
  * Interactive ROI Calculator with slider inputs and animated results.
@@ -89,7 +105,7 @@ export default function ROICalculator() {
       aria-label="ROI calculator"
     >
       {/* Background glow */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--ast-blue)]/[0.02] to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/[0.02] to-transparent dark:via-white/[0.02]" />
 
       <div className="container-wide relative">
         <SectionHeading
@@ -154,44 +170,46 @@ export default function ROICalculator() {
                   <h3 className="mb-6 text-sm font-bold uppercase tracking-wider text-foreground">
                     Projected Results
                   </h3>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {[
                       {
                         label: "Additional Monthly Revenue",
                         value: results.additionalRevenue,
                         prefix: "$",
-                        icon: "📈",
+                        id: "revenue",
                       },
                       {
                         label: "Annual Cost Savings",
                         value: results.annualSavings,
                         prefix: "$",
-                        icon: "💰",
+                        id: "savings",
                       },
                       {
                         label: "Marketing ROI",
                         value: results.marketingReturn,
                         prefix: "$",
-                        icon: "🎯",
+                        id: "roi",
                       },
                       {
                         label: "New Conversion Rate",
                         value: results.newConversionRate,
                         suffix: "%",
-                        icon: "🚀",
+                        id: "conversion",
                         decimals: 1,
                       },
-                    ].map((result, j) => (
-                      <motion.div
-                        key={result.label}
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={isInView ? { opacity: 1, y: 0 } : {}}
-                        transition={{ duration: 0.5, delay: 0.2 + j * 0.08 }}
-                        className="rounded-lg border border-border bg-neutral-50 p-4 text-center shadow-[0_2px_10px_rgba(0,0,0,0.025)]"
-                      >
-                        <div className="mb-1 text-lg animate-float" aria-hidden="true">
-                          {result.icon}
-                        </div>
+                    ].map((result, j) => {
+                      const Icon = getResultIcon(result.id);
+                      return (
+                        <motion.div
+                          key={result.label}
+                          initial={{ opacity: 0, y: 15 }}
+                          animate={isInView ? { opacity: 1, y: 0 } : {}}
+                          transition={{ duration: 0.5, delay: 0.2 + j * 0.08 }}
+                          className="rounded-lg border border-border bg-neutral-50 dark:bg-neutral-800 p-4 text-center shadow-[0_2px_10px_rgba(0,0,0,0.025)] flex flex-col items-center justify-center"
+                        >
+                          <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-700 text-black dark:text-white shadow-sm animate-float" aria-hidden="true">
+                            <Icon className="h-4 w-4 stroke-[1.8]" />
+                          </div>
                         <div className="text-xl font-extrabold text-foreground lg:text-2xl">
                           <AnimatedCounter
                             value={result.value}
@@ -204,7 +222,8 @@ export default function ROICalculator() {
                           {result.label}
                         </div>
                       </motion.div>
-                    ))}
+                    );
+                  })}
                   </div>
 
                   <div className="mt-6 rounded-lg bg-neutral-50 border border-border p-4 text-center shadow-[0_2px_10px_rgba(0,0,0,0.025)]">

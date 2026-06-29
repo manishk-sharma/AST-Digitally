@@ -52,6 +52,10 @@ export default function Contact() {
               </h3>
               <ul className="space-y-2.5 text-sm text-muted-foreground font-sans font-semibold list-disc list-inside pl-1">
                 <li>
+                  <span className="text-foreground font-bold">Founder:</span>{" "}
+                  {BRAND.founder}
+                </li>
+                <li>
                   <span className="text-foreground font-bold">Phone:</span>{" "}
                   <a href={`tel:${BRAND.phone}`} className="hover:underline">
                     {BRAND.phone}

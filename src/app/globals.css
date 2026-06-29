@@ -64,15 +64,12 @@
   --muted-foreground: oklch(0.45 0 0); /* Mid Gray */
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.08 0 0);
-  --destructive: oklch(0.55 0.18 25);
+  --destructive: oklch(0 0 0);
   --border: oklch(0.92 0 0); /* Thin Light Border */
   --input: oklch(0.92 0 0);
   --ring: oklch(0.08 0 0);
   --radius: 8px; /* Standard rectangular radius */
 
-  --ast-blue: oklch(0.5 0.15 250);
-  --ast-purple: oklch(0.5 0.15 290);
-  --ast-cyan: oklch(0.5 0.15 200);
 }
 
 /* Dark mode */
@@ -91,7 +88,7 @@
   --muted-foreground: oklch(0.6 0 0);
   --accent: oklch(0.2 0 0);
   --accent-foreground: oklch(0.95 0 0);
-  --destructive: oklch(0.55 0.18 25);
+  --destructive: oklch(0.95 0 0);
   --border: oklch(0.25 0 0);
   --input: oklch(0.25 0 0);
   --ring: oklch(0.7 0 0);

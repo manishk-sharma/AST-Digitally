@@ -15,7 +15,7 @@ export default function Testimonials() {
       role: "Operations Manager",
       avatar: "BP",
       quote: "This ERP revolutionized our operations, streamlining finance and inventory. The cloud-based platform keeps us productive, even remotely.",
-      color: "bg-red-500",
+      color: "bg-neutral-900 dark:bg-neutral-100",
     },
     {
       id: 2,
@@ -23,7 +23,7 @@ export default function Testimonials() {
       role: "Business Analyst",
       avatar: "AK",
       quote: "The smooth implementation exceeded expectations. It streamlined processes, improving overall business performance.",
-      color: "bg-blue-500",
+      color: "bg-neutral-700 dark:bg-neutral-300",
     },
     {
       id: 3,
@@ -47,7 +47,7 @@ export default function Testimonials() {
       role: "Business Analyst",
       avatar: "AK",
       quote: "This ERP's seamless integration enhanced our business operations and efficiency. Highly recommend for its intuitive interface.",
-      color: "bg-[#4f46e5]",
+      color: "bg-neutral-800 dark:bg-neutral-200",
     },
     {
       id: 6,

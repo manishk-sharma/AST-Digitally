@@ -162,9 +162,9 @@ await AST.scale({
                 {/* Editor Tab Header */}
                 <div className="flex items-center justify-between px-5 py-4 bg-neutral-900/60 border-b border-neutral-800/80">
                   <div className="flex items-center gap-2">
-                    <div className="h-3 w-3 rounded-full bg-[#ff5f56]" />
-                    <div className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
-                    <div className="h-3 w-3 rounded-full bg-[#27c93f]" />
+                    <div className="h-3 w-3 rounded-full bg-neutral-500" />
+                    <div className="h-3 w-3 rounded-full bg-neutral-400" />
+                    <div className="h-3 w-3 rounded-full bg-neutral-600" />
                   </div>
                   <span className="text-[10px] font-mono font-bold text-neutral-500 uppercase tracking-wider select-none">
                     ast-framework.ts
@@ -173,7 +173,7 @@ await AST.scale({
                 </div>
 
                 {/* Editor Content Area */}
-                <div className="p-6 font-mono text-[12px] leading-relaxed text-neutral-300 overflow-x-auto min-h-[220px] flex items-center">
+                <div className="p-6 font-mono text-[12px] leading-relaxed text-neutral-300 overflow-x-auto min-h-[160px] md:min-h-[220px] flex items-center">
                   <AnimatePresence mode="wait">
                     <motion.pre
                       key={activeStep}

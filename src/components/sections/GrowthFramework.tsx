@@ -20,13 +20,13 @@ export default function GrowthFramework() {
       aria-label="Growth framework process"
     >
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--ast-purple)]/[0.03] to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/[0.02] to-transparent dark:via-white/[0.02]" />
 
       <div className="container-wide relative">
         <SectionHeading
           badge="Our Process"
-          title="The Growth Framework"
-          subtitle="A proven 6-phase methodology that transforms your vision into measurable business outcomes."
+          title="How We Work"
+          subtitle="A proven 7-step process from consultation to ongoing support that ensures your project is delivered on time and exceeds expectations."
         />
 
         <div ref={ref} className="relative">
@@ -81,7 +81,7 @@ export default function GrowthFramework() {
                     </div>
 
                     {/* Stats */}
-                    <div className="flex gap-4 lg:gap-6">
+                    <div className="flex flex-wrap gap-4 lg:gap-6">
                       {step.stats.map((stat) => (
                         <div
                           key={stat.label}

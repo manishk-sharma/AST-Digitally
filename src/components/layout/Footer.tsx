@@ -212,10 +212,17 @@ export default function Footer() {
         <Separator className="my-10 bg-border" />
 
         {/* Bottom bar */}
-        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-          <p className="text-sm text-neutral-600 font-medium font-sans">
-            © {currentYear} {BRAND.name}. All rights reserved.
-          </p>
+        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+          <div className="flex items-center gap-3">
+            <img 
+              src="/AST Logo.png" 
+              alt="AST Digitally Logo" 
+              className="h-9 md:h-10 w-auto object-contain drop-shadow-[0_0_8px_rgba(0,0,0,0.06)] dark:drop-shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:drop-shadow-[0_0_12px_rgba(0,0,0,0.12)] dark:hover:drop-shadow-[0_0_18px_rgba(255,255,255,0.25)] transition-all duration-300" 
+            />
+            <p className="text-sm text-neutral-600 font-medium font-sans">
+              © {currentYear} {BRAND.name}. All rights reserved.
+            </p>
+          </div>
           <div className="flex gap-6 font-sans">
             {["Privacy Policy", "Terms & Conditions", "Cookie Settings"].map(
               (label) => (
