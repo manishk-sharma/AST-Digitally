@@ -29,8 +29,8 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
         scrolled
-          ? "bg-white/95 backdrop-blur-md border-border/80 shadow-[0_1px_8px_rgba(0,0,0,0.03)] py-0"
-          : "bg-white/80 backdrop-blur-sm border-border/30 py-1"
+          ? "bg-white border-border shadow-[0_1px_8px_rgba(0,0,0,0.03)] py-0"
+          : "bg-white border-border py-1"
       )}
       role="banner"
     >

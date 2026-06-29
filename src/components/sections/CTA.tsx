@@ -7,13 +7,13 @@ export default function CTA() {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.05 });
 
   return (
-    <section className="py-20 bg-white relative overflow-hidden" aria-label="Call to action banner">
+    <section className="py-20 relative overflow-hidden" aria-label="Call to action banner">
       <div ref={ref} className="container-wide max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="rounded-2xl border border-neutral-200/80 bg-neutral-50/70 p-8 md:p-12 lg:p-14 flex flex-col lg:flex-row items-center gap-8 lg:gap-0 relative overflow-hidden"
+          className="rounded-2xl border border-neutral-200 bg-neutral-50 p-8 md:p-12 lg:p-14 flex flex-col lg:flex-row items-center gap-8 lg:gap-0 relative overflow-hidden"
         >
 
           {/* Left Side: Floating service pills around a large "D" */}

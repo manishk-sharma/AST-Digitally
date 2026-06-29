@@ -122,7 +122,7 @@ await AST.scale({
                   className={`p-4 rounded-lg border transition-all duration-300 ${
                     activeStep === idx
                       ? "border-neutral-800 bg-neutral-50 shadow-[0_2px_10px_rgba(0,0,0,0.035)] border-l-4 border-l-foreground"
-                      : "border-transparent hover:bg-neutral-50/50"
+                      : "border-transparent hover:bg-neutral-50"
                   }`}
                 >
                   <div className="flex items-center gap-3 mb-1">

@@ -61,7 +61,7 @@ export default function Capabilities() {
               className="p-6 md:p-7 h-[320px] border border-border bg-white flex flex-col items-center justify-between text-center"
             >
               {/* Fingerprint graphic */}
-              <div className="flex h-20 w-20 items-center justify-center rounded-lg border border-neutral-100 bg-neutral-50/50 shadow-[0_2px_10px_rgba(0,0,0,0.025)]">
+              <div className="flex h-20 w-20 items-center justify-center rounded-lg border border-neutral-100 bg-neutral-50 shadow-[0_2px_10px_rgba(0,0,0,0.025)]">
                 <svg className="h-10 w-10 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
                   <path d="M12 2a10 10 0 0 0-10 10c0 1.2.2 2.3.6 3.4M12 2a10 10 0 0 1 10 10c0 1.2-.2 2.3-.6 3.4" />
                   <path d="M12 6a6 6 0 0 0-6 6c0 1.2.2 2.3.6 3.4M12 6a6 6 0 0 1 6 6c0 1.2-.2 2.3-.6 3.4" />
@@ -130,7 +130,7 @@ export default function Capabilities() {
               className="p-6 md:p-7 min-h-[220px] border border-border bg-white flex flex-col md:flex-row items-center justify-between gap-6"
             >
               <div className="space-y-4 max-w-md">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-100 bg-neutral-50/50 shadow-[0_2px_10px_rgba(0,0,0,0.025)]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-100 bg-neutral-50 shadow-[0_2px_10px_rgba(0,0,0,0.025)]">
                   <svg className="h-5 w-5 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
                 <div className="space-y-1">
@@ -144,7 +144,7 @@ export default function Capabilities() {
               </div>
               
               {/* Detailed stock sparkline chart with labels */}
-              <div className="w-full md:w-1/2 border border-neutral-100 rounded-lg p-3 bg-neutral-50/20">
+              <div className="w-full md:w-1/2 border border-neutral-100 rounded-lg p-3 bg-neutral-50">
                 <div className="flex justify-between text-[9px] text-neutral-500 font-bold uppercase tracking-wider mb-2 font-mono">
                   <span>Page Load Time</span>
                   <span>LCP: 0.6s</span>
@@ -169,7 +169,7 @@ export default function Capabilities() {
               className="p-6 md:p-7 min-h-[220px] border border-border bg-white flex flex-col justify-between"
             >
               <div className="flex items-center justify-between gap-4 w-full">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-100 bg-neutral-50/50 shadow-[0_2px_10px_rgba(0,0,0,0.025)] shrink-0">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-100 bg-neutral-50 shadow-[0_2px_10px_rgba(0,0,0,0.025)] shrink-0">
                   <svg className="h-5 w-5 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 </div>
                 

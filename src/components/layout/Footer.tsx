@@ -29,7 +29,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative z-[41] border-t border-border bg-white py-16" role="contentinfo">
+    <footer className="relative border-t border-border bg-white py-16" role="contentinfo">
       <div className="container-wide">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           

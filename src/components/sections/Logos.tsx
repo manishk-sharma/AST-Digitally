@@ -33,7 +33,7 @@ export default function Logos() {
   ];
 
   return (
-    <section className="py-12 border-b border-border bg-white" aria-label="Technology stack">
+    <section className="py-12 border-b border-border" aria-label="Technology stack">
       <div className="container-wide text-center">
         <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 md:gap-x-16 lg:gap-x-20">
           {logos.map((logo, i) => (
