@@ -1,26 +1,321 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
+/* ─── Theme Tokens (Minimalist Light Grid Style) ────────────────────────── */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: oklch(1 0 0); /* Pure White */
+  --foreground: oklch(0.08 0 0); /* Stark Charcoal */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.08 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.08 0 0);
+  --primary: oklch(0 0 0); /* Stark Black */
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.97 0 0); /* Light Neutral Gray */
+  --secondary-foreground: oklch(0.08 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.45 0 0); /* Mid Gray */
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.08 0 0);
+  --destructive: oklch(0.55 0.18 25);
+  --border: oklch(0.92 0 0); /* Thin Light Border */
+  --input: oklch(0.92 0 0);
+  --ring: oklch(0.08 0 0);
+  --radius: 8px; /* Standard rectangular radius */
+
+  --ast-blue: oklch(0.5 0.15 250);
+  --ast-purple: oklch(0.5 0.15 290);
+  --ast-cyan: oklch(0.5 0.15 200);
+}
+
+/* Dark mode */
+.dark {
+  --background: oklch(0.13 0 0);
+  --foreground: oklch(0.95 0 0);
+  --card: oklch(0.16 0 0);
+  --card-foreground: oklch(0.95 0 0);
+  --popover: oklch(0.16 0 0);
+  --popover-foreground: oklch(0.95 0 0);
+  --primary: oklch(0.95 0 0);
+  --primary-foreground: oklch(0.13 0 0);
+  --secondary: oklch(0.2 0 0);
+  --secondary-foreground: oklch(0.95 0 0);
+  --muted: oklch(0.2 0 0);
+  --muted-foreground: oklch(0.6 0 0);
+  --accent: oklch(0.2 0 0);
+  --accent-foreground: oklch(0.95 0 0);
+  --destructive: oklch(0.55 0.18 25);
+  --border: oklch(0.25 0 0);
+  --input: oklch(0.25 0 0);
+  --ring: oklch(0.7 0 0);
+}
+
+/* ─── Base Styles ───────────────────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground relative;
+    background-color: var(--background);
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 40;
+    background:
+      radial-gradient(ellipse at center, transparent 20%, rgba(0, 0, 0, 0.18) 100%),
+      linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    background-size: 100% 100%, 60px 60px, 60px 60px;
+  }
+  .dark body::before,
+  body:has(.dark)::before {
+    background:
+      radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.25) 100%),
+      linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 100% 100%, 60px 60px, 60px 60px;
+  }
+  html {
+    @apply font-sans scroll-smooth;
+    /* Offset anchor jumps so section headings clear the fixed navbar */
+    scroll-padding-top: 6rem;
+  }
+
+  /* Focus visible for accessibility */
+  :focus-visible {
+    outline: 2px solid var(--foreground);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+  }
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  /* Selection color */
+  ::selection {
+    background: rgba(0, 0, 0, 0.08);
+    color: var(--foreground);
+  }
+  .dark ::selection {
+    background: rgba(255, 255, 255, 0.12);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─── Dark Mode Overrides ───────────────────────────────────────────────── */
+/*
+ * Many components hard-code LIGHT colors (bg-white, bg-neutral-50/100/200,
+ * text-neutral-200→700, light borders) that ignore the theme tokens. In dark
+ * mode we remap those specific light utilities onto the dark tokens.
+ * Intentionally-dark surfaces (bg-neutral-700→950) are left untouched so code
+ * blocks and dark badges keep rendering correctly in both themes.
+ */
+
+/* White surfaces → card (covers bg-white and its opacity variants, e.g. bg-white/95) */
+.dark [class*="bg-white"] {
+  background-color: var(--card) !important;
+}
+
+/* Light neutral surfaces → muted */
+.dark .bg-neutral-50,
+.dark .bg-neutral-50\/20,
+.dark .bg-neutral-50\/50,
+.dark .bg-neutral-50\/70,
+.dark .bg-neutral-100,
+.dark .bg-neutral-200,
+.dark .hover\:bg-neutral-50:hover {
+  background-color: var(--muted) !important;
+}
+
+/* Light borders → border token */
+.dark .border-neutral-100,
+.dark .border-neutral-200,
+.dark .border-neutral-200\/80,
+.dark .border-neutral-300,
+.dark .border-neutral-400 {
+  border-color: var(--border) !important;
+}
+
+/* Near-black text → foreground (light in dark mode) */
+.dark .text-black,
+.dark .text-neutral-900,
+.dark .text-neutral-800 {
+  color: var(--foreground) !important;
+}
+
+/* Muted / light-gray text → muted-foreground */
+.dark .text-neutral-700,
+.dark .text-neutral-600,
+.dark .text-neutral-500,
+.dark .text-neutral-400,
+.dark .text-neutral-300,
+.dark .text-neutral-200 {
+  color: var(--muted-foreground) !important;
+}
+
+/* Glassmorphism + decorative utilities need dark-aware surfaces */
+.dark .glass {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.dark .glass-strong {
+  background: rgba(22, 22, 24, 0.88);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.dark .glass-subtle {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+.dark .underline-highlight::after {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ─── Utility Classes ───────────────────────────────────────────────────── */
+@layer utilities {
+  /* Minimalist Light Glassmorphism */
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .glass-subtle {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+  }
+
+  /* Underline Highlight like "to ship" */
+  .underline-highlight {
+    position: relative;
+    z-index: 1;
+  }
+  .underline-highlight::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    background-color: rgba(0, 0, 0, 0.05);
+    z-index: -1;
+  }
+
+  /* Section padding & layout */
+  .section-padding {
+    @apply py-20 md:py-28;
+  }
+
+  .container-wide {
+    @apply mx-auto max-w-7xl px-6 lg:px-12;
+  }
+}
+
+/* ─── Keyframes & Animations ────────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marquee-left 30s linear infinite;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marquee-right 30s linear infinite;
 }
