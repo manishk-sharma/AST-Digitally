@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { FAQS } from "@/lib/constants";
+import { FAQS } from "@/constants";
 
 /**
  * FAQ section using shadcn Accordion with smooth expand/collapse.

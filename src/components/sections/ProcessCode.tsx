@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
-import { useInView } from "@/lib/hooks/useInView";
+import { useInView } from "@/hooks/useInView";
 
 export default function ProcessCode() {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.05 });

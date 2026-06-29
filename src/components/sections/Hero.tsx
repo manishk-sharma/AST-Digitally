@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { buttonVariants } from "@/components/ui/button";
 import SceneLoader from "@/components/ui/SceneLoader";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils";
 
 const HeroScene = dynamic(() => import("@/components/canvas/HeroScene"), {
   ssr: false,

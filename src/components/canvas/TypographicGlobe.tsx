@@ -4,7 +4,7 @@ import { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Points, PointMaterial } from "@react-three/drei";
 import * as THREE from "three";
-import { useIsDark } from "@/lib/hooks/useIsDark";
+import { useIsDark } from "@/hooks/useIsDark";
 
 const DOT_COUNT = 8000;
 const RADIUS = 2.4;

@@ -4,8 +4,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
-import { useInView } from "@/lib/hooks/useInView";
-import { cn } from "@/lib/utils";
+import { useInView } from "@/hooks/useInView";
+import { cn } from "@/utils";
 import { buttonVariants } from "@/components/ui/button";
 
 export default function Pricing() {

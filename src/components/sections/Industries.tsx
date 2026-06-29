@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
-import { useInView } from "@/lib/hooks/useInView";
+import { useInView } from "@/hooks/useInView";
 
 const industries = [
   { name: "Healthcare", icon: "🏥", desc: "Digital solutions for hospitals, clinics, and health-tech startups." },

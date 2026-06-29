@@ -6,9 +6,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
 import SceneLoader from "@/components/ui/SceneLoader";
-import { TECH_NODES } from "@/lib/constants";
-import { useGPUTier } from "@/lib/hooks/useGPUTier";
-import { useInView } from "@/lib/hooks/useInView";
+import { TECH_NODES } from "@/constants";
+import { useGPUTier } from "@/hooks/useGPUTier";
+import { useInView } from "@/hooks/useInView";
 
 const OrbitScene = dynamic(() => import("@/components/canvas/OrbitScene"), {
   ssr: false,

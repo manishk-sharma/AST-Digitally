@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { BRAND, NAV_LINKS } from "@/lib/constants";
+import { BRAND, NAV_LINKS } from "@/constants";
 import { Separator } from "@/components/ui/separator";
 
 export default function Footer() {

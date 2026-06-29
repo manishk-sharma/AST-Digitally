@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useInView } from "@/lib/hooks/useInView";
-import { cn } from "@/lib/utils";
+import { useInView } from "@/hooks/useInView";
+import { cn } from "@/utils";
 
 interface SectionHeadingProps {
   badge?: string;

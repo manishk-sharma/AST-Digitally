@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { buttonVariants } from "@/components/ui/button";
-import { NAV_LINKS, BRAND } from "@/lib/constants";
-import { cn } from "@/lib/utils";
+import { NAV_LINKS, BRAND } from "@/constants";
+import { cn } from "@/utils";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);

@@ -3,8 +3,8 @@
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
-import { SERVICES } from "@/lib/constants";
-import { useInView } from "@/lib/hooks/useInView";
+import { SERVICES } from "@/constants";
+import { useInView } from "@/hooks/useInView";
 import { TrendingUp, Search, Monitor, Palette, Video, Cpu } from "lucide-react";
 
 const getServiceIcon = (id: string) => {

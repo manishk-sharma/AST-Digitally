@@ -3,8 +3,8 @@
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
-import { GROWTH_STEPS } from "@/lib/constants";
-import { useInView } from "@/lib/hooks/useInView";
+import { GROWTH_STEPS } from "@/constants";
+import { useInView } from "@/hooks/useInView";
 
 /**
  * Growth Framework section — 6-step journey from Discovery to Optimization.

@@ -5,7 +5,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Text, AdaptiveDpr } from "@react-three/drei";
 import { Suspense } from "react";
 import * as THREE from "three";
-import { TECH_NODES } from "@/lib/constants";
+import { TECH_NODES } from "@/constants";
 
 function OrbitNode({
   node,

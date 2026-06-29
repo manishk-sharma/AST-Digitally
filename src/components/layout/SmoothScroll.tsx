@@ -1,6 +1,6 @@
 "use client";
 
-import { useSmoothScroll } from "@/lib/hooks/useSmoothScroll";
+import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 
 /**
  * Client component wrapper that initializes Lenis smooth scrolling.

@@ -5,8 +5,8 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { Badge } from "@/components/ui/badge";
-import { CASE_STUDIES } from "@/lib/constants";
-import { useInView } from "@/lib/hooks/useInView";
+import { CASE_STUDIES } from "@/constants";
+import { useInView } from "@/hooks/useInView";
 
 /**
  * Case studies section with floating dashboard aesthetic and animated metrics.

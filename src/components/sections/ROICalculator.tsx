@@ -6,8 +6,8 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { Label } from "@/components/ui/label";
-import { ROI_DEFAULTS } from "@/lib/constants";
-import { useInView } from "@/lib/hooks/useInView";
+import { ROI_DEFAULTS } from "@/constants";
+import { useInView } from "@/hooks/useInView";
 import { TrendingUp, DollarSign, Target, Zap } from "lucide-react";
 
 const getResultIcon = (id: string) => {

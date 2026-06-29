@@ -1,4 +1,4 @@
-import { BRAND, SERVICES, FAQS } from "./constants";
+import { BRAND, SERVICES, FAQS } from "@/constants";
 
 /**
  * Generates Organization JSON-LD structured data.

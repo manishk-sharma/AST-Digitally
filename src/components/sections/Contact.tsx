@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { BRAND } from "@/lib/constants";
-import { useInView } from "@/lib/hooks/useInView";
+import { BRAND } from "@/constants";
+import { useInView } from "@/hooks/useInView";
 
 export default function Contact() {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.05 });

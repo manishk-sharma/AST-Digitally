@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useInView } from "@/lib/hooks/useInView";
+import { useInView } from "@/hooks/useInView";
 
 export default function CTA() {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.05 });

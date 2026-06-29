@@ -3,7 +3,7 @@
 import { useState } from "react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
-import { useInView } from "@/lib/hooks/useInView";
+import { useInView } from "@/hooks/useInView";
 import { motion } from "framer-motion";
 
 export default function DeveloperExperience() {

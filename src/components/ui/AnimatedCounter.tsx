@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { useInView } from "@/lib/hooks/useInView";
+import { useInView } from "@/hooks/useInView";
 
 interface AnimatedCounterProps {
   value: number;

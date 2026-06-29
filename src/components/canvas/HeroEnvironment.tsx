@@ -1,6 +1,6 @@
 "use client";
 
-import { useIsDark } from "@/lib/hooks/useIsDark";
+import { useIsDark } from "@/hooks/useIsDark";
 
 /**
  * Clean neutral lighting and theme-aware fog for the typographic globe.
