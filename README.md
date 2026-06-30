@@ -9,63 +9,82 @@ Transform Your Business with Digital Marketing & Smart Technology Solutions.
 
 AST Digitally is a full-service digital marketing and technology agency. We help startups, SMEs, and enterprises grow through digital marketing, websites, branding, automation, custom dashboards, app deployment, and business applications.
 
-## Monorepo Structure
+---
+
+## Folder Structure
 
 ```
-├── frontend/          # Next.js 16 application (App Router)
-│   ├── src/
-│   │   ├── app/       # App Router pages & layouts
-│   │   ├── components/
-│   │   │   ├── ui/        # Reusable UI primitives (shadcn/ui)
-│   │   │   ├── sections/  # Page sections (Hero, Services, etc.)
-│   │   │   ├── layout/    # Navbar, Footer, ScrollToTop
-│   │   │   └── canvas/    # Three.js/R3F 3D components
-│   │   ├── constants/ # Brand, services, FAQ data
-│   │   ├── hooks/     # Custom React hooks
-│   │   ├── types/     # TypeScript type definitions
-│   │   └── utils/     # Utility functions
-│   └── package.json
-├── backend/           # API / server-side code
-└── package.json       # Root orchestration
+├── public/            # Static assets (logos, icons, vector files)
+├── src/               # React/Next.js codebase
+│   ├── app/           # App Router pages, metadata, sitemap & layouts
+│   ├── components/    # Reusable parts of the UI
+│   │   ├── canvas/    # Three.js / React Three Fiber interactive 3D elements
+│   │   ├── layout/    # Page scaffolding (Navbar, Footer, Scroll controls)
+│   │   ├── sections/  # Core landing page components
+│   │   └── ui/        # Custom interface primitives (shadcn/ui, buttons, dialogs)
+│   ├── constants/     # Core copy, services description list, and FAQs
+│   ├── hooks/         # Custom React hooks (reduced motion, gpu tiers, intersection observers)
+│   ├── lib/           # SEO and utility library scripts
+│   ├── types/         # TypeScript type interfaces
+│   └── utils/         # Performance count-up and styling helper files
+├── components.json    # Component configuration mapping
+├── eslint.config.mjs  # Linter configurations
+├── next.config.ts     # Next.js compiler & routing rules
+├── postcss.config.mjs # Tailwind CSS processor rules
+├── tailwind.config.ts # Core styling definitions
+└── tsconfig.json      # TypeScript compiler setups
 ```
+
+---
 
 ## Tech Stack
 
-- **Framework:** Next.js 16 with App Router
+- **Framework:** Next.js 16 (App Router)
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS v4, shadcn/ui
-- **3D Graphics:** Three.js, React Three Fiber (@react-three/fiber)
-- **Animation:** Framer Motion
-- **Icons:** lucide-react
+- **3D Graphics:** Three.js, React Three Fiber (`@react-three/fiber`), React Three Drei
+- **Animation:** Framer Motion (Bento Grid animations, SVG drawing, stats count-ups)
+- **Icons:** Lucide React (clean theme-aware monochrome icons)
+
+---
 
 ## Getting Started
 
+To launch the project locally, run the following commands in the root directory:
+
 ```bash
-# Install dependencies (root runs all workspaces)
+# 1. Install dependencies
 npm install
 
-# Start the frontend dev server
-cd frontend && npm run dev
+# 2. Start the development server
+npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to view the application.
+
+---
 
 ## Available Scripts
 
 | Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Production build |
-| `npm run lint` | Lint check |
+|:---|:---|
+| `npm run dev` | Starts the local dev server on port 3000 |
+| `npm run build` | Compiles the production build |
+| `npm run start` | Boots up the built Next.js server in production mode |
+| `npm run lint` | Runs ESLint syntax and code quality checks |
+
+---
 
 ## Services
 
 - Digital Marketing
-- SEO Services
+- SEO Optimization & Marketing Analytics
 - Website Design & Development
 - Graphic Design
-- Video Editing
-- App Deployment & Automation
+- Video Editing & Production
+- Custom Applications, Deployments & Automation
+
+---
 
 ## Contact
 
