@@ -81,7 +81,7 @@ export default function DeveloperExperience() {
               <div className="p-4 sm:p-6 font-mono text-[12px] sm:text-[13px] leading-relaxed flex items-center justify-between gap-4 min-w-0 border-t border-neutral-900/50">
                 <div className="flex items-center gap-2.5 overflow-x-auto scrollbar-none min-w-0 flex-1">
                   <span className="text-neutral-600 select-none">$</span>
-                  <span className="select-all whitespace-nowrap text-white">{commands[activeTab]}</span>
+                  <span className="select-all whitespace-normal break-all sm:whitespace-nowrap text-white">{commands[activeTab]}</span>
                 </div>
                 
                 {/* Copy action */}

@@ -69,7 +69,7 @@ export default function Testimonials() {
         <SectionHeading
           badge="Testimonials"
           title="What our users say"
-          subtitle="Discover how thousands of teams streamline their operations with our platform."
+          subtitle="See how businesses across industries have transformed their digital presence and achieved measurable growth with AST Digitally."
         />
 
         {/* Masonry Columns Layout */}

@@ -139,7 +139,7 @@ await AST.scale({
                       {step.title}
                     </h3>
                   </div>
-                  <p className="text-[11px] leading-relaxed text-muted-foreground pl-9">
+                  <p className="text-[11px] leading-relaxed text-muted-foreground pl-9 break-words">
                     {step.desc}
                   </p>
                 </div>
@@ -173,7 +173,7 @@ await AST.scale({
                 </div>
 
                 {/* Editor Content Area */}
-                <div className="p-6 font-mono text-[12px] leading-relaxed text-neutral-300 overflow-x-auto min-h-[160px] md:min-h-[220px] block min-w-0">
+                <div className="p-4 sm:p-6 font-mono text-[11px] sm:text-[12px] leading-relaxed text-neutral-300 overflow-x-auto min-h-[140px] md:min-h-[220px] block min-w-0">
                   <AnimatePresence mode="wait">
                     <motion.pre
                       key={activeStep}
@@ -183,12 +183,12 @@ await AST.scale({
                       transition={{ duration: 0.25 }}
                       className="w-full"
                     >
-                      <code>{steps[activeStep].code}</code>
+                      <code className="whitespace-pre-wrap break-all sm:break-normal sm:whitespace-pre">{steps[activeStep].code}</code>
                     </motion.pre>
                   </AnimatePresence>
                 </div>
               </GlassCard>
-              <div className="text-right text-[10px] font-mono text-neutral-500 mt-2.5 uppercase tracking-wider select-none">
+              <div className="text-right text-[9px] sm:text-[10px] font-mono text-neutral-500 mt-2.5 uppercase tracking-wider select-none break-words">
                 Interactive Growth Pipeline & SDK Execution Sandbox
               </div>
             </motion.div>

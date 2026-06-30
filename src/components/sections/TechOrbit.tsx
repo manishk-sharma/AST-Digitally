@@ -49,7 +49,7 @@ export default function TechOrbit() {
 
           {/* Technology grid (visible on low-end or as supplementary) */}
           <div
-            className={`grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${show3D ? "mt-12" : ""}`}
+            className={`grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${show3D ? "mt-12" : ""}`}
           >
             {TECH_NODES.map((node, i) => (
               <motion.div

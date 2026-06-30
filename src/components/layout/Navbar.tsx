@@ -84,7 +84,7 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Button — clean hamburger ≡ ↔ ✕ transition */}
         <button
           className="relative flex h-10 w-10 items-center justify-center rounded-lg transition-colors hover:bg-foreground/5 lg:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -94,20 +94,20 @@ export default function Navbar() {
           <div className="relative h-5 w-6">
             <span
               className={cn(
-                "absolute left-0 h-0.5 w-full rounded-full bg-foreground transition-all duration-300",
-                mobileOpen ? "top-2.5 rotate-45" : "top-0"
+                "absolute left-0 h-0.5 w-full rounded-full bg-foreground transition-all duration-300 origin-center",
+                mobileOpen ? "top-[9px] rotate-45" : "top-0"
               )}
             />
             <span
               className={cn(
-                "absolute left-0 top-2.5 h-0.5 w-full rounded-full bg-foreground transition-all duration-300",
-                mobileOpen ? "opacity-0" : "opacity-100"
+                "absolute left-0 top-[9px] h-0.5 w-full rounded-full bg-foreground transition-all duration-300",
+                mobileOpen ? "opacity-0 scale-x-0" : "opacity-100 scale-x-100"
               )}
             />
             <span
               className={cn(
-                "absolute left-0 h-0.5 w-full rounded-full bg-foreground transition-all duration-300",
-                mobileOpen ? "top-2.5 -rotate-45" : "top-5"
+                "absolute left-0 h-0.5 w-full rounded-full bg-foreground transition-all duration-300 origin-center",
+                mobileOpen ? "top-[9px] -rotate-45" : "top-[18px]"
               )}
             />
           </div>
@@ -117,53 +117,67 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-            className="glass-strong overflow-hidden border-t border-border lg:hidden"
-          >
-            <nav className="container-wide py-6" aria-label="Mobile navigation">
-              <ul className="flex flex-col gap-1">
-                {NAV_LINKS.map((link, i) => (
-                  <motion.li
-                    key={link.href}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.04 }}
-                  >
-                    <a
-                      href={link.href}
-                      className="block rounded-lg px-4 py-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
-                      onClick={() => setMobileOpen(false)}
+          <>
+            {/* Backdrop overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="fixed inset-0 top-16 bg-black/40 z-40 lg:hidden"
+              onClick={() => setMobileOpen(false)}
+              aria-hidden="true"
+            />
+
+            {/* Menu panel */}
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+              className="relative z-50 glass-strong overflow-hidden border-t border-border lg:hidden"
+            >
+              <nav className="container-wide py-6" aria-label="Mobile navigation">
+                <ul className="flex flex-col gap-1">
+                  {NAV_LINKS.map((link, i) => (
+                    <motion.li
+                      key={link.href}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.04 }}
                     >
-                      {link.label}
-                    </a>
-                  </motion.li>
-                ))}
-              </ul>
-              <div className="mt-6 px-4 flex flex-col gap-4">
-                <a
-                  href="#contact"
-                  className="text-center text-xs font-semibold uppercase tracking-wider text-muted-foreground py-2"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Get Free Website Audit
-                </a>
-                <a
-                  href="#contact"
-                  className={cn(
-                    buttonVariants({ variant: "default" }),
-                    "w-full rounded-lg bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider py-3.5"
-                  )}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Book Free Consultation
-                </a>
-              </div>
-            </nav>
-          </motion.div>
+                      <a
+                        href={link.href}
+                        className="block rounded-lg px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {link.label}
+                      </a>
+                    </motion.li>
+                  ))}
+                </ul>
+                <div className="mt-6 px-6 flex flex-col gap-4">
+                  <a
+                    href="#contact"
+                    className="text-center text-xs font-semibold uppercase tracking-wider text-muted-foreground py-2"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Get Free Website Audit
+                  </a>
+                  <a
+                    href="#contact"
+                    className={cn(
+                      buttonVariants({ variant: "default" }),
+                      "w-full rounded-lg bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider py-3.5"
+                    )}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Book Free Consultation
+                  </a>
+                </div>
+              </nav>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>

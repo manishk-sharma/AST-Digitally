@@ -25,19 +25,19 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden pt-20 sm:pt-28 md:pt-40 pb-12"
+      className="relative flex min-h-[auto] sm:min-h-[100svh] flex-col justify-between overflow-hidden pt-20 sm:pt-28 md:pt-40 pb-8 sm:pb-12"
       aria-label="Hero section"
     >
-      {/* 3D Dotted Globe — hidden on mobile */}
+      {/* 3D Dotted Globe — hidden on mobile/tablet */}
       <div className="absolute top-0 right-0 w-0 lg:w-[58%] h-[100svh] pointer-events-none">
         <HeroScene />
       </div>
 
       {/* Content Container */}
       <div className="container-wide relative z-10 flex-1 flex flex-col justify-center">
-        <div className="grid gap-12 lg:grid-cols-12 items-center">
+        <div className="grid gap-8 sm:gap-12 lg:grid-cols-12 items-center">
           {/* Left: Heading and description */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 w-full min-w-0">
             {/* Monospace Badge Label */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
@@ -54,7 +54,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="mb-6 sm:mb-8 text-[28px] leading-[1.2] font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-7xl text-foreground lg:leading-[1.1]"
+              className="mb-4 sm:mb-6 md:mb-8 text-[clamp(1.5rem,5.5vw,4.5rem)] font-extrabold tracking-tight text-foreground leading-[1.15] break-words"
             >
               Transform Your Business with Digital Marketing &{" "}
               <span className="underline-highlight">Smart Technology Solutions</span>
@@ -65,7 +65,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed text-neutral-600 md:text-lg"
+              className="mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed text-neutral-600 md:text-lg max-w-xl"
             >
               We design, market, automate, and scale businesses with creative strategies and custom digital solutions that deliver real results.
             </motion.p>
@@ -101,11 +101,11 @@ export default function Hero() {
         </div>
 
         {/* Bottom Fold: Infinite Scrolling Stats Ticker */}
-        <div className="mt-16 sm:mt-24 md:mt-32 border-t border-border pt-8 sm:pt-10 relative overflow-hidden select-none w-full">
+        <div className="mt-10 sm:mt-20 md:mt-28 border-t border-border pt-6 sm:pt-8 md:pt-10 relative overflow-hidden select-none w-full">
           <div className="animate-marquee-left flex gap-8 sm:gap-12 items-center pr-8 sm:pr-12">
-            {[...tickerStats, ...tickerStats].map((stat, i) => (
+            {[...tickerStats, ...tickerStats, ...tickerStats, ...tickerStats].map((stat, i) => (
               <div key={i} className="flex items-center gap-3 sm:gap-4 whitespace-nowrap">
-                <span className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-foreground">{stat.value}</span>
+                <span className="text-xl sm:text-2xl md:text-4xl font-extrabold text-foreground">{stat.value}</span>
                 <span className="text-[10px] sm:text-xs md:text-sm text-neutral-700 uppercase tracking-wider font-bold">
                   {stat.label}
                 </span>

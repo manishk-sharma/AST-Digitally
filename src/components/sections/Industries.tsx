@@ -63,7 +63,7 @@ export default function Industries() {
           subtitle="From healthcare to e-commerce, we deliver tailored digital solutions for businesses of all sizes and industries."
         />
 
-        <div ref={ref} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
+        <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
           {industries.map((item, i) => {
             const Icon = getIndustryIcon(item.name);
             return (
