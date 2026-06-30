@@ -78,16 +78,16 @@ export default function DeveloperExperience() {
               </div>
 
               {/* Terminal input display */}
-              <div className="p-6 font-mono text-[13px] leading-relaxed flex items-center justify-between">
-                <div className="flex items-center gap-3">
+              <div className="p-4 sm:p-6 font-mono text-[12px] sm:text-[13px] leading-relaxed flex items-center justify-between gap-4 min-w-0 border-t border-neutral-900/50">
+                <div className="flex items-center gap-2.5 overflow-x-auto scrollbar-none min-w-0 flex-1">
                   <span className="text-neutral-600 select-none">$</span>
-                  <span>{commands[activeTab]}</span>
+                  <span className="select-all whitespace-nowrap text-white">{commands[activeTab]}</span>
                 </div>
                 
                 {/* Copy action */}
                 <button
                   onClick={handleCopy}
-                  className="text-neutral-500 hover:text-neutral-300 transition-colors p-1.5 rounded hover:bg-neutral-900"
+                  className="text-neutral-500 hover:text-neutral-300 transition-colors p-1.5 rounded hover:bg-neutral-900 shrink-0"
                   aria-label="Copy installation command"
                 >
                   {copied ? (

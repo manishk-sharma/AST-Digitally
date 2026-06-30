@@ -173,7 +173,7 @@ await AST.scale({
                 </div>
 
                 {/* Editor Content Area */}
-                <div className="p-6 font-mono text-[12px] leading-relaxed text-neutral-300 overflow-x-auto min-h-[160px] md:min-h-[220px] flex items-center">
+                <div className="p-6 font-mono text-[12px] leading-relaxed text-neutral-300 overflow-x-auto min-h-[160px] md:min-h-[220px] block min-w-0">
                   <AnimatePresence mode="wait">
                     <motion.pre
                       key={activeStep}
