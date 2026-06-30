@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AST Digitally
+
+Transform Your Business with Digital Marketing & Smart Technology Solutions.
+
+**Founder:** Asif Siddique  
+**Email:** astdigitally@gmail.com  
+**Phone:** +91 80841 58221  
+**Website:** [astdigitally.com](https://astdigitally.com)
+
+AST Digitally is a full-service digital marketing and technology agency. We help startups, SMEs, and enterprises grow through digital marketing, websites, branding, automation, custom dashboards, app deployment, and business applications.
+
+## Monorepo Structure
+
+```
+├── frontend/          # Next.js 16 application (App Router)
+│   ├── src/
+│   │   ├── app/       # App Router pages & layouts
+│   │   ├── components/
+│   │   │   ├── ui/        # Reusable UI primitives (shadcn/ui)
+│   │   │   ├── sections/  # Page sections (Hero, Services, etc.)
+│   │   │   ├── layout/    # Navbar, Footer, ScrollToTop
+│   │   │   └── canvas/    # Three.js/R3F 3D components
+│   │   ├── constants/ # Brand, services, FAQ data
+│   │   ├── hooks/     # Custom React hooks
+│   │   ├── types/     # TypeScript type definitions
+│   │   └── utils/     # Utility functions
+│   └── package.json
+├── backend/           # API / server-side code
+└── package.json       # Root orchestration
+```
+
+## Tech Stack
+
+- **Framework:** Next.js 16 with App Router
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS v4, shadcn/ui
+- **3D Graphics:** Three.js, React Three Fiber (@react-three/fiber)
+- **Animation:** Framer Motion
+- **Icons:** lucide-react
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Install dependencies (root runs all workspaces)
+npm install
+
+# Start the frontend dev server
+cd frontend && npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build |
+| `npm run lint` | Lint check |
 
-## Learn More
+## Services
 
-To learn more about Next.js, take a look at the following resources:
+- Digital Marketing
+- SEO Services
+- Website Design & Development
+- Graphic Design
+- Video Editing
+- App Deployment & Automation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contact
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Email:** astdigitally@gmail.com
+- **Phone:** +91 80841 58221
+- **Hours:** Monday – Saturday, 9:00 AM – 6:00 PM IST
