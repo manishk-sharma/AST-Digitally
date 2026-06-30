@@ -19,13 +19,13 @@ export default function CTA() {
           {/* Left Side: Floating service pills around a large "D" */}
           <div className="relative w-full lg:w-[45%] h-[220px] flex items-center justify-center select-none shrink-0">
 
-            {/* Center "D" letterform — soft decorative watermark */}
-            <div
-              className="text-[120px] font-black text-neutral-300/40 leading-none select-none pointer-events-none"
+            {/* Center AST logo — decorative watermark */}
+            <img
+              src="/AST Logo.png"
+              alt=""
+              className="h-24 sm:h-28 md:h-32 w-auto object-contain opacity-60 select-none pointer-events-none"
               aria-hidden="true"
-            >
-              D
-            </div>
+            />
 
             {/* Floating Pill: Graphic Design — top-left */}
             <div className="absolute hidden sm:block left-4 md:left-6 top-12 px-4 py-2 rounded-full border border-neutral-200 bg-white text-xs font-semibold text-neutral-600 shadow-sm">

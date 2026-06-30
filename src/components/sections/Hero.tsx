@@ -25,11 +25,11 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen flex-col justify-between overflow-hidden pt-24 sm:pt-32 md:pt-40 pb-12"
+      className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden pt-20 sm:pt-28 md:pt-40 pb-12"
       aria-label="Hero section"
     >
       {/* 3D Dotted Globe — hidden on mobile */}
-      <div className="absolute top-0 right-0 w-0 md:w-[58%] h-screen pointer-events-none">
+      <div className="absolute top-0 right-0 w-0 lg:w-[58%] h-[100svh] pointer-events-none">
         <HeroScene />
       </div>
 
@@ -103,7 +103,7 @@ export default function Hero() {
         {/* Bottom Fold: Infinite Scrolling Stats Ticker */}
         <div className="mt-16 sm:mt-24 md:mt-32 border-t border-border pt-8 sm:pt-10 relative overflow-hidden select-none w-full">
           <div className="animate-marquee-left flex gap-8 sm:gap-12 items-center pr-8 sm:pr-12">
-            {[...tickerStats, ...tickerStats, ...tickerStats, ...tickerStats].map((stat, i) => (
+            {[...tickerStats, ...tickerStats].map((stat, i) => (
               <div key={i} className="flex items-center gap-3 sm:gap-4 whitespace-nowrap">
                 <span className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-foreground">{stat.value}</span>
                 <span className="text-[10px] sm:text-xs md:text-sm text-neutral-700 uppercase tracking-wider font-bold">
