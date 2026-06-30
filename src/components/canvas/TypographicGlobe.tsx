@@ -5,28 +5,41 @@ import { useFrame } from "@react-three/fiber";
 import { Points, PointMaterial } from "@react-three/drei";
 import * as THREE from "three";
 import { useIsDark } from "@/hooks/useIsDark";
+import { isLand } from "./landMask";
 
-const DOT_COUNT = 8000;
+// Candidate points distributed over the sphere; only those that land on a
+// continent (per the equirectangular mask) are kept, so the final dot count is
+// roughly SAMPLE_COUNT × land-ratio (~33%).
+const SAMPLE_COUNT = 20000;
 const RADIUS = 2.4;
+const RAD2DEG = 180 / Math.PI;
 
 export default function TypographicGlobe() {
   const pointsRef = useRef<THREE.Points>(null);
   const isDark = useIsDark();
 
   const positions = useMemo(() => {
-    const pos = new Float32Array(DOT_COUNT * 3);
+    // Fibonacci (golden-spiral) sphere — even, gap-free distribution with every
+    // point at exactly RADIUS, giving a mathematically perfect spherical shell.
+    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+    const coords: number[] = [];
 
-    for (let i = 0; i < DOT_COUNT; i++) {
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(2 * Math.random() - 1);
-      const r = RADIUS * (0.92 + Math.random() * 0.08);
+    for (let i = 0; i < SAMPLE_COUNT; i++) {
+      const y = 1 - (i / (SAMPLE_COUNT - 1)) * 2; // 1 → -1
+      const ring = Math.sqrt(Math.max(0, 1 - y * y));
+      const theta = goldenAngle * i;
+      const x = Math.cos(theta) * ring;
+      const z = Math.sin(theta) * ring;
 
-      pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-      pos[i * 3 + 1] = r * Math.cos(phi);
-      pos[i * 3 + 2] = r * Math.sin(phi) * Math.sin(theta);
+      const lat = Math.asin(y) * RAD2DEG; // [-90, 90]
+      const lon = Math.atan2(z, x) * RAD2DEG; // [-180, 180]
+
+      if (isLand(lon, lat)) {
+        coords.push(x * RADIUS, y * RADIUS, z * RADIUS);
+      }
     }
 
-    return pos;
+    return new Float32Array(coords);
   }, []);
 
   useFrame((state) => {
@@ -52,10 +65,10 @@ export default function TypographicGlobe() {
     <Points ref={pointsRef} positions={positions} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        size={0.04}
+        size={0.035}
         sizeAttenuation
         depthWrite={false}
-        opacity={0.8}
+        opacity={0.85}
         color={isDark ? "#d4d4d4" : "#a3a3a3"}
       />
     </Points>
