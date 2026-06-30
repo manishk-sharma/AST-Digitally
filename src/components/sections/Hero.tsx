@@ -4,17 +4,23 @@ import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { buttonVariants } from "@/components/ui/button";
 import SceneLoader from "@/components/ui/SceneLoader";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { cn } from "@/utils";
 
 const HeroScene = dynamic(() => import("@/components/canvas/HeroScene"), {
   ssr: false,
-  loading: () => <SceneLoader className="absolute inset-0" />,
+  loading: () => null,
 });
 
 /**
  * Hero section with decorative canvas, floating icons and infinite scrolling stats ticker.
  */
 export default function Hero() {
+  // The decorative globe is only visible at lg+ (it's `w-0` below). Gate the
+  // WebGL canvas to that breakpoint so mobile/tablet don't spin up a hidden
+  // Three.js scene.
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+
   const tickerStats = [
     { value: "500+", label: "Projects Delivered" },
     { value: "98%", label: "Client Satisfaction" },
@@ -28,9 +34,9 @@ export default function Hero() {
       className="relative flex min-h-[auto] sm:min-h-[100svh] flex-col justify-between overflow-hidden pt-20 sm:pt-28 md:pt-40 pb-8 sm:pb-12"
       aria-label="Hero section"
     >
-      {/* 3D Dotted Globe — hidden on mobile/tablet */}
+      {/* 3D Dotted Globe — only mounted at lg+ where it's actually visible */}
       <div className="absolute top-0 right-0 w-0 lg:w-[58%] h-[100svh] pointer-events-none">
-        <HeroScene />
+        {isDesktop && <HeroScene />}
       </div>
 
       {/* Content Container */}

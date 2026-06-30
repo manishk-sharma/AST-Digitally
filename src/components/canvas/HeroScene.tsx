@@ -16,7 +16,7 @@ import SceneLoader from "@/components/ui/SceneLoader";
 export default function HeroScene() {
   return (
     <div className="absolute inset-0" aria-hidden="true">
-      <Suspense fallback={<SceneLoader className="h-full w-full" />}>
+      <Suspense fallback={null}>
         <Canvas
           dpr={[1, 1.5]}
           camera={{ position: [0, 0, 5], fov: 50 }}
