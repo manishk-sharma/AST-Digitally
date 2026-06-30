@@ -6,7 +6,6 @@ import Footer from "@/components/layout/Footer";
 
 // Dynamically import client-heavy sections to optimize performance and prevent hydration mismatch
 const Hero = dynamic(() => import("@/components/sections/Hero"), { ssr: false });
-const Logos = dynamic(() => import("@/components/sections/Logos"), { ssr: false });
 const Services = dynamic(() => import("@/components/sections/Services"), { ssr: false });
 const Capabilities = dynamic(() => import("@/components/sections/Capabilities"), { ssr: false });
 const ProcessCode = dynamic(() => import("@/components/sections/ProcessCode"), { ssr: false });
@@ -31,7 +30,6 @@ export default function HomePage() {
       <Navbar />
       <main id="main-content">
         <Hero />
-        <Logos />
         <Services />
         <Capabilities />
         <ProcessCode />
