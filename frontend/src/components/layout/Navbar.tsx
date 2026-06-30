@@ -56,7 +56,7 @@ export default function Navbar() {
             <li key={link.href} role="none">
               <a
                 href={link.href}
-                className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground/80 transition-colors hover:text-foreground"
+                className="px-2 xl:px-3 py-2 text-[10px] xl:text-xs font-bold uppercase tracking-wider text-muted-foreground/80 transition-colors hover:text-foreground"
                 role="menuitem"
               >
                 {link.label}
