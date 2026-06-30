@@ -29,7 +29,7 @@ export default function Hero() {
       aria-label="Hero section"
     >
       {/* 3D Dotted Globe */}
-      <div className="absolute top-0 right-0 w-0 md:w-[58%] h-screen pointer-events-none md:pointer-events-auto">
+      <div className="absolute top-0 right-0 w-0 md:w-[58%] h-screen pointer-events-none">
         <HeroScene />
       </div>
 
