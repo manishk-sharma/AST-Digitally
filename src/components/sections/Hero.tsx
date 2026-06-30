@@ -34,7 +34,7 @@ export default function Hero() {
       </div>
 
       {/* Content Container */}
-      <div className="container-wide relative z-10 flex-1 flex flex-col justify-center">
+      <div className="container-wide w-full relative z-10 flex-1 flex flex-col justify-center">
         <div className="grid gap-8 sm:gap-12 lg:grid-cols-12 items-center">
           {/* Left: Heading and description */}
           <div className="lg:col-span-7 w-full min-w-0">
