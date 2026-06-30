@@ -48,10 +48,10 @@ export default function Navbar() {
           className="flex items-center gap-1.5 transition-opacity hover:opacity-90"
           aria-label={`${BRAND.name} - Home`}
         >
-          <img 
-            src="/AST Logo.png" 
-            alt="AST Digitally" 
-            className="h-12 md:h-14 w-auto object-contain drop-shadow-[0_0_8px_rgba(0,0,0,0.06)] dark:drop-shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:drop-shadow-[0_0_12px_rgba(0,0,0,0.12)] dark:hover:drop-shadow-[0_0_18px_rgba(255,255,255,0.25)] transition-all duration-300" 
+          <img
+            src="/AST Logo.png"
+            alt="AST Digitally"
+            className="h-12 md:h-14 w-auto object-contain drop-shadow-[0_0_8px_rgba(0,0,0,0.06)] dark:drop-shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:drop-shadow-[0_0_12px_rgba(0,0,0,0.12)] dark:hover:drop-shadow-[0_0_18px_rgba(255,255,255,0.25)] transition-all duration-300"
           />
         </a>
 
@@ -72,12 +72,7 @@ export default function Navbar() {
 
         {/* Desktop CTA & Login */}
         <div className="hidden items-center gap-6 lg:flex">
-          <a
-            href="#contact"
-            className="text-xs font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Get Free Website Audit
-          </a>
+
           <a
             href="#contact"
             className={cn(
@@ -160,7 +155,7 @@ export default function Navbar() {
                   href="#contact"
                   className={cn(
                     buttonVariants({ variant: "default" }),
-                "w-full rounded-lg bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider py-3.5"
+                    "w-full rounded-lg bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider py-3.5"
                   )}
                   onClick={() => setMobileOpen(false)}
                 >
