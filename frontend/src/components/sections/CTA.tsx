@@ -36,15 +36,7 @@ export default function CTA() {
             <div className="absolute hidden sm:block left-[38%] top-2 md:top-4 px-4 py-2 rounded-full border border-neutral-200 bg-white text-xs font-semibold text-neutral-600 shadow-sm">
               Branding
             </div>
-            {/* Red mouse cursor pointer next to Branding */}
-            <svg
-              className="absolute hidden sm:block left-[55%] top-[52px] md:top-[56px] h-4 w-3 text-neutral-500 pointer-events-none"
-              viewBox="0 0 12 18"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M0 0v18l4.5-4.5L8 18l2.5-1L7 12.5 12 12z" />
-            </svg>
+
 
             {/* Floating Pill: Web Application — right-center */}
             <div className="absolute hidden sm:block right-2 md:right-6 bottom-[55px] px-4 py-2 rounded-full border border-neutral-200 bg-white text-xs font-semibold text-neutral-600 shadow-sm">
