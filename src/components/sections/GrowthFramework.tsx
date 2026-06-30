@@ -84,9 +84,6 @@ export default function GrowthFramework() {
                     <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
                       <div className="flex-1">
                         <div className="mb-3 flex items-center gap-3">
-                          <span className="md:hidden">
-                            {IconComponent && <IconComponent className="h-5 w-5 text-foreground" />}
-                          </span>
                           <span
                             className="text-xs font-bold uppercase tracking-wider text-neutral-500"
                           >

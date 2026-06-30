@@ -25,11 +25,17 @@ export default function AnimatedCounter({
 }: AnimatedCounterProps) {
   const [displayValue, setDisplayValue] = useState(0);
   const [ref, isInView] = useInView<HTMLSpanElement>({ threshold: 0.3 });
-  const hasAnimated = useRef(false);
+  // Track the currently rendered value so re-targets (e.g. slider drags) tween
+  // smoothly from where the counter is now, not from a stale starting point.
+  const displayRef = useRef(0);
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (!isInView || hasAnimated.current) return;
-    hasAnimated.current = true;
+    if (!isInView) return;
+
+    const from = displayRef.current;
+    const to = value;
+    if (from === to) return;
 
     const startTime = performance.now();
 
@@ -39,14 +45,20 @@ export default function AnimatedCounter({
 
       // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplayValue(eased * value);
+      const current = from + (to - from) * eased;
+      displayRef.current = current;
+      setDisplayValue(current);
 
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        rafRef.current = requestAnimationFrame(animate);
       }
     };
 
-    requestAnimationFrame(animate);
+    rafRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
   }, [isInView, value, duration]);
 
   return (
