@@ -106,6 +106,7 @@
 
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
     /* Offset anchor jumps so section headings clear the fixed navbar */
     scroll-padding-top: 6rem;
   }
