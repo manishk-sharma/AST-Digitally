@@ -103,23 +103,7 @@
     @apply bg-background text-foreground relative;
     background-color: var(--background);
   }
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    background:
-      linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-    background-size: 60px 60px, 60px 60px;
-  }
-  .dark body::before,
-  body:has(.dark)::before {
-    background:
-      linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-    background-size: 60px 60px, 60px 60px;
-  }
+
   html {
     @apply font-sans;
     /* Offset anchor jumps so section headings clear the fixed navbar */
