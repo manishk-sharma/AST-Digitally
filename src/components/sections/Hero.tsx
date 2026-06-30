@@ -43,10 +43,10 @@ export default function Hero() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="flex items-center gap-2 text-[10px] sm:text-xs font-mono tracking-wider text-muted-foreground uppercase mb-4 sm:mb-6"
+              className="flex flex-wrap items-center gap-2 text-[10px] sm:text-xs font-mono tracking-wider text-muted-foreground uppercase mb-4 sm:mb-6"
             >
               <span className="h-px w-6 sm:w-8 bg-muted-foreground/30 shrink-0" />
-              <span>Digital Marketing & Smart Technology Solutions</span>
+              <span className="leading-relaxed">Digital Marketing & Smart Technology Solutions</span>
             </motion.div>
 
             {/* Stark Display Heading */}
@@ -54,7 +54,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="mb-4 sm:mb-6 md:mb-8 text-[32px] sm:text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.15] break-words"
+              className="mb-4 sm:mb-6 md:mb-8 text-[clamp(1.5rem,5.5vw,4.5rem)] font-extrabold tracking-tight text-foreground leading-[1.15] break-words"
             >
               Transform Your Business with Digital Marketing &{" "}
               <span className="underline-highlight">Smart Technology Solutions</span>
@@ -65,7 +65,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed text-neutral-600 dark:text-neutral-400 md:text-lg max-w-xl"
+              className="mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed text-neutral-600 md:text-lg max-w-xl"
             >
               We design, market, automate, and scale businesses with creative strategies and custom digital solutions that deliver real results.
             </motion.p>
@@ -84,13 +84,14 @@ export default function Hero() {
                   "rounded-lg bg-primary text-primary-foreground px-5 py-3.5 text-sm font-semibold transition-all duration-300 hover:bg-primary/90 shadow-[0_2px_10px_rgba(0,0,0,0.08)] flex items-center justify-center gap-2 w-full sm:w-auto"
                 )}
               >
-                Book Free Consultation →
+                Book Free Consultation
+                <span className="text-base">→</span>
               </a>
               <a
                 href="#services"
                 className={cn(
                   buttonVariants({ variant: "outline", size: "lg" }),
-                  "rounded-lg border-border bg-transparent text-foreground px-5 py-3.5 text-sm font-semibold transition-all duration-300 hover:bg-secondary/20 shadow-[0_2px_10px_rgba(0,0,0,0.035)] text-center w-full sm:w-auto"
+                  "rounded-lg border-border bg-white text-foreground px-5 py-3.5 text-sm font-semibold transition-all duration-300 hover:bg-secondary/20 shadow-[0_2px_10px_rgba(0,0,0,0.035)] text-center w-full sm:w-auto"
                 )}
               >
                 Explore Services
@@ -108,7 +109,7 @@ export default function Hero() {
                 <span className="text-[10px] sm:text-xs md:text-sm text-neutral-700 uppercase tracking-wider font-bold">
                   {stat.label}
                 </span>
-                <span className="text-neutral-400 dark:text-neutral-600 mx-2 select-none">•</span>
+                <span className="h-1 w-1 rounded-full bg-neutral-300 mx-1 sm:mx-2" />
               </div>
             ))}
           </div>
