@@ -16,9 +16,31 @@ export default function Contact() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1200));
-    setSubmitted(true);
-    setIsSubmitting(false);
+
+    const form = e.currentTarget;
+    const data = {
+      firstName: (form.querySelector("#first-name") as HTMLInputElement).value,
+      lastName: (form.querySelector("#last-name") as HTMLInputElement).value,
+      email: (form.querySelector("#email") as HTMLInputElement).value,
+      subject: (form.querySelector("#subject") as HTMLInputElement).value,
+      message: (form.querySelector("#message") as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+        form.reset();
+      }
+    } catch {
+      // fall through
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

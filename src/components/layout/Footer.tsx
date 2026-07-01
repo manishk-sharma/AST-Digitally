@@ -70,8 +70,13 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground font-sans font-semibold">
+                <a href="/" className="text-sm text-muted-foreground transition-colors hover:text-foreground font-sans font-semibold">
                   Home
+                </a>
+              </li>
+              <li>
+                <a href="/careers" className="text-sm text-muted-foreground transition-colors hover:text-foreground font-sans font-semibold">
+                  Careers
                 </a>
               </li>
               {NAV_LINKS.map((link) => (
@@ -224,17 +229,19 @@ export default function Footer() {
             </p>
           </div>
           <div className="flex gap-6 font-sans">
-            {["Privacy Policy", "Terms & Conditions", "Cookie Settings"].map(
-              (label) => (
-                <a
-                  key={label}
-                  href="#"
-                  className="text-sm text-neutral-600 transition-colors hover:text-foreground font-semibold"
-                >
-                  {label}
-                </a>
-              )
-            )}
+            {[
+              { label: "Privacy Policy", href: "/privacy" },
+              { label: "Terms & Conditions", href: "/terms" },
+              { label: "Cookie Settings", href: "/cookies" },
+            ].map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-sm text-neutral-600 transition-colors hover:text-foreground font-semibold"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
         </div>
       </div>
