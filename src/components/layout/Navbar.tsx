@@ -29,6 +29,27 @@ export default function Navbar() {
     };
   }, [mobileOpen]);
 
+  const closeMobileMenu = () => {
+    document.body.style.overflow = "";
+    setMobileOpen(false);
+  };
+
+  const handleMobileNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    document.body.style.overflow = "";
+    setMobileOpen(false);
+    const el = document.querySelector(href);
+    if (!el) return;
+    // The body is still `overflow: hidden` (scroll-locked) at this instant, so a
+    // synchronous scroll gets dropped — notably on mobile browsers. Wait for the
+    // unlock + menu close to take effect, then scroll on the next frames.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  };
+
   return (
     <header
       className={cn(
@@ -125,7 +146,7 @@ export default function Navbar() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
               className="fixed inset-0 top-16 bg-black/40 z-40 lg:hidden"
-              onClick={() => setMobileOpen(false)}
+              onClick={closeMobileMenu}
               aria-hidden="true"
             />
 
@@ -135,7 +156,7 @@ export default function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-              className="relative z-50 glass-strong overflow-hidden border-t border-border lg:hidden"
+              className="relative z-50 glass-strong overflow-y-auto border-t border-border lg:hidden max-h-[calc(100dvh-4rem)]"
             >
               <nav className="container-wide py-6" aria-label="Mobile navigation">
                 <ul className="flex flex-col gap-1">
@@ -149,7 +170,7 @@ export default function Navbar() {
                       <a
                         href={link.href}
                         className="block rounded-lg px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
-                        onClick={() => setMobileOpen(false)}
+                        onClick={(e) => handleMobileNavClick(e, link.href)}
                       >
                         {link.label}
                       </a>
@@ -160,7 +181,7 @@ export default function Navbar() {
                   <a
                     href="#contact"
                     className="text-center text-xs font-semibold uppercase tracking-wider text-muted-foreground py-2"
-                    onClick={() => setMobileOpen(false)}
+                    onClick={(e) => handleMobileNavClick(e, "#contact")}
                   >
                     Get Free Website Audit
                   </a>
@@ -170,7 +191,7 @@ export default function Navbar() {
                       buttonVariants({ variant: "default" }),
                       "w-full rounded-lg bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider py-3.5"
                     )}
-                    onClick={() => setMobileOpen(false)}
+                    onClick={(e) => handleMobileNavClick(e, "#contact")}
                   >
                     Book Free Consultation
                   </a>
