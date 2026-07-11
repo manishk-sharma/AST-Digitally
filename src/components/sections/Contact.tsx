@@ -50,17 +50,20 @@ export default function Contact() {
       aria-label="Contact us"
     >
       <div className="container-wide max-w-6xl">
-        <div ref={ref} className="grid gap-12 lg:grid-cols-12 items-start">
+        <div ref={ref} className="flex flex-col lg:flex-row lg:gap-16 xl:gap-20 gap-12 items-start">
           
           {/* Left Side: Contact Information */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-5 space-y-12"
+            className="w-full lg:w-[42%] xl:w-[40%] shrink-0 space-y-10"
           >
             <div>
-              <h2 className="text-hero text-foreground mb-6">
+              <h2
+                className="font-heading font-extrabold tracking-tight text-foreground mb-6 leading-[1.1]"
+                style={{ fontSize: "clamp(2rem, 4vw, 3.25rem)", wordBreak: "normal", overflowWrap: "normal" }}
+              >
                 Contact Us
               </h2>
               <p className="text-paragraph">
@@ -72,26 +75,26 @@ export default function Contact() {
               <h3 className="text-lg font-heading font-bold text-foreground">
                 Contact Details
               </h3>
-              <ul className="space-y-4 text-sm text-secondary-foreground font-medium list-none pl-0">
+              <ul className="space-y-4 text-[15px] text-secondary-foreground font-medium list-none pl-0">
                 <li>
                   <span className="text-foreground font-bold">Founder:</span>{" "}
                   {BRAND.founder}
                 </li>
                 <li>
                   <span className="text-foreground font-bold">Phone:</span>{" "}
-                  <a href={`tel:${BRAND.phone}`} className="hover:underline">
+                  <a href={`tel:${BRAND.phone}`} className="hover:text-accent transition-colors">
                     {BRAND.phone}
                   </a>
                 </li>
                 <li>
                   <span className="text-foreground font-bold">Email:</span>{" "}
-                  <a href={`mailto:${BRAND.email}`} className="hover:underline">
+                  <a href={`mailto:${BRAND.email}`} className="hover:text-accent transition-colors">
                     {BRAND.email}
                   </a>
                 </li>
                 <li>
                   <span className="text-foreground font-bold">Web:</span>{" "}
-                  <a href="https://astdigitally.com" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                  <a href="https://astdigitally.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
                     astdigitally.com
                   </a>
                 </li>
@@ -104,7 +107,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="lg:col-span-7"
+            className="w-full lg:flex-1 min-w-0"
           >
             <div className="premium-card p-6 md:p-10">
               {submitted ? (
