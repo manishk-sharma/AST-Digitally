@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import StatNumber from "@/components/ui/StatNumber";
 
 export default function Hero() {
   const tickerStats = [
@@ -89,9 +90,11 @@ export default function Hero() {
                 transition={{ duration: 0.4, delay: 0.4 + i * 0.1 }}
                 className="premium-card flex flex-col items-center justify-center text-center !p-8 group"
               >
-                <span className="text-[32px] md:text-[40px] font-heading font-extrabold text-accent mb-2 leading-none group-hover:scale-105 transition-transform duration-300">
-                  {stat.value}
-                </span>
+                <StatNumber
+                    value={stat.value}
+                    className="text-[32px] md:text-[40px] font-heading font-extrabold text-accent mb-2 leading-none group-hover:scale-105 transition-transform duration-300"
+                    duration={1800}
+                  />
                 <span className="text-label">
                   {stat.label}
                 </span>

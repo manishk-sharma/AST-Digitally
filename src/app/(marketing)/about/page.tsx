@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Target, Lightbulb, Heart, TrendingUp } from "lucide-react";
+import StatNumber from "@/components/ui/StatNumber";
 
 const SmoothScroll = dynamic(() => import("@/components/layout/SmoothScroll"), { ssr: false });
 const ScrollToTop = dynamic(() => import("@/components/layout/ScrollToTop"), { ssr: false });
@@ -115,9 +116,11 @@ export default function AboutPage() {
                     transition={{ duration: 0.4, delay: i * 0.1 }}
                     className="premium-card !p-8 text-center bg-white"
                   >
-                    <div className="text-[42px] font-heading font-extrabold text-accent leading-none mb-2">
-                      {stat.value}
-                    </div>
+                    <StatNumber
+                      value={stat.value}
+                      className="text-[42px] font-heading font-extrabold text-accent leading-none mb-2"
+                      duration={1800}
+                    />
                     <div className="text-label">{stat.label}</div>
                   </motion.div>
                 ))}

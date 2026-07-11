@@ -88,10 +88,12 @@ export default function CaseStudies() {
                         <div className="rounded-xl border border-accent/20 bg-accent/5 p-5 text-center">
                           <div className="text-[32px] font-heading font-extrabold text-accent tracking-tight">
                             <AnimatedCounter
-                              value={parseFloat(metric.value)}
+                              end={parseFloat(metric.value)}
                               prefix={metric.prefix}
                               suffix={metric.suffix}
                               decimals={metric.value.includes(".") ? 1 : 0}
+                              duration={1800}
+                              startTrigger={isInView}
                             />
                           </div>
                           <div className="mt-3 text-label text-secondary-foreground">

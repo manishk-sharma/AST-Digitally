@@ -5,51 +5,7 @@ import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { useInView } from "@/hooks/useInView";
 
-// Premium CountUp helper component that triggers when in view
-function CountUp({
-  value,
-  duration = 1.5,
-  decimals = 0,
-  suffix = "",
-  startTrigger = false,
-}: {
-  value: number;
-  duration?: number;
-  decimals?: number;
-  suffix?: string;
-  startTrigger?: boolean;
-}) {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!startTrigger) return;
-    let start = 0;
-    const end = value;
-    const totalMiliseconds = duration * 1000;
-    const incrementTime = 25;
-    const totalSteps = totalMiliseconds / incrementTime;
-    const stepValue = (end - start) / totalSteps;
-
-    const timer = setInterval(() => {
-      start += stepValue;
-      if (start >= end) {
-        clearInterval(timer);
-        setCount(end);
-      } else {
-        setCount(start);
-      }
-    }, incrementTime);
-
-    return () => clearInterval(timer);
-  }, [value, duration, startTrigger]);
-
-  return (
-    <span>
-      {count.toFixed(decimals).replace(".", ",")}
-      {suffix}
-    </span>
-  );
-}
+import AnimatedCounter from "@/components/ui/AnimatedCounter";
 
 export default function Capabilities() {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.05 });
@@ -113,7 +69,7 @@ export default function Capabilities() {
               {/* Hand-drawn oval around 100% */}
               <div className="relative mb-6 flex items-center justify-center">
                 <span className="text-4xl font-black text-accent tracking-tight relative z-10">
-                  <CountUp value={100} duration={1.2} suffix="%" startTrigger={isInView} />
+                  <AnimatedCounter end={100} duration={1200} suffix="%" startTrigger={isInView} />
                 </span>
                 <svg className="absolute w-40 h-20 text-neutral-200 pointer-events-none" viewBox="0 0 200 100" fill="none">
                   <motion.path
@@ -197,7 +153,7 @@ export default function Capabilities() {
                     Download Speed
                   </span>
                   <span className="font-extrabold text-accent">
-                    <CountUp value={14.34} duration={1.6} decimals={2} suffix=" mbps" startTrigger={isInView} />
+                    <AnimatedCounter end={14.34} duration={1600} decimals={2} suffix=" mbps" startTrigger={isInView} />
                   </span>
                 </div>
                 {/* Wavy line */}
@@ -251,7 +207,7 @@ export default function Capabilities() {
                 <div className="flex justify-between text-[9px] text-muted-foreground font-bold uppercase tracking-wider mb-2 font-mono">
                   <span>Page Load Time</span>
                   <span className="flex items-center gap-1">
-                    LCP: <CountUp value={0.6} duration={1.2} decimals={1} suffix="s" startTrigger={isInView} />
+                    LCP: <AnimatedCounter end={0.6} duration={1200} decimals={1} suffix="s" startTrigger={isInView} />
                   </span>
                 </div>
                 <svg className="w-full h-24 text-foreground" viewBox="0 0 200 80" fill="none">

@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import StatNumber from "@/components/ui/StatNumber";
 import {
   TrendingUp, Search, Monitor, Palette, Video, Cpu,
   ShoppingCart, Megaphone, Bot, Settings, CheckCircle,
@@ -317,7 +318,11 @@ export default function ServicesPage() {
                   transition={{ duration: 0.4, delay: 0.4 + i * 0.08 }}
                   className="premium-card !p-6 text-center"
                 >
-                  <div className="text-[28px] font-heading font-extrabold text-accent">{s.value}</div>
+                  <StatNumber
+                    value={s.value}
+                    className="text-[28px] font-heading font-extrabold text-accent"
+                    duration={1800}
+                  />
                   <div className="text-label mt-1">{s.label}</div>
                 </motion.div>
               ))}

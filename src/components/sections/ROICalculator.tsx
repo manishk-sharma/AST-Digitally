@@ -209,10 +209,12 @@ export default function ROICalculator() {
                           </div>
                         <div className="text-[28px] font-heading font-extrabold text-accent">
                           <AnimatedCounter
-                            value={result.value}
+                            end={result.value}
                             prefix={result.prefix}
                             suffix={result.suffix}
                             decimals={"decimals" in result ? result.decimals : 0}
+                            duration={1600}
+                            startOnView={true}
                           />
                         </div>
                         <div className="mt-2 text-label text-secondary-foreground">

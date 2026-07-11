@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { GROWTH_STEPS } from "@/constants";
 import { useInView } from "@/hooks/useInView";
+import StatNumber from "@/components/ui/StatNumber";
 import {
   Lightbulb,
   ClipboardList,
@@ -94,9 +95,11 @@ export default function GrowthFramework() {
                             key={stat.label}
                             className="flex flex-col items-center rounded-lg border border-accent/20 bg-accent/5 px-5 py-4 text-center min-w-[100px]"
                           >
-                            <span className="text-[22px] font-heading font-extrabold text-accent tracking-tight">
-                              {stat.value}
-                            </span>
+                            <StatNumber
+                              value={stat.value}
+                              className="text-[22px] font-heading font-extrabold text-accent tracking-tight"
+                              duration={1600}
+                            />
                             <span className="mt-1 text-label text-secondary-foreground">
                               {stat.label}
                             </span>
