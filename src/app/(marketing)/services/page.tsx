@@ -213,7 +213,7 @@ const SERVICE_FAQS = [
   },
   {
     q: "Do you offer packages or custom quotes?",
-    a: "We offer both. You can choose from our Pricing plans or request a custom quote tailored to your specific requirements.",
+    a: "We offer tailored custom quotes. Contact us with your project details, and we will provide a custom proposal outlining scope and pricing.",
   },
   {
     q: "Can you manage both SEO and Paid Ads together?",
@@ -505,9 +505,6 @@ export default function ServicesPage() {
                   className="bg-white text-accent font-bold px-8 py-4 rounded-lg hover:bg-white/90 transition-all duration-300 hover:-translate-y-1 inline-flex items-center gap-2"
                 >
                   Book Free Consultation <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link href="/pricing" className="border-2 border-white/40 text-white font-bold px-8 py-4 rounded-lg hover:bg-white/10 transition-all duration-300 inline-flex items-center gap-2">
-                  View Pricing
                 </Link>
               </div>
             </motion.div>

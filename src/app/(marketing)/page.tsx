@@ -12,7 +12,6 @@ const GrowthFramework = dynamic(() => import("@/components/sections/GrowthFramew
 
 // Preview sections linking to dedicated pages
 const FeaturedServices = dynamic(() => import("@/components/sections/FeaturedServices"), { ssr: false });
-const FeaturedPricing = dynamic(() => import("@/components/sections/FeaturedPricing"), { ssr: false });
 
 // Social proof & conversion sections
 const CaseStudies = dynamic(() => import("@/components/sections/CaseStudies"), { ssr: false });
@@ -36,7 +35,6 @@ export default function HomePage() {
         <WhyUs />
         <CaseStudies />
         <Testimonials />
-        <FeaturedPricing />
         <Integrations />
         <FAQ />
         <CTA />
