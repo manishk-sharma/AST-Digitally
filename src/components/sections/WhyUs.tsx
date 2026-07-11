@@ -2,26 +2,18 @@
 
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
-import GlassCard from "@/components/ui/GlassCard";
 import { Target, Palette, MessageSquare, Clock, Users, Rocket } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
 
 const getDiffIcon = (num: string) => {
   switch (num) {
-    case "01":
-      return Target;
-    case "02":
-      return Palette;
-    case "03":
-      return MessageSquare;
-    case "04":
-      return Clock;
-    case "05":
-      return Users;
-    case "06":
-      return Rocket;
-    default:
-      return Target;
+    case "01": return Target;
+    case "02": return Palette;
+    case "03": return MessageSquare;
+    case "04": return Clock;
+    case "05": return Users;
+    case "06": return Rocket;
+    default: return Target;
   }
 };
 
@@ -64,7 +56,7 @@ export default function WhyUs() {
   return (
     <section
       id="why-us"
-      className="section-padding relative overflow-hidden"
+      className="section-padding bg-background relative overflow-hidden"
       aria-label="Why choose us"
     >
       <div className="container-wide">
@@ -84,33 +76,29 @@ export default function WhyUs() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: i * 0.06 }}
               >
-                <GlassCard
-                  variant="solid"
-                  hover={true}
-                  className="p-8 h-full flex flex-col justify-between border border-border"
-                >
+                <div className="premium-card p-8 h-full flex flex-col group">
                   <div>
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-neutral-100 dark:bg-neutral-800 text-black dark:text-white border border-neutral-200 dark:border-neutral-700 transition-transform duration-400 group-hover:scale-105">
-                        <Icon className="h-5 w-5 stroke-[1.8]" />
+                    <div className="flex items-center justify-between mb-8">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-white">
+                        <Icon className="h-5 w-5" />
                       </div>
-                      <span className="text-[10px] font-mono text-neutral-400 font-bold border border-border rounded px-1.5 py-0.5 leading-none">
+                      <span className="text-label text-accent font-mono font-bold">
                         {diff.num}
                       </span>
                     </div>
-                  
-                  <h3 className="text-lg font-bold text-foreground mb-3 font-sans tracking-wide">
-                    {diff.title}
-                  </h3>
-                  
-                  <p className="text-sm leading-relaxed text-neutral-600 font-medium">
-                    {diff.desc}
-                  </p>
+
+                    <h3 className="text-[20px] font-heading font-extrabold text-foreground mb-3 tracking-tight">
+                      {diff.title}
+                    </h3>
+
+                    <p className="text-paragraph text-[15px]">
+                      {diff.desc}
+                    </p>
+                  </div>
                 </div>
-              </GlassCard>
-            </motion.div>
-          );
-        })}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

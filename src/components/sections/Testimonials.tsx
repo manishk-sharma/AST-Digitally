@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
-import GlassCard from "@/components/ui/GlassCard";
 import { useInView } from "@/hooks/useInView";
+import { Star } from "lucide-react";
 
 export default function Testimonials() {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.02 });
@@ -15,64 +15,58 @@ export default function Testimonials() {
       role: "Operations Manager",
       avatar: "BP",
       quote: "This ERP revolutionized our operations, streamlining finance and inventory. The cloud-based platform keeps us productive, even remotely.",
-      color: "bg-neutral-900 dark:bg-neutral-100",
     },
     {
       id: 2,
       name: "Aliza Khan",
       role: "Business Analyst",
       avatar: "AK",
-      quote: "The smooth implementation exceeded expectations. It streamlined processes, improving overall business performance.",
-      color: "bg-neutral-700 dark:bg-neutral-300",
+      quote: "The smooth implementation exceeded expectations. It streamlined processes, improving overall business performance significantly.",
     },
     {
       id: 3,
       name: "Hassan Ali",
       role: "E-commerce Manager",
       avatar: "HA",
-      quote: "Our sales pipeline became more visible, and lead times shortened. Very happy with the custom workflows.",
-      color: "bg-neutral-800",
+      quote: "Our sales pipeline became more visible, and lead times shortened dramatically. Very happy with the custom workflows AST built for us.",
     },
     {
       id: 4,
       name: "Farhan Siddiqui",
       role: "Marketing Director",
       avatar: "FS",
-      quote: "Our business functions improved with a user-friendly design and positive customer feedback.",
-      color: "bg-neutral-700",
+      quote: "Our business functions improved with a user-friendly design and positive customer feedback. Highly recommend AST Digitally!",
     },
     {
       id: 5,
-      name: "Aliza Khan",
+      name: "Nadia Ahmed",
       role: "Business Analyst",
-      avatar: "AK",
-      quote: "This ERP's seamless integration enhanced our business operations and efficiency. Highly recommend for its intuitive interface.",
-      color: "bg-neutral-800 dark:bg-neutral-200",
+      avatar: "NA",
+      quote: "AST's seamless integration enhanced our business operations and efficiency. Their intuitive interface is a game-changer.",
     },
     {
       id: 6,
-      name: "Briana Patton",
+      name: "James Cooper",
       role: "Operations Manager",
-      avatar: "BP",
-      quote: "The team provided excellent post-launch support. Ongoing campaign optimization has consistently brought in qualified leads.",
-      color: "bg-neutral-800",
+      avatar: "JC",
+      quote: "The team provided excellent post-launch support. Ongoing campaign optimization has consistently brought in qualified leads every month.",
     },
   ];
 
   return (
     <section
       id="testimonials"
-      className="section-padding bg-white relative overflow-hidden"
-      aria-label="What our users say"
+      className="section-padding bg-alternate relative overflow-hidden"
+      aria-label="What our clients say"
     >
       <div className="container-wide">
         <SectionHeading
           badge="Testimonials"
-          title="What our users say"
+          title="What Our Clients Say"
           subtitle="See how businesses across industries have transformed their digital presence and achieved measurable growth with AST Digitally."
         />
 
-        {/* Masonry Columns Layout */}
+        {/* Masonry grid */}
         <div
           ref={ref}
           className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 [column-fill:_balance] w-full max-w-6xl mx-auto"
@@ -83,37 +77,40 @@ export default function Testimonials() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{
-                duration: 0.6,
-                delay: i * 0.05,
+                duration: 0.5,
+                delay: i * 0.06,
                 ease: [0.25, 0.1, 0.25, 1],
               }}
               className="break-inside-avoid-column mb-6 inline-block w-full"
             >
-              <GlassCard
-                variant="solid"
-                hover={true}
-                className="p-6 md:p-7 border border-border bg-white rounded-lg shadow-[0_2px_10px_rgba(0,0,0,0.035)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.055)] transition-all duration-300"
-              >
-                {/* Quote Content */}
-                <p className="text-sm leading-relaxed text-muted-foreground mb-6 font-sans font-medium">
-                  {t.quote}
+              <div className="premium-card p-6 md:p-8 bg-white">
+                {/* Stars */}
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, si) => (
+                    <Star key={si} className="h-3.5 w-3.5 fill-accent text-accent" />
+                  ))}
+                </div>
+
+                {/* Quote */}
+                <p className="text-[15px] text-foreground font-medium leading-[1.7] mb-6">
+                  &ldquo;{t.quote}&rdquo;
                 </p>
 
-                {/* Author Info */}
+                {/* Author */}
                 <div className="flex items-center gap-3">
-                  <div className={`flex h-9 w-9 items-center justify-center rounded-lg ${t.color} text-xs font-extrabold text-white`}>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-white text-[12px] font-bold">
                     {t.avatar}
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-foreground font-sans">
+                    <div className="text-[14px] font-heading font-bold text-foreground">
                       {t.name}
                     </div>
-                    <div className="text-[10px] text-muted-foreground font-sans font-medium">
+                    <div className="text-[12px] text-muted-foreground">
                       {t.role}
                     </div>
                   </div>
                 </div>
-              </GlassCard>
+              </div>
             </motion.div>
           ))}
         </div>

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
-import GlassCard from "@/components/ui/GlassCard";
 import { useInView } from "@/hooks/useInView";
 import { cn } from "@/utils";
 import { buttonVariants } from "@/components/ui/button";
@@ -59,7 +58,7 @@ export default function Pricing() {
   return (
     <section
       id="pricing"
-      className="section-padding relative overflow-hidden"
+      className="section-padding bg-card relative overflow-hidden"
       aria-label="Pricing Plans"
     >
       <div className="container-wide">
@@ -83,13 +82,13 @@ export default function Pricing() {
             onClick={() =>
               setBillingPeriod(billingPeriod === "monthly" ? "annual" : "monthly")
             }
-            className="relative h-6 w-11 rounded-lg border border-border bg-neutral-100 transition-colors focus:outline-none"
+            className="relative h-6 w-11 border border-border bg-neutral-100 transition-colors focus:outline-none"
             aria-label="Toggle annual billing"
             aria-pressed={billingPeriod === "annual"}
           >
             <span
               className={cn(
-                "absolute left-0.5 top-0.5 h-5 w-5 rounded-md bg-white transition-transform shadow-[0_1px_4px_rgba(0,0,0,0.08)]",
+                "absolute left-0.5 top-0.5 h-4 w-4 bg-black transition-transform",
                 billingPeriod === "annual" ? "translate-x-5" : "translate-x-0"
               )}
             />
@@ -101,7 +100,7 @@ export default function Pricing() {
             )}
           >
             Annual
-            <span className="text-[9px] font-bold text-neutral-600 bg-neutral-100 px-1 py-0.5 rounded uppercase leading-none font-mono dark:text-neutral-300 dark:bg-neutral-800">
+            <span className="text-[9px] font-bold text-foreground border border-border bg-background px-1 py-0.5 uppercase leading-none font-mono">
               Save 20%
             </span>
           </span>
@@ -116,18 +115,16 @@ export default function Pricing() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.1 }}
             >
-              <GlassCard
-                variant="solid"
-                hover={true}
+              <div
                 className={cn(
-                  "p-6 md:p-7 h-full flex flex-col justify-between relative overflow-hidden",
-                  plan.popular ? "border-neutral-800 shadow-[0_4px_16px_rgba(0,0,0,0.07)] scale-[1.01] z-10" : "border-border"
+                  "premium-card p-6 md:p-8 h-full flex flex-col justify-between relative overflow-hidden",
+                  plan.popular ? "border-2 border-foreground bg-background z-10" : "bg-card"
                 )}
               >
                 {/* Popular Tag */}
                 {plan.popular && (
                   <div className="absolute top-4 right-4">
-                    <span className="text-[9px] font-bold uppercase tracking-wider text-black bg-neutral-100 border border-neutral-300 rounded px-2.5 py-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-background bg-foreground border border-foreground px-3 py-1">
                       Most Popular
                     </span>
                   </div>
@@ -135,41 +132,41 @@ export default function Pricing() {
 
                 <div>
                   {/* Plan Name */}
-                  <h3 className="text-lg font-extrabold text-foreground mb-1">
+                  <h3 className="text-[28px] font-heading font-extrabold text-foreground tracking-tight mb-2">
                     {plan.name}
                   </h3>
-                  <p className="text-xs text-muted-foreground min-h-[32px]">
+                  <p className="text-paragraph text-sm min-h-[40px]">
                     {plan.desc}
                   </p>
 
                   {/* Price */}
-                  <div className="my-6">
+                  <div className="my-8">
                     {typeof plan.price[billingPeriod] === "number" ? (
                       <div className="flex items-baseline">
-                        <span className="text-4xl font-extrabold text-foreground tracking-tight">
+                        <span className="text-[42px] font-heading font-extrabold text-foreground tracking-tight">
                           ${plan.price[billingPeriod]}
                         </span>
-                        <span className="text-xs text-muted-foreground ml-1 font-semibold uppercase tracking-wider">
+                        <span className="text-label text-secondary-foreground ml-2">
                           / month
                         </span>
                       </div>
                     ) : (
-                      <div className="text-4xl font-extrabold text-foreground tracking-tight">
+                      <div className="text-[42px] font-heading font-extrabold text-foreground tracking-tight">
                         {plan.price[billingPeriod]}
                       </div>
                     )}
                   </div>
 
                   {/* Features list */}
-                  <ul className="space-y-3 border-t border-border pt-6 mt-6">
+                  <ul className="space-y-4 border-t border-border pt-8 mt-8">
                     {plan.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-2.5 text-xs text-muted-foreground font-semibold uppercase tracking-wider">
+                      <li key={feature} className="flex items-start gap-3 text-label text-secondary-foreground">
                         <svg
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
                           strokeWidth="3"
-                          className="h-3.5 w-3.5 text-foreground shrink-0 mt-0.5"
+                          className="h-4 w-4 text-accent shrink-0 mt-0.5"
                           aria-hidden="true"
                         >
                           <polyline points="20 6 9 17 4 12" />
@@ -181,23 +178,17 @@ export default function Pricing() {
                 </div>
 
                 {/* Call to Action Button */}
-                <div className="mt-8">
+                <div className="mt-10">
                   <a
                     href="#contact"
                     className={cn(
-                      buttonVariants({
-                        variant: plan.popular ? "default" : "outline",
-                      }),
-                      "w-full rounded-lg py-3.5 text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:scale-[1.01]",
-                      plan.popular
-                        ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_2px_10px_rgba(0,0,0,0.08)]"
-                        : "border-border bg-white text-foreground hover:bg-secondary/20"
+                      plan.popular ? "btn-primary w-full justify-center" : "btn-secondary w-full justify-center"
                     )}
                   >
                     {plan.cta}
                   </a>
                 </div>
-              </GlassCard>
+              </div>
             </motion.div>
           ))}
         </div>

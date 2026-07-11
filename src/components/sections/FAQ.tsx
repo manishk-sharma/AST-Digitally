@@ -16,7 +16,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="section-padding relative"
+      className="section-padding bg-background relative"
       aria-label="Frequently asked questions"
     >
       <div className="container-wide">
@@ -32,12 +32,12 @@ export default function FAQ() {
               <AccordionItem
                 key={i}
                 value={`faq-${i}`}
-                className="glass rounded-lg border border-border px-5 shadow-[0_2px_10px_rgba(0,0,0,0.025)] data-[state=open]:border-neutral-400 data-[state=open]:bg-neutral-50 data-[state=open]:border-l-4 data-[state=open]:border-l-black transition-all duration-300"
+                className="border border-border rounded-lg px-6 py-1 data-[state=open]:border-accent/40 data-[state=open]:bg-accent/3 transition-all duration-300 bg-card"
               >
-                <AccordionTrigger className="text-left text-base font-bold text-foreground hover:no-underline py-5">
+                <AccordionTrigger className="text-left text-[15px] font-heading font-bold text-foreground hover:no-underline py-5 hover:text-accent transition-colors">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="pb-5 text-neutral-600 leading-relaxed text-sm font-medium">
+                <AccordionContent className="pb-5 text-paragraph text-[15px]">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

@@ -1,26 +1,10 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { buttonVariants } from "@/components/ui/button";
-import SceneLoader from "@/components/ui/SceneLoader";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { cn } from "@/utils";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
-const HeroScene = dynamic(() => import("@/components/canvas/HeroScene"), {
-  ssr: false,
-  loading: () => null,
-});
-
-/**
- * Hero section with decorative canvas, floating icons and infinite scrolling stats ticker.
- */
 export default function Hero() {
-  // The decorative globe is only visible at lg+ (it's `w-0` below). Gate the
-  // WebGL canvas to that breakpoint so mobile/tablet don't spin up a hidden
-  // Three.js scene.
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
-
   const tickerStats = [
     { value: "500+", label: "Projects Delivered" },
     { value: "98%", label: "Client Satisfaction" },
@@ -31,92 +15,87 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[auto] sm:min-h-[100svh] flex-col justify-between overflow-hidden pt-20 sm:pt-28 md:pt-40 pb-8 sm:pb-12"
+      className="relative flex min-h-screen flex-col justify-center overflow-hidden pt-32 pb-24 bg-background animate-fade-up"
       aria-label="Hero section"
     >
-      {/* 3D Dotted Globe — only mounted at lg+ where it's actually visible */}
-      <div className="absolute top-0 right-0 w-0 lg:w-[58%] h-[100svh] pointer-events-none">
-        {isDesktop && <HeroScene />}
-      </div>
+      {/* Grid background */}
+      <div className="absolute inset-0 pointer-events-none z-0" style={{
+        backgroundImage: `linear-gradient(to right, #F0F0F0 1px, transparent 1px), linear-gradient(to bottom, #F0F0F0 1px, transparent 1px)`,
+        backgroundSize: `60px 60px`
+      }} />
 
-      {/* Content Container */}
-      <div className="container-wide w-full relative z-10 flex-1 flex flex-col justify-center">
-        <div className="grid gap-8 sm:gap-12 lg:grid-cols-12 items-center">
-          {/* Left: Heading and description */}
-          <div className="lg:col-span-7 w-full min-w-0">
-            {/* Monospace Badge Label */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="flex flex-wrap items-center gap-2 text-[10px] sm:text-xs font-mono tracking-wider text-muted-foreground uppercase mb-4 sm:mb-6"
-            >
-              <span className="h-px w-6 sm:w-8 bg-muted-foreground/30 shrink-0" />
-              <span className="leading-relaxed">Digital Marketing & Smart Technology Solutions</span>
-            </motion.div>
+      {/* Blue glow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-accent/5 rounded-full blur-[100px] pointer-events-none z-0" />
 
-            {/* Stark Display Heading */}
-            <motion.h1
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="mb-4 sm:mb-6 md:mb-8 text-[clamp(1.5rem,5.5vw,4.5rem)] font-extrabold tracking-tight text-foreground leading-[1.15] break-words"
-            >
-              Transform Your Business with Digital Marketing &{" "}
-              <span className="underline-highlight">Smart Technology Solutions</span>
-            </motion.h1>
+      {/* Content */}
+      <div className="container-wide w-full relative z-10 flex-1 flex flex-col justify-center items-center text-center mt-12">
+        <div className="w-full max-w-[1000px] flex flex-col items-center">
 
-            {/* Description Subtitle */}
-            <motion.p
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed text-neutral-600 md:text-lg max-w-xl"
-            >
-              We design, market, automate, and scale businesses with creative strategies and custom digital solutions that deliver real results.
-            </motion.p>
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-8"
+          >
+            <span className="section-badge">Digital Growth Partner</span>
+          </motion.div>
 
-            {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4"
-            >
-              <a
-                href="#contact"
-                className={cn(
-                  buttonVariants({ size: "lg" }),
-                  "rounded-lg bg-primary text-primary-foreground px-5 py-3.5 text-sm font-semibold transition-all duration-300 hover:bg-primary/90 shadow-[0_2px_10px_rgba(0,0,0,0.08)] flex items-center justify-center gap-2 w-full sm:w-auto"
-                )}
-              >
-                Book Free Consultation
-                <span className="text-base">→</span>
-              </a>
-              <a
-                href="#services"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "rounded-lg border-border bg-white text-foreground px-5 py-3.5 text-sm font-semibold transition-all duration-300 hover:bg-secondary/20 shadow-[0_2px_10px_rgba(0,0,0,0.035)] text-center w-full sm:w-auto"
-                )}
-              >
-                Explore Services
-              </a>
-            </motion.div>
-          </div>
+          {/* Heading */}
+          <motion.h1
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="mb-8 text-hero"
+          >
+            Transform Your Business with Digital Marketing &{" "}
+            <span className="text-accent">Smart Technology</span>
+          </motion.h1>
+
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="mb-14 text-paragraph max-w-[640px] mx-auto"
+          >
+            We design, market, automate, and scale businesses with creative strategies and custom digital solutions that deliver real results.
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <Link href="/#contact" className="btn-primary">
+              Book Free Consultation <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link href="/services" className="btn-secondary">
+              Explore Services
+            </Link>
+          </motion.div>
         </div>
 
-        {/* Bottom Fold: Infinite Scrolling Stats Ticker */}
-        <div className="mt-10 sm:mt-20 md:mt-28 border-t border-border pt-6 sm:pt-8 md:pt-10 relative overflow-hidden select-none w-full">
-          <div className="animate-marquee-left flex gap-8 sm:gap-12 items-center pr-8 sm:pr-12">
-            {[...tickerStats, ...tickerStats, ...tickerStats, ...tickerStats].map((stat, i) => (
-              <div key={i} className="flex items-center gap-3 sm:gap-4 whitespace-nowrap">
-                <span className="text-xl sm:text-2xl md:text-4xl font-extrabold text-foreground">{stat.value}</span>
-                <span className="text-[10px] sm:text-xs md:text-sm text-neutral-700 uppercase tracking-wider font-bold">
+        {/* Stats */}
+        <div className="mt-24 md:mt-32 w-full relative z-10 max-w-[1000px] mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {tickerStats.map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.4 + i * 0.1 }}
+                className="premium-card flex flex-col items-center justify-center text-center !p-8 group"
+              >
+                <span className="text-[32px] md:text-[40px] font-heading font-extrabold text-accent mb-2 leading-none group-hover:scale-105 transition-transform duration-300">
+                  {stat.value}
+                </span>
+                <span className="text-label">
                   {stat.label}
                 </span>
-                <span className="h-1 w-1 rounded-full bg-neutral-300 mx-1 sm:mx-2" />
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

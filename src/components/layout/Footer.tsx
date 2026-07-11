@@ -1,26 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import Link from "next/link";
 import { BRAND, NAV_LINKS } from "@/constants";
 import { Separator } from "@/components/ui/separator";
+import { ArrowRight } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const [emailInput, setEmailInput] = useState("");
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    // The inline script in <head> has already applied the right class before paint;
-    // sync local state to it so the toggle reflects the current theme.
-    setIsDarkMode(document.documentElement.classList.contains("dark"));
-  }, []);
-
-  const toggleTheme = () => {
-    const next = !isDarkMode;
-    setIsDarkMode(next);
-    document.documentElement.classList.toggle("dark", next);
-    localStorage.setItem("theme", next ? "dark" : "light");
-  };
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,17 +17,21 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-border bg-white py-16" role="contentinfo">
+    <footer className="relative border-t border-divider bg-card py-[100px]" role="contentinfo">
       <div className="container-wide">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-          
-          {/* Column 1: Stay Connected (Newsletter) */}
+
+          {/* Column 1: Brand + Newsletter */}
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-foreground mb-4 font-sans">
-              Stay Connected
-            </h3>
-            <p className="text-sm text-muted-foreground mb-6 leading-relaxed font-sans font-medium">
-              Join our newsletter for the latest updates and exclusive offers.
+            <Link href="/">
+              <img
+                src="/AST Logo.png"
+                alt="AST Digitally"
+                className="h-[36px] w-auto object-contain mb-6 transition-opacity hover:opacity-80"
+              />
+            </Link>
+            <p className="text-[15px] text-secondary-foreground mb-6 leading-relaxed">
+              A full-service digital agency helping businesses grow through marketing, websites, branding, and automation.
             </p>
             <form onSubmit={handleSubscribe} className="relative max-w-sm">
               <input
@@ -48,81 +40,80 @@ export default function Footer() {
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
                 required
-                className="w-full rounded-lg border border-border bg-white py-3 pl-4 pr-12 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-black font-sans"
+                className="w-full border-b border-border bg-transparent py-3 pr-10 text-[15px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors"
               />
               <button
                 type="submit"
-                className="absolute right-1.5 top-1.5 flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                className="absolute right-0 top-2 flex h-8 w-8 items-center justify-center text-muted-foreground hover:text-accent transition-colors"
                 aria-label="Subscribe"
               >
-                <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="22" y1="2" x2="11" y2="13" />
-                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                </svg>
+                <ArrowRight className="h-4 w-4" />
               </button>
             </form>
           </div>
 
-          {/* Column 2: Quick Links */}
+          {/* Column 2: Navigation */}
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-foreground mb-4 font-sans">
+            <h3 className="text-label text-foreground mb-6">
               Quick Links
             </h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="/" className="text-sm text-muted-foreground transition-colors hover:text-foreground font-sans font-semibold">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="/careers" className="text-sm text-muted-foreground transition-colors hover:text-foreground font-sans font-semibold">
-                  Careers
-                </a>
-              </li>
+            <ul className="space-y-3">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground font-sans font-semibold"
+                    className="text-[15px] font-medium text-secondary-foreground transition-colors hover:text-accent"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/careers"
+                  className="text-[15px] font-medium text-secondary-foreground transition-colors hover:text-accent"
+                >
+                  Careers
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Column 3: Contact Us */}
+          {/* Column 3: Contact */}
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-foreground mb-4 font-sans">
+            <h3 className="text-label text-foreground mb-6">
               Contact Us
             </h3>
-            <ul className="space-y-3 text-sm text-muted-foreground font-sans font-semibold">
-              <li>{BRAND.address}</li>
+            <ul className="space-y-4">
+              <li className="text-[15px] text-secondary-foreground">{BRAND.address}</li>
               <li>
-                Phone:{" "}
-                <a href={`tel:${BRAND.phone}`} className="transition-colors hover:text-foreground">
+                <a
+                  href={`tel:${BRAND.phone}`}
+                  className="text-[15px] text-secondary-foreground transition-colors hover:text-accent"
+                >
                   {BRAND.phone}
                 </a>
               </li>
               <li>
-                Email:{" "}
-                <a href={`mailto:${BRAND.email}`} className="transition-colors hover:text-foreground">
+                <a
+                  href={`mailto:${BRAND.email}`}
+                  className="text-[15px] text-secondary-foreground transition-colors hover:text-accent"
+                >
                   {BRAND.email}
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Column 4: Follow Us (Socials + Theme Toggle) */}
+          {/* Column 4: Socials */}
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-foreground mb-4 font-sans">
+            <h3 className="text-label text-foreground mb-6">
               Follow Us
             </h3>
-            <div className="flex gap-3 mb-6">
+            <div className="flex gap-3 mb-6 flex-wrap">
               {[
-                { 
-                  label: "Facebook", 
+                {
+                  label: "Facebook",
                   href: "https://facebook.com",
                   svg: (
                     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -130,8 +121,8 @@ export default function Footer() {
                     </svg>
                   )
                 },
-                { 
-                  label: "Twitter", 
+                {
+                  label: "Twitter",
                   href: "https://x.com",
                   svg: (
                     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -139,8 +130,8 @@ export default function Footer() {
                     </svg>
                   )
                 },
-                { 
-                  label: "Instagram", 
+                {
+                  label: "Instagram",
                   href: "https://instagram.com",
                   svg: (
                     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -150,8 +141,8 @@ export default function Footer() {
                     </svg>
                   )
                 },
-                { 
-                  label: "LinkedIn", 
+                {
+                  label: "LinkedIn",
                   href: "https://linkedin.com",
                   svg: (
                     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -161,86 +152,42 @@ export default function Footer() {
                     </svg>
                   )
                 },
-              ].map((social) => {
-                return (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-muted-foreground transition-all duration-300 hover:border-black hover:text-foreground hover:bg-neutral-50 shadow-[0_2px_10px_rgba(0,0,0,0.025)]"
-                    aria-label={social.label}
-                  >
-                    {social.svg}
-                  </a>
-                );
-              })}
-            </div>
-
-            {/* Theme Toggle switch */}
-            <div className="flex items-center gap-3 select-none mt-2">
-              {/* Sun icon */}
-              <svg className="h-5 w-5 text-neutral-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="5" />
-                <line x1="12" y1="1" x2="12" y2="3" />
-                <line x1="12" y1="21" x2="12" y2="23" />
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                <line x1="1" y1="12" x2="3" y2="12" />
-                <line x1="21" y1="12" x2="23" y2="12" />
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-              </svg>
-
-              {/* Toggle track */}
-              <button
-                onClick={toggleTheme}
-                className="relative h-8 w-14 rounded-full bg-neutral-200 transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
-                aria-label="Toggle theme"
-              >
-                <span
-                  className={`absolute top-1 left-1 h-6 w-6 rounded-full bg-white shadow-md transition-transform duration-300 ${
-                    isDarkMode ? "translate-x-6" : "translate-x-0"
-                  }`}
-                />
-              </button>
-
-              {/* Moon icon */}
-              <svg className="h-5 w-5 text-neutral-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-              </svg>
+              ].map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-foreground transition-all duration-300 hover:border-accent hover:bg-accent hover:text-white"
+                  aria-label={social.label}
+                >
+                  {social.svg}
+                </a>
+              ))}
             </div>
           </div>
-
         </div>
 
-        <Separator className="my-10 bg-border" />
+        <Separator className="my-10 bg-divider" />
 
         {/* Bottom bar */}
-        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-          <div className="flex items-center gap-3">
-            <img 
-              src="/AST Logo.png" 
-              alt="AST Digitally Logo" 
-              className="h-9 md:h-10 w-auto object-contain drop-shadow-[0_0_8px_rgba(0,0,0,0.06)] dark:drop-shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:drop-shadow-[0_0_12px_rgba(0,0,0,0.12)] dark:hover:drop-shadow-[0_0_18px_rgba(255,255,255,0.25)] transition-all duration-300" 
-            />
-            <p className="text-sm text-neutral-600 font-medium font-sans">
-              © {currentYear} {BRAND.name}. All rights reserved.
-            </p>
-          </div>
-          <div className="flex gap-6 font-sans">
+        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+          <p className="text-[14px] text-secondary-foreground">
+            © {currentYear} {BRAND.name}. All rights reserved.
+          </p>
+          <div className="flex gap-6">
             {[
               { label: "Privacy Policy", href: "/privacy" },
               { label: "Terms & Conditions", href: "/terms" },
               { label: "Cookie Settings", href: "/cookies" },
             ].map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
-                className="text-sm text-neutral-600 transition-colors hover:text-foreground font-semibold"
+                className="text-[14px] text-secondary-foreground transition-colors hover:text-accent"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

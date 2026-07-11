@@ -2,14 +2,14 @@
 
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
-import GlassCard from "@/components/ui/GlassCard";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
-import { Badge } from "@/components/ui/badge";
 import { CASE_STUDIES } from "@/constants";
 import { useInView } from "@/hooks/useInView";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 /**
- * Case studies section with floating dashboard aesthetic and animated metrics.
+ * Case studies section with metric dashboard and animated counters.
  */
 export default function CaseStudies() {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.05 });
@@ -17,17 +17,26 @@ export default function CaseStudies() {
   return (
     <section
       id="case-studies"
-      className="section-padding relative"
+      className="section-padding bg-alternate relative"
       aria-label="Case studies"
     >
       <div className="container-wide">
-        <SectionHeading
-          badge="Our Work"
-          title="Case Studies"
-          subtitle="Real results from real clients. See how we've helped businesses achieve extraordinary growth."
-        />
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div>
+            <span className="section-badge mb-4 inline-flex">Our Work</span>
+            <h2 className="text-section-title mt-4">
+              Case Studies
+            </h2>
+            <p className="text-paragraph max-w-[500px] mt-4">
+              Real results from real clients. See how we've helped businesses achieve extraordinary growth.
+            </p>
+          </div>
+          <Link href="/#contact" className="btn-outline-blue self-start md:self-auto shrink-0">
+            Start Your Project <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
 
-        <div ref={ref} className="space-y-8 lg:space-y-12">
+        <div ref={ref} className="space-y-8 lg:space-y-10">
           {CASE_STUDIES.map((study, i) => (
             <motion.div
               key={study.id}
@@ -35,42 +44,37 @@ export default function CaseStudies() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{
                 duration: 0.7,
-                delay: i * 0.2,
+                delay: i * 0.15,
                 ease: [0.25, 0.1, 0.25, 1],
               }}
             >
-              <GlassCard
-                variant="solid"
-                hover={true}
-                className="overflow-hidden p-6 lg:p-8"
-              >
+              <div className="premium-card overflow-hidden p-6 lg:p-8 bg-white">
                 <div className="grid gap-8 lg:grid-cols-2">
                   {/* Left: Info */}
                   <div>
                     <div className="mb-4 flex flex-wrap gap-2">
                       {study.tags.map((tag) => (
-                        <Badge
+                        <span
                           key={tag}
-                          variant="secondary"
-                          className="border-border bg-neutral-100 text-neutral-800 font-semibold"
+                          className="rounded-full border border-accent/20 bg-accent/8 text-[11px] font-mono text-accent font-semibold px-3 py-1 uppercase"
                         >
                           {tag}
-                        </Badge>
+                        </span>
                       ))}
                     </div>
-                    <h3 className="mb-1 text-lg font-bold text-foreground lg:text-xl">
+                    <h3 className="mb-2 text-[26px] font-heading font-extrabold text-foreground tracking-tight">
                       {study.title}
                     </h3>
-                    <p className="mb-4 text-xs font-mono uppercase tracking-wider text-muted-foreground">
-                      {study.client} • {study.industry}
+                    <p className="mb-5 text-label text-muted-foreground uppercase font-bold tracking-wider">
+                      {study.client} · {study.industry}
                     </p>
-                    <p className="text-sm leading-relaxed text-muted-foreground">
+                    <p className="text-paragraph text-[15px]">
                       {study.description}
                     </p>
                   </div>
 
-                  {/* Right: Metrics Dashboard */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* Right: Metrics */}
+                  <div className="grid grid-cols-2 gap-4">
                     {study.metrics.map((metric, j) => (
                       <motion.div
                         key={metric.label}
@@ -81,8 +85,8 @@ export default function CaseStudies() {
                           delay: i * 0.15 + j * 0.08 + 0.2,
                         }}
                       >
-                        <div className="rounded-lg border border-border bg-neutral-50 p-4 text-center shadow-[0_2px_10px_rgba(0,0,0,0.025)]">
-                          <div className="text-2xl font-extrabold text-foreground lg:text-3xl">
+                        <div className="rounded-xl border border-accent/20 bg-accent/5 p-5 text-center">
+                          <div className="text-[32px] font-heading font-extrabold text-accent tracking-tight">
                             <AnimatedCounter
                               value={parseFloat(metric.value)}
                               prefix={metric.prefix}
@@ -90,7 +94,7 @@ export default function CaseStudies() {
                               decimals={metric.value.includes(".") ? 1 : 0}
                             />
                           </div>
-                          <div className="mt-1 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                          <div className="mt-3 text-label text-secondary-foreground">
                             {metric.label}
                           </div>
                         </div>
@@ -98,7 +102,7 @@ export default function CaseStudies() {
                     ))}
                   </div>
                 </div>
-              </GlassCard>
+              </div>
             </motion.div>
           ))}
         </div>

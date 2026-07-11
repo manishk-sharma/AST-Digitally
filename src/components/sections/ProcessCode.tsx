@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
-import GlassCard from "@/components/ui/GlassCard";
 import { useInView } from "@/hooks/useInView";
 
 export default function ProcessCode() {
@@ -97,7 +96,7 @@ await AST.scale({
   return (
     <section
       id="process"
-      className="section-padding relative overflow-hidden"
+      className="section-padding bg-card relative overflow-hidden"
       aria-label="Growth Process and Framework"
     >
       <div className="container-wide">
@@ -119,27 +118,27 @@ await AST.scale({
                 aria-label={`Show process step ${step.title}`}
               >
                 <div
-                  className={`p-4 rounded-lg border transition-all duration-300 ${
+                  className={`p-5 border transition-all duration-300 ${
                     activeStep === idx
-                      ? "border-neutral-800 bg-neutral-50 shadow-[0_2px_10px_rgba(0,0,0,0.035)] border-l-4 border-l-foreground"
-                      : "border-transparent hover:bg-neutral-50"
+                      ? "border-accent bg-background"
+                      : "border-transparent hover:bg-background"
                   }`}
                 >
-                  <div className="flex items-center gap-3 mb-1">
+                  <div className="flex items-center gap-3 mb-2">
                     <span
-                      className={`text-[10px] font-mono font-bold leading-none px-1.5 py-0.5 border rounded ${
+                      className={`text-[11px] font-mono font-bold leading-none px-2 py-1 border ${
                         activeStep === idx
-                          ? "bg-primary text-primary-foreground border-primary"
-                          : "text-neutral-400 border-border"
+                          ? "bg-accent text-white border-accent"
+                          : "text-muted-foreground border-border bg-card"
                       }`}
                     >
                       {step.num}
                     </span>
-                    <h3 className="text-sm font-extrabold text-foreground">
+                    <h3 className="text-base font-heading font-bold text-foreground tracking-tight">
                       {step.title}
                     </h3>
                   </div>
-                  <p className="text-[11px] leading-relaxed text-muted-foreground pl-9 break-words">
+                  <p className="text-label leading-relaxed text-secondary-foreground pl-[44px] break-words">
                     {step.desc}
                   </p>
                 </div>
@@ -154,26 +153,21 @@ await AST.scale({
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.5 }}
             >
-              <GlassCard
-                variant="solid"
-                hover={false}
-                className="overflow-hidden border border-neutral-800 bg-neutral-950 shadow-[0_4px_18px_rgba(0,0,0,0.12)]"
+              <div
+                className="border border-border bg-background"
               >
                 {/* Editor Tab Header */}
-                <div className="flex items-center justify-between px-5 py-4 bg-neutral-900/60 border-b border-neutral-800/80">
+                <div className="flex items-center justify-between px-5 py-4 border-b border-border bg-card">
                   <div className="flex items-center gap-2">
-                    <div className="h-3 w-3 rounded-full bg-neutral-500" />
-                    <div className="h-3 w-3 rounded-full bg-neutral-400" />
-                    <div className="h-3 w-3 rounded-full bg-neutral-600" />
+                    <span className="text-[10px] font-mono font-bold text-muted-foreground uppercase tracking-wider select-none">
+                      ast-framework.ts
+                    </span>
                   </div>
-                  <span className="text-[10px] font-mono font-bold text-neutral-500 uppercase tracking-wider select-none">
-                    ast-framework.ts
-                  </span>
                   <div className="w-12" />
                 </div>
 
                 {/* Editor Content Area */}
-                <div className="p-4 sm:p-6 font-mono text-[11px] sm:text-[12px] leading-relaxed text-neutral-300 overflow-x-auto min-h-[140px] md:min-h-[220px] block min-w-0">
+                <div className="p-4 sm:p-6 font-mono text-[11px] sm:text-[12px] leading-relaxed text-foreground overflow-x-auto min-h-[140px] md:min-h-[220px] block min-w-0">
                   <AnimatePresence mode="wait">
                     <motion.pre
                       key={activeStep}
@@ -187,7 +181,7 @@ await AST.scale({
                     </motion.pre>
                   </AnimatePresence>
                 </div>
-              </GlassCard>
+              </div>
               <div className="text-right text-[9px] sm:text-[10px] font-mono text-neutral-500 mt-2.5 uppercase tracking-wider select-none break-words">
                 Interactive Growth Pipeline & SDK Execution Sandbox
               </div>

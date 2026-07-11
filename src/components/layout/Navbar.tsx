@@ -1,19 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { buttonVariants } from "@/components/ui/button";
 import { NAV_LINKS, BRAND } from "@/constants";
 import { cn } from "@/utils";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  // Filter NAV_LINKS for desktop to prevent crowding and double-line wraps
-  const DESKTOP_LINKS = NAV_LINKS.filter((link) =>
-    ["Services", "Process", "Works", "Pricing", "FAQ", "Contact"].includes(link.label)
-  );
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);
@@ -34,78 +31,65 @@ export default function Navbar() {
     setMobileOpen(false);
   };
 
-  const handleMobileNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    document.body.style.overflow = "";
-    setMobileOpen(false);
-    const el = document.querySelector(href);
-    if (!el) return;
-    // The body is still `overflow: hidden` (scroll-locked) at this instant, so a
-    // synchronous scroll gets dropped — notably on mobile browsers. Wait for the
-    // unlock + menu close to take effect, then scroll on the next frames.
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    });
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href.split("#")[0]) && href.split("#")[0] !== "/";
   };
 
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
-        scrolled
-          ? "bg-white border-border shadow-[0_1px_8px_rgba(0,0,0,0.03)] py-0"
-          : "bg-white border-border py-1"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white",
+        scrolled ? "border-b border-border shadow-[0_2px_20px_rgba(0,0,0,0.05)]" : "border-b border-transparent"
       )}
       role="banner"
     >
       <nav
-        className="container-wide flex h-16 items-center justify-between md:h-20"
+        className="container-wide flex h-[80px] items-center justify-between"
         aria-label="Main navigation"
       >
-        <a
-          href="#"
+        {/* Logo */}
+        <Link
+          href="/"
           className="flex items-center gap-1.5 transition-opacity hover:opacity-90"
           aria-label={`${BRAND.name} - Home`}
         >
           <img
             src="/AST Logo.png"
             alt="AST Digitally"
-            className="h-12 md:h-14 w-auto object-contain drop-shadow-[0_0_8px_rgba(0,0,0,0.06)] dark:drop-shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:drop-shadow-[0_0_12px_rgba(0,0,0,0.12)] dark:hover:drop-shadow-[0_0_18px_rgba(255,255,255,0.25)] transition-all duration-300"
+            className="h-[40px] w-auto object-contain"
           />
-        </a>
+        </Link>
 
         {/* Desktop Nav Links */}
-        <ul className="hidden items-center gap-1 xl:gap-3 lg:flex" role="menubar">
-          {DESKTOP_LINKS.map((link) => (
+        <ul className="hidden items-center gap-1 lg:flex" role="menubar">
+          {NAV_LINKS.map((link) => (
             <li key={link.href} role="none">
-              <a
+              <Link
                 href={link.href}
-                className="px-2.5 py-2 text-xs font-bold uppercase tracking-wider text-muted-foreground/80 transition-colors hover:text-foreground"
+                className={cn(
+                  "nav-link px-4 py-2 rounded-md hover:bg-accent/5 transition-all duration-200",
+                  isActive(link.href) && "active"
+                )}
                 role="menuitem"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
 
-        {/* Desktop CTA & Login */}
-        <div className="hidden items-center gap-6 lg:flex">
-
-          <a
-            href="#contact"
-            className={cn(
-              buttonVariants({ variant: "default" }),
-              "rounded-lg bg-primary text-primary-foreground px-4 py-3 text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:bg-primary/90 hover:scale-[1.01] shadow-[0_2px_10px_rgba(0,0,0,0.08)]"
-            )}
+        {/* Desktop CTA */}
+        <div className="hidden items-center gap-4 lg:flex">
+          <Link
+            href="/#contact"
+            className="btn-primary text-[14px] px-6 py-[12px]"
           >
             Book Free Consultation
-          </a>
+          </Link>
         </div>
 
-        {/* Mobile Menu Button — clean hamburger ≡ ↔ ✕ transition */}
+        {/* Mobile Menu Button */}
         <button
           className="relative flex h-10 w-10 items-center justify-center rounded-lg transition-colors hover:bg-foreground/5 lg:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -139,62 +123,60 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <>
-            {/* Backdrop overlay */}
+            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="fixed inset-0 top-16 bg-black/40 z-40 lg:hidden"
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 top-[80px] bg-black/30 z-40 lg:hidden backdrop-blur-sm"
               onClick={closeMobileMenu}
               aria-hidden="true"
             />
 
             {/* Menu panel */}
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-              className="relative z-50 glass-strong overflow-y-auto border-t border-border lg:hidden max-h-[calc(100dvh-4rem)]"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+              className="relative z-50 bg-white border-t border-divider lg:hidden overflow-y-auto max-h-[calc(100dvh-80px)]"
             >
               <nav className="container-wide py-6" aria-label="Mobile navigation">
                 <ul className="flex flex-col gap-1">
                   {NAV_LINKS.map((link, i) => (
                     <motion.li
                       key={link.href}
-                      initial={{ opacity: 0, x: -10 }}
+                      initial={{ opacity: 0, x: -8 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.04 }}
                     >
-                      <a
+                      <Link
                         href={link.href}
-                        className="block rounded-lg px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
-                        onClick={(e) => handleMobileNavClick(e, link.href)}
+                        className={cn(
+                          "flex items-center gap-3 rounded-lg px-4 py-3.5 text-[15px] font-semibold transition-colors",
+                          isActive(link.href)
+                            ? "bg-accent/8 text-accent"
+                            : "text-foreground hover:bg-foreground/5"
+                        )}
+                        onClick={closeMobileMenu}
                       >
+                        {isActive(link.href) && (
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                        )}
                         {link.label}
-                      </a>
+                      </Link>
                     </motion.li>
                   ))}
                 </ul>
-                <div className="mt-6 px-6 flex flex-col gap-4">
-                  <a
-                    href="#contact"
-                    className="text-center text-xs font-semibold uppercase tracking-wider text-muted-foreground py-2"
-                    onClick={(e) => handleMobileNavClick(e, "#contact")}
-                  >
-                    Get Free Website Audit
-                  </a>
-                  <a
-                    href="#contact"
-                    className={cn(
-                      buttonVariants({ variant: "default" }),
-                      "w-full rounded-lg bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider py-3.5"
-                    )}
-                    onClick={(e) => handleMobileNavClick(e, "#contact")}
+                <div className="mt-6 px-4 flex flex-col gap-3">
+                  <Link
+                    href="/#contact"
+                    className="btn-primary w-full py-4 justify-center"
+                    onClick={closeMobileMenu}
                   >
                     Book Free Consultation
-                  </a>
+                  </Link>
                 </div>
               </nav>
             </motion.div>

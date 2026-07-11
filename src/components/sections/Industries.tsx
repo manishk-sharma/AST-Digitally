@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
-import GlassCard from "@/components/ui/GlassCard";
 import { useInView } from "@/hooks/useInView";
 
 const industries = [
@@ -53,7 +52,7 @@ export default function Industries() {
   return (
     <section
       id="industries"
-      className="section-padding relative overflow-hidden"
+      className="section-padding bg-card relative overflow-hidden"
       aria-label="Industries we serve"
     >
       <div className="container-wide">
@@ -74,21 +73,19 @@ export default function Industries() {
                 transition={{ duration: 0.4, delay: i * 0.04 }}
                 className="h-full"
               >
-                <GlassCard
-                  variant="solid"
-                  hover={true}
-                  className="p-5 text-center border border-border h-full flex flex-col items-center justify-center group"
+                <div
+                  className="premium-card p-6 text-center h-full flex flex-col items-center justify-center group"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-neutral-100 dark:bg-neutral-800 text-black dark:text-white border border-neutral-200 dark:border-neutral-700 transition-transform duration-400 group-hover:scale-105 mb-4">
-                    <Icon className="h-6 w-6 stroke-[1.8]" />
+                  <div className="flex h-12 w-12 items-center justify-center border border-border bg-background transition-all duration-300 group-hover:-translate-y-1 group-hover:bg-black group-hover:text-white mb-6">
+                    <Icon className="h-5 w-5 stroke-[1.75]" />
                   </div>
-                  <h3 className="text-sm font-bold text-foreground mb-1">
+                  <h3 className="text-base font-heading font-bold text-foreground mb-2">
                     {item.name}
                   </h3>
-                  <p className="text-[11px] text-muted-foreground leading-relaxed">
+                  <p className="text-[13px] text-secondary-foreground leading-relaxed font-medium">
                     {item.desc}
                   </p>
-                </GlassCard>
+                </div>
               </motion.div>
             );
           })}

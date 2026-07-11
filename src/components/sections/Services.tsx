@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
-import GlassCard from "@/components/ui/GlassCard";
 import { SERVICES } from "@/constants";
 import { useInView } from "@/hooks/useInView";
 import { TrendingUp, Search, Monitor, Palette, Video, Cpu } from "lucide-react";
@@ -33,7 +32,7 @@ export default function Services() {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.05 });
 
   return (
-    <section id="services" className="section-padding relative" aria-label="Our services">
+    <section id="services" className="section-padding relative bg-background" aria-label="Our services">
       <div className="container-wide">
         <SectionHeading
           badge="Our Services"
@@ -55,24 +54,22 @@ export default function Services() {
                   ease: [0.25, 0.1, 0.25, 1],
                 }}
               >
-                <GlassCard
-                  variant="solid"
-                  hover={true}
-                  className="group relative h-full p-8 flex flex-col justify-between"
+                <div
+                  className="premium-card group relative h-full flex flex-col justify-between"
                 >
                   <div>
                     {/* Icon */}
-                    <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-neutral-100 dark:bg-neutral-800 text-black dark:text-white border border-neutral-200 dark:border-neutral-700 transition-transform duration-400 group-hover:scale-105">
-                      <Icon className="h-5 w-5 stroke-[1.8]" />
+                    <div className="mb-8 text-foreground transition-transform duration-400 group-hover:-translate-y-1">
+                      <Icon className="h-5 w-5 stroke-[1.75]" />
                     </div>
 
                   {/* Title */}
-                  <h3 className="mb-3 text-base font-bold text-foreground">
+                  <h3 className="mb-3 text-[22px] font-heading font-bold text-foreground">
                     {service.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
+                  <p className="mb-8 text-paragraph">
                     {service.description}
                   </p>
                 </div>
@@ -82,14 +79,14 @@ export default function Services() {
                   {service.features.map((feature) => (
                     <li
                       key={feature}
-                      className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground/80"
+                      className="flex items-center gap-3 text-[14px] text-secondary-foreground font-mono"
                     >
-                      <span className="h-1 w-1 rounded-full bg-neutral-400" />
+                      <span className="text-accent">—</span>
                       {feature}
                     </li>
                   ))}
                 </ul>
-              </GlassCard>
+                </div>
             </motion.div>
           );
         })}

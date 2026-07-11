@@ -24,16 +24,12 @@ export const BRAND = {
 // ─── Navigation ─────────────────────────────────────────────────────────────
 
 export const NAV_LINKS = [
-  { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
-  { label: "Why Us", href: "#why-us" },
-  { label: "Works", href: "#case-studies" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "Calculator", href: "#roi" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Tech Stack", href: "#ecosystem" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Case Studies", href: "/#case-studies" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/#contact" },
 ] as const;
 
 // ─── Hero KPIs ──────────────────────────────────────────────────────────────

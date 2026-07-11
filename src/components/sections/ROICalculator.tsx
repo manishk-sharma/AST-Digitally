@@ -3,7 +3,6 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
-import GlassCard from "@/components/ui/GlassCard";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { Label } from "@/components/ui/label";
 import { ROI_DEFAULTS } from "@/constants";
@@ -101,11 +100,11 @@ export default function ROICalculator() {
   return (
     <section
       id="roi"
-      className="section-padding relative overflow-hidden"
+      className="section-padding bg-background relative overflow-hidden"
       aria-label="ROI calculator"
     >
       {/* Background glow */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/[0.02] to-transparent dark:via-white/[0.02]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/[0.02] to-transparent" />
 
       <div className="container-wide relative">
         <SectionHeading
@@ -122,18 +121,18 @@ export default function ROICalculator() {
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6 }}
             >
-              <GlassCard variant="solid" hover={false} className="p-6 lg:p-8">
-                <h3 className="mb-6 text-sm font-bold uppercase tracking-wider text-foreground">
+              <div className="premium-card p-6 lg:p-8">
+                <h3 className="mb-8 text-[13px] font-bold uppercase tracking-wider text-foreground">
                   Your Business Metrics
                 </h3>
                 <div className="space-y-6">
                   {sliders.map((slider) => (
                     <div key={slider.label}>
-                      <div className="mb-2 flex items-center justify-between">
-                        <Label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      <div className="mb-3 flex items-center justify-between">
+                        <Label className="text-label text-secondary-foreground">
                           {slider.label}
                         </Label>
-                        <span className="text-sm font-bold text-foreground">
+                        <span className="text-[15px] font-bold text-foreground">
                           {slider.format(slider.value)}
                         </span>
                       </div>
@@ -146,13 +145,13 @@ export default function ROICalculator() {
                         onChange={(e) =>
                           slider.setValue(parseFloat(e.target.value))
                         }
-                        className="w-full cursor-pointer appearance-none rounded-lg bg-neutral-200 h-1.5 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-md [&::-webkit-slider-thumb]:bg-foreground [&::-webkit-slider-thumb]:shadow-[0_1px_4px_rgba(0,0,0,0.12)]"
+                        className="w-full cursor-pointer appearance-none bg-neutral-200 h-1.5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:bg-black"
                         aria-label={slider.label}
                       />
                     </div>
                   ))}
                 </div>
-              </GlassCard>
+              </div>
             </motion.div>
 
             {/* Results */}
@@ -161,13 +160,11 @@ export default function ROICalculator() {
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <GlassCard
-                variant="solid"
-                hover={true}
-                className="relative overflow-hidden p-6 lg:p-8"
+              <div
+                className="premium-card relative overflow-hidden p-6 lg:p-8"
               >
                 <div className="relative">
-                  <h3 className="mb-6 text-sm font-bold uppercase tracking-wider text-foreground">
+                  <h3 className="mb-8 text-[13px] font-bold uppercase tracking-wider text-foreground">
                     Projected Results
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -205,12 +202,12 @@ export default function ROICalculator() {
                           initial={{ opacity: 0, y: 15 }}
                           animate={isInView ? { opacity: 1, y: 0 } : {}}
                           transition={{ duration: 0.5, delay: 0.2 + j * 0.08 }}
-                          className="rounded-lg border border-border bg-neutral-50 dark:bg-neutral-800 p-4 text-center shadow-[0_2px_10px_rgba(0,0,0,0.025)] flex flex-col items-center justify-center"
+                          className="border border-border bg-background p-5 text-center flex flex-col items-center justify-center"
                         >
-                          <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-700 text-black dark:text-white shadow-sm animate-float" aria-hidden="true">
-                            <Icon className="h-4 w-4 stroke-[1.8]" />
+                          <div className="mb-3 flex h-10 w-10 items-center justify-center border border-border bg-black text-white" aria-hidden="true">
+                            <Icon className="h-5 w-5 stroke-[2]" />
                           </div>
-                        <div className="text-xl font-extrabold text-foreground lg:text-2xl">
+                        <div className="text-[28px] font-heading font-extrabold text-accent">
                           <AnimatedCounter
                             value={result.value}
                             prefix={result.prefix}
@@ -218,7 +215,7 @@ export default function ROICalculator() {
                             decimals={"decimals" in result ? result.decimals : 0}
                           />
                         </div>
-                        <div className="mt-1 text-[9px] font-bold uppercase tracking-wider text-muted-foreground">
+                        <div className="mt-2 text-label text-secondary-foreground">
                           {result.label}
                         </div>
                       </motion.div>
@@ -226,11 +223,11 @@ export default function ROICalculator() {
                   })}
                   </div>
 
-                  <div className="mt-6 rounded-lg bg-neutral-50 border border-border p-4 text-center shadow-[0_2px_10px_rgba(0,0,0,0.025)]">
-                    <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  <div className="mt-6 border border-border bg-foreground p-6 text-center text-background">
+                    <p className="text-[13px] font-bold uppercase tracking-wider text-background/80">
                       Estimated Annual Impact
                     </p>
-                    <p className="mt-2 text-3xl font-extrabold text-foreground">
+                    <p className="mt-3 text-[42px] font-heading font-extrabold text-white">
                       $
                       {(
                         (results.additionalRevenue * 12 +
@@ -241,7 +238,7 @@ export default function ROICalculator() {
                     </p>
                   </div>
                 </div>
-              </GlassCard>
+              </div>
             </motion.div>
           </div>
         </div>

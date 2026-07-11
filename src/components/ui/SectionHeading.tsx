@@ -14,7 +14,7 @@ interface SectionHeadingProps {
 }
 
 /**
- * Consistent section heading with clean monospace badge and dark stark typography.
+ * Consistent section heading with blue pill badge and bold Syne typography.
  */
 export default function SectionHeading({
   badge,
@@ -40,30 +40,29 @@ export default function SectionHeading({
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
           className={cn(
-            "flex items-center gap-2 text-xs font-mono tracking-wider text-neutral-700 font-bold uppercase mb-4",
-            align === "center" && "justify-center"
+            "mb-6",
+            align === "center" && "flex justify-center"
           )}
         >
-          <span className="h-px w-6 bg-neutral-400" />
-          {badge}
+          <span className="section-badge">{badge}</span>
         </motion.div>
       )}
-      
+
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-5xl leading-tight"
+        className="text-section-title"
       >
         {title}
       </motion.h2>
-      
+
       {subtitle && (
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-4 text-base leading-relaxed text-muted-foreground lg:text-lg"
+          className="mt-5 text-paragraph"
         >
           {subtitle}
         </motion.p>

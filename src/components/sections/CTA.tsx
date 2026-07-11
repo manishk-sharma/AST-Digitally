@@ -2,96 +2,85 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "@/hooks/useInView";
+import Link from "next/link";
+import { ArrowRight, Mail, MessageCircle } from "lucide-react";
 
 export default function CTA() {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.05 });
 
   return (
-    <section className="py-20 relative overflow-hidden" aria-label="Call to action banner">
+    <section className="py-24 relative overflow-hidden bg-background" aria-label="Call to action banner">
       <div ref={ref} className="container-wide max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="rounded-2xl border border-neutral-200 bg-neutral-50 p-8 md:p-12 lg:p-14 flex flex-col lg:flex-row items-center gap-8 lg:gap-0 relative overflow-hidden"
+          className="rounded-2xl bg-foreground text-white p-8 md:p-12 lg:p-14 flex flex-col lg:flex-row items-center gap-8 lg:gap-0 relative overflow-hidden"
         >
-
-          {/* Left Side: Floating service pills around a large "D" */}
+          {/* Left: Floating service pills */}
           <div className="relative w-full lg:w-[45%] h-[220px] flex items-center justify-center select-none shrink-0">
-
-            {/* Center AST logo — decorative watermark */}
+            {/* Center logo watermark */}
             <img
               src="/AST Logo.png"
               alt=""
-              className="h-24 sm:h-28 md:h-32 w-auto object-contain opacity-60 select-none pointer-events-none"
+              className="h-24 sm:h-28 w-auto object-contain opacity-30 select-none pointer-events-none"
               aria-hidden="true"
             />
 
-            {/* Floating Pill: Graphic Design — top-left */}
-            <div className="absolute hidden sm:block left-4 md:left-6 top-12 px-4 py-2 rounded-full border border-neutral-200 bg-white text-xs font-semibold text-neutral-600 shadow-sm">
+            {/* Floating pills with blue accent borders */}
+            <div className="absolute hidden sm:block left-4 top-12 px-4 py-2 border border-accent/40 bg-accent/10 text-[12px] font-bold text-accent tracking-wide uppercase rounded-lg">
               Graphic Design
             </div>
-
-            {/* Floating Pill: Branding — top-center with red cursor */}
-            <div className="absolute hidden sm:block left-[38%] top-2 md:top-4 px-4 py-2 rounded-full border border-neutral-200 bg-white text-xs font-semibold text-neutral-600 shadow-sm">
+            <div className="absolute hidden sm:block left-[38%] top-2 px-4 py-2 border border-accent/40 bg-accent/10 text-[12px] font-bold text-accent tracking-wide uppercase rounded-lg">
               Branding
             </div>
-
-
-            {/* Floating Pill: Web Application — right-center */}
-            <div className="absolute hidden sm:block right-2 md:right-6 bottom-[55px] px-4 py-2 rounded-full border border-neutral-200 bg-white text-xs font-semibold text-neutral-600 shadow-sm">
+            <div className="absolute hidden sm:block right-4 bottom-[55px] px-4 py-2 border border-accent/40 bg-accent/10 text-[12px] font-bold text-accent tracking-wide uppercase rounded-lg">
               Web Application
             </div>
-
-            {/* Floating Pill: UI-UX — bottom-left */}
-            <div className="absolute hidden sm:block left-10 md:left-16 bottom-4 px-4 py-2 rounded-full border border-neutral-200 bg-white text-xs font-semibold text-neutral-600 shadow-sm">
+            <div className="absolute hidden sm:block left-12 bottom-4 px-4 py-2 border border-accent/40 bg-accent/10 text-[12px] font-bold text-accent tracking-wide uppercase rounded-lg">
               UI-UX
             </div>
           </div>
 
-          {/* Right Side: Headline + CTA buttons */}
+          {/* Right: Headline + CTA */}
           <div className="w-full lg:w-[55%] space-y-5 text-left relative z-10">
-            <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-[42px] leading-[1.15]">
+            <div className="inline-flex items-center gap-2 text-accent">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+              <span className="text-[12px] font-mono font-bold tracking-wider uppercase">Free Consultation</span>
+            </div>
+            <h2 className="text-[40px] md:text-[48px] font-heading font-extrabold tracking-tight text-white leading-[1.1]">
               Any questions about{" "}
               <br className="hidden sm:block" />
-              Design?
+              growing your business?
             </h2>
-            <p className="text-base text-neutral-500 font-medium">
-              Feel free to reach out to me!
+            <p className="text-[16px] text-white/60">
+              Feel free to reach out — we'd love to talk strategy.
             </p>
 
-            <div className="flex items-center gap-3 pt-1">
+            <div className="flex items-center gap-4 pt-2 flex-wrap">
               {/* Primary CTA */}
-              <a
-                href="#contact"
-                className="rounded-lg bg-primary text-primary-foreground px-6 py-3 text-sm font-bold transition-all hover:bg-primary/90 hover:scale-[1.01] shadow-sm"
-              >
-                Book a call
-              </a>
+              <Link href="/#contact" className="btn-primary">
+                Book a call <ArrowRight className="h-4 w-4" />
+              </Link>
 
-              {/* Mail icon button */}
+              {/* Email */}
               <a
                 href="mailto:astdigitally@gmail.com"
-                className="flex h-11 w-11 items-center justify-center rounded-lg border border-neutral-200 bg-white text-neutral-600 hover:bg-neutral-50 transition-colors shadow-sm"
+                className="flex h-12 w-12 items-center justify-center rounded-lg border border-white/20 bg-white/10 text-white hover:bg-accent hover:border-accent transition-all duration-300"
                 aria-label="Email us"
               >
-                <svg className="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="4" width="20" height="16" rx="2" />
-                  <polyline points="22,6 12,13 2,6" />
-                </svg>
+                <Mail className="h-4 w-4" />
               </a>
 
-              {/* WhatsApp / Chat icon button */}
+              {/* WhatsApp */}
               <a
                 href="https://wa.me/918084158221"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-11 w-11 items-center justify-center rounded-lg border border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 transition-colors shadow-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300"
+                className="flex h-12 w-12 items-center justify-center rounded-lg border border-white/20 bg-white/10 text-white hover:bg-accent hover:border-accent transition-all duration-300"
                 aria-label="WhatsApp us"
               >
-                <svg className="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-                </svg>
+                <MessageCircle className="h-4 w-4" />
               </a>
             </div>
           </div>

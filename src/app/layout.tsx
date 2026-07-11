@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, Syne, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { getOrganizationSchema, getServiceSchema, getFAQSchema } from "@/lib/seo";
 
@@ -9,9 +9,16 @@ const inter = Inter({
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-geist-mono",
+const syne = Syne({
+  variable: "--font-heading",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const ibm = IBM_Plex_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -71,16 +78,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${syne.variable} ${ibm.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>
-        {/* Apply the persisted/system theme before paint to avoid a flash of the wrong theme */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})();`,
-          }}
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

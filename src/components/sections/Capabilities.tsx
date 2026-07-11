@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
-import GlassCard from "@/components/ui/GlassCard";
 import { useInView } from "@/hooks/useInView";
 
 // Premium CountUp helper component that triggers when in view
@@ -87,8 +86,8 @@ export default function Capabilities() {
 
   return (
     <section
-      id="services"
-      className="section-padding bg-white relative overflow-hidden"
+      id="capabilities"
+      className="section-padding bg-background relative overflow-hidden"
       aria-label="Features bento grid"
     >
       <div className="container-wide">
@@ -108,14 +107,12 @@ export default function Capabilities() {
           
           {/* Card 1: 100% Customizable */}
           <motion.div variants={itemVariants}>
-            <GlassCard
-              variant="solid"
-              hover={true}
-              className="p-6 md:p-7 min-h-[200px] md:h-[320px] border border-border bg-white flex flex-col items-center justify-center text-center relative overflow-hidden"
+            <div
+              className="premium-card p-6 md:p-7 min-h-[200px] md:h-[320px] flex flex-col items-center justify-center text-center relative overflow-hidden group"
             >
               {/* Hand-drawn oval around 100% */}
               <div className="relative mb-6 flex items-center justify-center">
-                <span className="text-4xl font-black text-foreground tracking-tight relative z-10">
+                <span className="text-4xl font-black text-accent tracking-tight relative z-10">
                   <CountUp value={100} duration={1.2} suffix="%" startTrigger={isInView} />
                 </span>
                 <svg className="absolute w-40 h-20 text-neutral-200 pointer-events-none" viewBox="0 0 200 100" fill="none">
@@ -130,22 +127,20 @@ export default function Capabilities() {
                   />
                 </svg>
               </div>
-              <h3 className="text-base font-extrabold text-foreground font-sans uppercase tracking-wider">
+              <h3 className="text-[22px] font-heading font-extrabold text-foreground tracking-tight">
                 Customizable
               </h3>
-            </GlassCard>
+            </div>
           </motion.div>
 
           {/* Card 2: Secure by default */}
           <motion.div variants={itemVariants}>
-            <GlassCard
-              variant="solid"
-              hover={true}
-              className="p-6 md:p-7 min-h-[200px] md:h-[320px] border border-border bg-white flex flex-col items-center justify-between text-center group"
+            <div
+              className="premium-card p-6 md:p-7 min-h-[200px] md:h-[320px] flex flex-col items-center justify-between text-center group"
             >
               {/* Fingerprint graphic */}
-              <div className="flex h-20 w-20 items-center justify-center rounded-lg border border-neutral-100 bg-neutral-50 shadow-[0_2px_10px_rgba(0,0,0,0.025)] transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
-                <svg className="h-10 w-10 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+              <div className="flex h-20 w-20 items-center justify-center rounded-xl border border-border bg-accent/10 text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-white">
+                <svg className="h-10 w-10 text-inherit" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
                   <motion.path
                     d="M12 2a10 10 0 0 0-10 10c0 1.2.2 2.3.6 3.4M12 2a10 10 0 0 1 10 10c0 1.2-.2 2.3-.6 3.4"
                     initial={{ pathLength: 0 }}
@@ -168,23 +163,21 @@ export default function Capabilities() {
                   <line x1="16" y1="12" x2="16.01" y2="12" />
                 </svg>
               </div>
-              <div className="space-y-2">
-                <h3 className="text-sm font-extrabold text-foreground font-sans uppercase tracking-wider">
+              <div className="space-y-3">
+                <h3 className="text-[22px] font-heading font-extrabold text-foreground tracking-tight">
                   Secure by default
                 </h3>
-                <p className="text-xs md:text-sm leading-relaxed text-neutral-600 font-medium">
+                <p className="text-paragraph text-sm">
                   Custom fingerprint validation and data encryption keep all platform processes isolated.
                 </p>
               </div>
-            </GlassCard>
+            </div>
           </motion.div>
 
           {/* Card 3: Faster than light */}
           <motion.div variants={itemVariants}>
-            <GlassCard
-              variant="solid"
-              hover={true}
-              className="p-6 md:p-7 min-h-[200px] md:h-[320px] border border-border bg-white flex flex-col items-center justify-between text-center group"
+            <div
+              className="premium-card p-6 md:p-7 min-h-[200px] md:h-[320px] flex flex-col items-center justify-between text-center group"
             >
               {/* Chart/Download graphic */}
               <div className="w-full">
@@ -203,7 +196,7 @@ export default function Capabilities() {
                     </motion.svg>
                     Download Speed
                   </span>
-                  <span className="font-extrabold">
+                  <span className="font-extrabold text-accent">
                     <CountUp value={14.34} duration={1.6} decimals={2} suffix=" mbps" startTrigger={isInView} />
                   </span>
                 </div>
@@ -220,15 +213,15 @@ export default function Capabilities() {
                   />
                 </svg>
               </div>
-              <div className="space-y-2">
-                <h3 className="text-sm font-extrabold text-foreground font-sans uppercase tracking-wider">
+              <div className="space-y-3">
+                <h3 className="text-[22px] font-heading font-extrabold text-foreground tracking-tight">
                   Faster than light
                 </h3>
-                <p className="text-xs md:text-sm leading-relaxed text-neutral-600 font-medium">
+                <p className="text-paragraph text-sm">
                   Optimized Next.js image loading and edge rendering ensure under 0.8s load times.
                 </p>
               </div>
-            </GlassCard>
+            </div>
           </motion.div>
 
           {/* Card 4: Perfect PageSpeed (Wide horizontal) */}
@@ -236,28 +229,26 @@ export default function Capabilities() {
             variants={itemVariants}
             className="md:col-span-2"
           >
-            <GlassCard
-              variant="solid"
-              hover={true}
-              className="p-6 md:p-7 min-h-[220px] border border-border bg-white flex flex-col md:flex-row items-center justify-between gap-6 group"
+            <div
+              className="premium-card p-6 md:p-7 min-h-[220px] flex flex-col md:flex-row items-center justify-between gap-6 group"
             >
               <div className="space-y-4 max-w-md">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-100 bg-neutral-50 shadow-[0_2px_10px_rgba(0,0,0,0.025)] transition-all duration-300 group-hover:scale-110 group-hover:rotate-[3deg]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-accent/10 text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-white group-hover:-translate-y-1">
                   <svg className="h-5 w-5 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
-                <div className="space-y-1">
-                  <h3 className="text-sm font-extrabold text-foreground font-sans uppercase tracking-wider">
+                <div className="space-y-3">
+                  <h3 className="text-[22px] font-heading font-extrabold text-foreground tracking-tight">
                     Perfect PageSpeed
                   </h3>
-                  <p className="text-xs md:text-sm leading-relaxed text-neutral-600 font-medium">
+                  <p className="text-paragraph text-sm">
                     Custom compilation yields 99+ PageSpeed scores on all viewport widths.
                   </p>
                 </div>
               </div>
               
               {/* Detailed stock sparkline chart with labels */}
-              <div className="w-full md:w-1/2 border border-neutral-100 rounded-lg p-3 bg-neutral-50 relative overflow-hidden">
-                <div className="flex justify-between text-[9px] text-neutral-500 font-bold uppercase tracking-wider mb-2 font-mono">
+              <div className="w-full md:w-1/2 border border-border p-3 bg-card relative overflow-hidden">
+                <div className="flex justify-between text-[9px] text-muted-foreground font-bold uppercase tracking-wider mb-2 font-mono">
                   <span>Page Load Time</span>
                   <span className="flex items-center gap-1">
                     LCP: <CountUp value={0.6} duration={1.2} decimals={1} suffix="s" startTrigger={isInView} />
@@ -297,7 +288,7 @@ export default function Capabilities() {
                   />
                 </svg>
               </div>
-            </GlassCard>
+            </div>
           </motion.div>
 
           {/* Card 5: Secure team access (Wide horizontal) */}
@@ -305,13 +296,11 @@ export default function Capabilities() {
             variants={itemVariants}
             className="md:col-span-1"
           >
-            <GlassCard
-              variant="solid"
-              hover={true}
-              className="p-6 md:p-7 min-h-[220px] border border-border bg-white flex flex-col justify-between group"
+            <div
+              className="premium-card p-6 md:p-7 min-h-[220px] flex flex-col justify-between group"
             >
               <div className="flex items-center justify-between gap-4 w-full">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-100 bg-neutral-50 shadow-[0_2px_10px_rgba(0,0,0,0.025)] shrink-0 group-hover:scale-105 transition-all">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-accent/10 text-accent shrink-0 transition-all duration-300 group-hover:bg-accent group-hover:text-white group-hover:-translate-y-1">
                   <svg className="h-5 w-5 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 </div>
                 
@@ -322,37 +311,37 @@ export default function Capabilities() {
                 >
                   <motion.div 
                     variants={teamMemberVariants}
-                    className="flex items-center gap-1.5 bg-neutral-50 border border-neutral-100 rounded-lg px-2.5 py-1 transition-colors hover:bg-neutral-100 cursor-default"
+                    className="flex items-center gap-1.5 bg-card border border-border px-2.5 py-1 transition-colors hover:bg-black hover:text-white cursor-default"
                   >
                     <span>Likeur</span>
-                    <span className="h-5 w-5 rounded-md bg-neutral-800 flex items-center justify-center text-[8px] text-white">L</span>
+                    <span className="h-5 w-5 bg-black flex items-center justify-center text-[8px] text-white">L</span>
                   </motion.div>
                   <motion.div 
                     variants={teamMemberVariants}
-                    className="flex items-center gap-1.5 bg-neutral-50 border border-neutral-100 rounded-lg px-2.5 py-1 translate-x-2 transition-colors hover:bg-neutral-100 cursor-default"
+                    className="flex items-center gap-1.5 bg-card border border-border px-2.5 py-1 translate-x-2 transition-colors hover:bg-black hover:text-white cursor-default"
                   >
-                    <span className="h-5 w-5 rounded-md bg-neutral-900 flex items-center justify-center text-[8px] text-white">M</span>
+                    <span className="h-5 w-5 bg-black flex items-center justify-center text-[8px] text-white">M</span>
                     <span>M. Irung</span>
                   </motion.div>
                   <motion.div 
                     variants={teamMemberVariants}
-                    className="flex items-center gap-1.5 bg-neutral-50 border border-neutral-100 rounded-lg px-2.5 py-1 transition-colors hover:bg-neutral-100 cursor-default"
+                    className="flex items-center gap-1.5 bg-card border border-border px-2.5 py-1 transition-colors hover:bg-black hover:text-white cursor-default"
                   >
                     <span>B. Ng</span>
-                    <span className="h-5 w-5 rounded-md bg-neutral-700 flex items-center justify-center text-[8px] text-white">B</span>
+                    <span className="h-5 w-5 bg-black flex items-center justify-center text-[8px] text-white">B</span>
                   </motion.div>
                 </motion.div>
               </div>
 
-              <div className="space-y-1 mt-4">
-                <h3 className="text-sm font-extrabold text-foreground font-sans uppercase tracking-wider">
+              <div className="space-y-3 mt-4">
+                <h3 className="text-[22px] font-heading font-extrabold text-foreground tracking-tight">
                   Secure team access
                 </h3>
-                <p className="text-xs md:text-sm leading-relaxed text-neutral-600 font-medium font-sans">
+                <p className="text-paragraph text-sm">
                   Configure team governance, permission policies, and secure workspace permissions.
                 </p>
               </div>
-            </GlassCard>
+            </div>
           </motion.div>
 
         </motion.div>

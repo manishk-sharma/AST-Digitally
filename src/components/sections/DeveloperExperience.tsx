@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import SectionHeading from "@/components/ui/SectionHeading";
-import GlassCard from "@/components/ui/GlassCard";
 import { useInView } from "@/hooks/useInView";
 import { motion } from "framer-motion";
 
@@ -30,7 +29,7 @@ export default function DeveloperExperience() {
   return (
     <section
       id="audit-tool"
-      className="section-padding relative overflow-hidden"
+      className="section-padding bg-card relative overflow-hidden"
       aria-label="Website Audit Tool"
     >
       <div className="container-wide">
@@ -46,15 +45,13 @@ export default function DeveloperExperience() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <GlassCard
-              variant="solid"
-              hover={false}
-              className="overflow-hidden border border-neutral-800 shadow-[0_4px_18px_rgba(0,0,0,0.12)] bg-neutral-950 text-neutral-300"
-            >
-              {/* Terminal Title Bar */}
-              <div className="flex items-center justify-between px-5 py-4 bg-neutral-900 border-b border-neutral-800">
+              <div
+                className="border border-border bg-background text-foreground"
+              >
+                {/* Terminal Title Bar */}
+                <div className="flex items-center justify-between px-5 py-4 border-b border-border bg-card">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-mono font-bold text-neutral-500 uppercase tracking-wider">
+                  <span className="text-[10px] font-mono font-bold text-muted-foreground uppercase tracking-wider">
                     cli-terminal
                   </span>
                 </div>
@@ -65,10 +62,10 @@ export default function DeveloperExperience() {
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
-                      className={`text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded transition-colors ${
+                      className={`text-[11px] font-mono font-bold uppercase px-3 py-1 border transition-colors ${
                         activeTab === tab
-                          ? "bg-neutral-800 text-white"
-                          : "text-neutral-500 hover:text-neutral-300"
+                          ? "bg-foreground text-background border-foreground"
+                          : "text-muted-foreground border-transparent hover:bg-background"
                       }`}
                     >
                       {tab}
@@ -78,20 +75,20 @@ export default function DeveloperExperience() {
               </div>
 
               {/* Terminal input display */}
-              <div className="p-4 sm:p-6 font-mono text-[12px] sm:text-[13px] leading-relaxed flex items-center justify-between gap-4 min-w-0 border-t border-neutral-900/50">
+              <div className="p-4 sm:p-6 font-mono text-[12px] sm:text-[13px] leading-relaxed flex items-center justify-between gap-4 min-w-0">
                 <div className="flex items-center gap-2.5 overflow-x-auto scrollbar-none min-w-0 flex-1">
-                  <span className="text-neutral-600 select-none">$</span>
-                  <span className="select-all whitespace-normal break-all sm:whitespace-nowrap text-white">{commands[activeTab]}</span>
+                  <span className="text-muted-foreground select-none">$</span>
+                  <span className="select-all whitespace-normal break-all sm:whitespace-nowrap text-foreground">{commands[activeTab]}</span>
                 </div>
                 
                 {/* Copy action */}
                 <button
                   onClick={handleCopy}
-                  className="text-neutral-500 hover:text-neutral-300 transition-colors p-1.5 rounded hover:bg-neutral-900 shrink-0"
+                  className="text-muted-foreground hover:text-foreground transition-colors p-1.5 border border-transparent hover:border-border hover:bg-card shrink-0"
                   aria-label="Copy installation command"
                 >
                   {copied ? (
-                    <span className="text-[11px] font-bold text-neutral-400">Copied!</span>
+                    <span className="text-[11px] font-bold text-muted-foreground">Copied!</span>
                   ) : (
                     <svg
                       viewBox="0 0 24 24"
@@ -107,7 +104,7 @@ export default function DeveloperExperience() {
                   )}
                 </button>
               </div>
-            </GlassCard>
+              </div>
           </motion.div>
         </div>
       </div>
