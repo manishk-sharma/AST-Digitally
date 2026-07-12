@@ -1,0 +1,390 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Auth ────────────────────────────────────────────────────────────────────
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  password      String?
+  role          Role      @default(EDITOR)
+  image         String?
+  emailVerified DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts      Account[]
+  sessions      Session[]
+  activityLogs  ActivityLog[]
+  notifications Notification[]
+
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// ─── Contact & Leads ─────────────────────────────────────────────────────────
+
+enum SubmissionStatus {
+  NEW
+  READ
+  REPLIED
+  ARCHIVED
+}
+
+model ContactSubmission {
+  id         String           @id @default(cuid())
+  firstName  String
+  lastName   String?
+  email      String
+  phone      String?
+  subject    String
+  message    String           @db.Text
+  status     SubmissionStatus @default(NEW)
+  notes      String?          @db.Text
+  isRead     Boolean          @default(false)
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  @@map("contact_submissions")
+}
+
+// ─── Careers ─────────────────────────────────────────────────────────────────
+
+enum JobStatus {
+  DRAFT
+  OPEN
+  CLOSED
+  PAUSED
+}
+
+enum ApplicationStatus {
+  NEW
+  REVIEWING
+  SHORTLISTED
+  REJECTED
+  HIRED
+}
+
+model JobPosting {
+  id               String            @id @default(cuid())
+  title            String
+  department       String
+  location         String
+  employmentType   String
+  salaryMin        Int?
+  salaryMax        Int?
+  currency         String            @default("INR")
+  description      String            @db.Text
+  responsibilities String[]
+  requirements     String[]
+  benefits         String[]
+  deadline         DateTime?
+  status           JobStatus         @default(DRAFT)
+  order            Int               @default(0)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  applications CareerApplication[]
+
+  @@map("job_postings")
+}
+
+model CareerApplication {
+  id           String            @id @default(cuid())
+  name         String
+  email        String
+  phone        String?
+  resumeUrl    String?
+  portfolioUrl String?
+  coverLetter  String?           @db.Text
+  jobId        String?
+  status       ApplicationStatus @default(NEW)
+  notes        String?           @db.Text
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  job JobPosting? @relation(fields: [jobId], references: [id], onDelete: SetNull)
+
+  @@map("career_applications")
+}
+
+// ─── Services ────────────────────────────────────────────────────────────────
+
+enum PublishStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model Service {
+  id           String        @id @default(cuid())
+  slug         String        @unique
+  title        String
+  icon         String?
+  heroImage    String?
+  description  String        @db.Text
+  features     String[]
+  benefits     String[]
+  process      Json?
+  faq          Json?
+  gallery      String[]
+  ctaTitle     String?
+  ctaUrl       String?
+  status       PublishStatus @default(DRAFT)
+  order        Int           @default(0)
+  metaTitle    String?
+  metaDesc     String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@map("services")
+}
+
+// ─── Pricing ─────────────────────────────────────────────────────────────────
+
+model PricingPlan {
+  id           String   @id @default(cuid())
+  title        String
+  subtitle     String?
+  price        Float
+  yearlyPrice  Float?
+  currency     String   @default("INR")
+  badge        String?
+  isPopular    Boolean  @default(false)
+  features     String[]
+  buttonText   String   @default("Get Started")
+  buttonUrl    String?
+  order        Int      @default(0)
+  isVisible    Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("pricing_plans")
+}
+
+// ─── Case Studies ─────────────────────────────────────────────────────────────
+
+model CaseStudy {
+  id             String        @id @default(cuid())
+  slug           String        @unique
+  projectName    String
+  industry       String
+  client         String
+  description    String        @db.Text
+  challenge      String?       @db.Text
+  solution       String?       @db.Text
+  results        String?       @db.Text
+  metrics        Json?
+  gallery        String[]
+  technologies   String[]
+  completionDate DateTime?
+  isFeatured     Boolean       @default(false)
+  status         PublishStatus @default(DRAFT)
+  metaTitle      String?
+  metaDesc       String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@map("case_studies")
+}
+
+// ─── Testimonials ─────────────────────────────────────────────────────────────
+
+model Testimonial {
+  id         String   @id @default(cuid())
+  name       String
+  company    String?
+  role       String?
+  photo      String?
+  rating     Int      @default(5)
+  review     String   @db.Text
+  isFeatured Boolean  @default(false)
+  order      Int      @default(0)
+  isVisible  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("testimonials")
+}
+
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
+
+model FAQ {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String   @db.Text
+  category  String?
+  order     Int      @default(0)
+  isVisible Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("faqs")
+}
+
+// ─── Homepage Sections ───────────────────────────────────────────────────────
+
+model HomepageSection {
+  id         String   @id @default(cuid())
+  sectionKey String   @unique
+  data       Json
+  isVisible  Boolean  @default(true)
+  updatedAt  DateTime @updatedAt
+
+  @@map("homepage_sections")
+}
+
+// ─── Media Library ────────────────────────────────────────────────────────────
+
+enum MediaType {
+  IMAGE
+  VIDEO
+  PDF
+  SVG
+  OTHER
+}
+
+model Media {
+  id        String    @id @default(cuid())
+  url       String
+  publicId  String?   @unique
+  name      String
+  type      MediaType @default(IMAGE)
+  mimeType  String?
+  size      Int?
+  width     Int?
+  height    Int?
+  folder    String?
+  alt       String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("media")
+}
+
+// ─── Navigation ───────────────────────────────────────────────────────────────
+
+model NavLink {
+  id         String    @id @default(cuid())
+  label      String
+  href       String
+  order      Int       @default(0)
+  isExternal Boolean   @default(false)
+  isVisible  Boolean   @default(true)
+  parentId   String?
+
+  parent   NavLink?  @relation("NavChildren", fields: [parentId], references: [id])
+  children NavLink[] @relation("NavChildren")
+
+  @@map("nav_links")
+}
+
+// ─── SEO Config ───────────────────────────────────────────────────────────────
+
+model SeoConfig {
+  id        String   @id @default(cuid())
+  page      String   @unique
+  metaTitle String?
+  metaDesc  String?
+  canonical String?
+  keywords  String[]
+  ogImage   String?
+  schema    Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("seo_configs")
+}
+
+// ─── Site Settings ────────────────────────────────────────────────────────────
+
+model SiteSettings {
+  id    String @id @default(cuid())
+  key   String @unique
+  value Json
+
+  @@map("site_settings")
+}
+
+// ─── Activity Log ─────────────────────────────────────────────────────────────
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  userId    String
+  action    String
+  entity    String
+  entityId  String?
+  meta      Json?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("activity_logs")
+}
+
+// ─── Notifications ────────────────────────────────────────────────────────────
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  message   String
+  type      String   @default("info")
+  isRead    Boolean  @default(false)
+  link      String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
