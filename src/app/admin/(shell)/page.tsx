@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { auth } from "@/auth";
-import { db } from "@/lib/db";
+import { db, checkDbConnection } from "@/lib/db";
+import DatabaseWarning from "@/components/admin/DatabaseWarning";
 import {
   MessageSquare,
   Briefcase,
@@ -10,6 +11,13 @@ import {
   Eye,
   ArrowUpRight,
   Clock,
+  Globe,
+  Database as DbIcon,
+  HardDrive,
+  Key,
+  Mail,
+  BarChart3,
+  ServerCrash
 } from "lucide-react";
 import Link from "next/link";
 
@@ -52,12 +60,14 @@ interface StatCardProps {
   value: number;
   badge?: number;
   badgeLabel?: string;
+  trend?: string;
+  trendLabel?: string;
   icon: import("lucide-react").LucideIcon;
   href: string;
   color: string;
 }
 
-function StatCard({ title, value, badge, badgeLabel, icon: Icon, href, color }: StatCardProps) {
+function StatCard({ title, value, badge, badgeLabel, trend, trendLabel, icon: Icon, href, color }: StatCardProps) {
   return (
     <Link href={href} className="group block bg-white rounded-2xl p-6 border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all">
       <div className="flex items-start justify-between mb-4">
@@ -67,19 +77,29 @@ function StatCard({ title, value, badge, badgeLabel, icon: Icon, href, color }: 
         <ArrowUpRight size={16} className="text-gray-300 group-hover:text-gray-500 transition-colors" />
       </div>
       <p className="text-3xl font-bold text-gray-900 mb-1">{value}</p>
-      <p className="text-sm text-gray-500">{title}</p>
-      {badge !== undefined && badge > 0 && (
-        <div className="mt-3 inline-flex items-center gap-1.5 px-2 py-1 rounded-lg bg-blue-50 text-blue-600 text-xs font-medium">
-          <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-          {badge} {badgeLabel}
-        </div>
-      )}
+      <p className="text-sm text-gray-500 mb-2">{title}</p>
+      <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-50">
+        <span className="text-xs font-semibold text-gray-400 group-hover:text-gray-600 transition-colors">View All</span>
+        {trend ? (
+          <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">
+            {trend} {trendLabel}
+          </span>
+        ) : badge !== undefined && badge > 0 ? (
+          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-blue-50 text-blue-600 text-xs font-semibold">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+            {badge} {badgeLabel}
+          </div>
+        ) : (
+          <span className="text-xs text-gray-400">Stable</span>
+        )}
+      </div>
     </Link>
   );
 }
 
 export default async function AdminDashboard() {
   const session = await auth();
+  const dbStatus = await checkDbConnection();
   const stats = await getDashboardStats();
 
   const greeting = () => {
@@ -89,15 +109,68 @@ export default async function AdminDashboard() {
     return "Good evening";
   };
 
+  // Determine health statuses
+  const statusBadges = [
+    { name: "Website", status: "Live", color: "bg-emerald-50 text-emerald-600 border-emerald-100", icon: Globe },
+    { 
+      name: "Database", 
+      status: dbStatus.isConnected ? "Connected" : dbStatus.errorType === "MIGRATION_MISSING" ? "Unsynced" : "Offline", 
+      color: dbStatus.isConnected ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-rose-50 text-rose-600 border-rose-100",
+      icon: DbIcon 
+    },
+    { name: "Storage", status: "Active", color: "bg-emerald-50 text-emerald-600 border-emerald-100", icon: HardDrive },
+    { name: "Auth", status: "Secure", color: "bg-emerald-50 text-emerald-600 border-emerald-100", icon: Key },
+    { name: "Email", status: "Relay", color: "bg-emerald-50 text-emerald-600 border-emerald-100", icon: Mail },
+    { name: "Analytics", status: "Active", color: "bg-emerald-50 text-emerald-600 border-emerald-100", icon: BarChart3 }
+  ];
+
+  const totalEntries = stats.contactLeads + stats.careerApps + stats.testimonials + stats.jobPostings;
+
   return (
     <div className="space-y-8">
-      {/* Welcome */}
-      <div>
-        <h2 className="text-2xl font-bold text-gray-900">
-          {greeting()}, {session?.user?.name?.split(" ")[0] ?? "Admin"} 👋
-        </h2>
-        <p className="text-gray-500 mt-1">Here&rsquo;s what&rsquo;s happening with AST Digitally today.</p>
+      {/* Welcome & Status badges */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-gray-100">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900">
+            {greeting()}, {session?.user?.name?.split(" ")[0] ?? "Admin"} 👋
+          </h2>
+          <p className="text-gray-500 mt-1">Here&rsquo;s what&rsquo;s happening with AST Digitally today.</p>
+        </div>
+
+        {/* Status badges */}
+        <div className="flex flex-wrap gap-2">
+          {statusBadges.map((badge) => (
+            <div key={badge.name} className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-semibold ${badge.color}`}>
+              <badge.icon size={12} />
+              <span>{badge.name}: {badge.status}</span>
+            </div>
+          ))}
+        </div>
       </div>
+
+      {/* Database offline warning if not connected */}
+      {!dbStatus.isConnected && (
+        <div className="space-y-4">
+          <div className="bg-rose-50 border border-rose-100 text-rose-700 p-4 rounded-xl flex items-center gap-3 text-sm">
+            <ServerCrash className="shrink-0 text-rose-500" />
+            <p><strong>Database Offline:</strong> The CMS is currently running in fallback mode. Connect your database to activate full functionality.</p>
+          </div>
+          <DatabaseWarning errorType={dbStatus.errorType || "UNKNOWN"} errorMessage={dbStatus.errorMessage} />
+        </div>
+      )}
+
+      {/* Database is connected but empty suggestion */}
+      {dbStatus.isConnected && totalEntries === 0 && (
+        <div className="bg-blue-50 border border-blue-100 text-blue-700 p-5 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h4 className="font-bold">🌱 Your database is empty!</h4>
+            <p className="text-sm text-blue-600/90 mt-0.5">Would you like to seed the database with premium default content for your pages?</p>
+          </div>
+          <Link href="/admin/system" className="btn-primary !py-2 !px-4 text-xs font-bold shrink-0">
+            Go to Diagnostics & Seed
+          </Link>
+        </div>
+      )}
 
       {/* Stat cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -106,6 +179,8 @@ export default async function AdminDashboard() {
           value={stats.contactLeads}
           badge={stats.newLeads}
           badgeLabel="new"
+          trend={stats.newLeads > 0 ? `+${stats.newLeads}` : undefined}
+          trendLabel="today"
           icon={MessageSquare}
           href="/admin/leads/contact"
           color="bg-blue-50 text-blue-600"
@@ -115,6 +190,8 @@ export default async function AdminDashboard() {
           value={stats.careerApps}
           badge={stats.newApps}
           badgeLabel="unreviewed"
+          trend={stats.newApps > 0 ? `+${stats.newApps}` : undefined}
+          trendLabel="new"
           icon={Briefcase}
           href="/admin/leads/careers"
           color="bg-purple-50 text-purple-600"
@@ -200,3 +277,4 @@ export default async function AdminDashboard() {
     </div>
   );
 }
+

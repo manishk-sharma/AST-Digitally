@@ -3,10 +3,24 @@ import Link from "next/link";
 import { BRAND } from "@/constants";
 import ApplyForm from "./ApplyForm";
 
-export const metadata: Metadata = {
-  title: "Careers",
-  description: `Join the ${BRAND.name} team. Explore career opportunities in digital marketing, web development, design, and technology.`,
-};
+import { getSeoConfigByPage } from "@/app/actions/seo";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getSeoConfigByPage("Careers");
+  if (!seo) {
+    return {
+      title: "Careers",
+      description: `Join the ${BRAND.name} team. Explore career opportunities in digital marketing, web development, design, and technology.`,
+    };
+  }
+  return {
+    title: seo.metaTitle || "Careers",
+    description: seo.metaDesc || undefined,
+    alternates: { canonical: seo.canonical || undefined },
+    keywords: seo.keywords || undefined,
+    openGraph: seo.ogImage ? { images: [{ url: seo.ogImage }] } : undefined,
+  };
+}
 
 export default function CareersPage() {
   return (

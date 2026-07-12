@@ -8,11 +8,21 @@ import { useInView } from "@/hooks/useInView";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-/**
- * Case studies section with metric dashboard and animated counters.
- */
-export default function CaseStudies() {
+interface CaseStudiesProps {
+  caseStudies?: Array<{
+    id: string;
+    title: string;
+    client: string;
+    industry: string;
+    description: string;
+    tags: string[];
+    metrics: Array<{ label: string; value: string; prefix?: string; suffix?: string }>;
+  }>;
+}
+
+export default function CaseStudies({ caseStudies }: CaseStudiesProps) {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.05 });
+  const list = caseStudies || CASE_STUDIES;
 
   return (
     <section
@@ -37,7 +47,7 @@ export default function CaseStudies() {
         </div>
 
         <div ref={ref} className="space-y-8 lg:space-y-10">
-          {CASE_STUDIES.map((study, i) => (
+          {list.map((study, i) => (
             <motion.div
               key={study.id}
               initial={{ opacity: 0, y: 50 }}
@@ -86,7 +96,7 @@ export default function CaseStudies() {
                         }}
                       >
                         <div className="rounded-xl border border-accent/20 bg-accent/5 p-5 text-center">
-                          <div className="text-[32px] font-heading font-extrabold text-accent tracking-tight">
+                          <div className="text-[24px] sm:text-[32px] font-heading font-extrabold text-accent tracking-tight">
                             <AnimatedCounter
                               end={parseFloat(metric.value)}
                               prefix={metric.prefix}

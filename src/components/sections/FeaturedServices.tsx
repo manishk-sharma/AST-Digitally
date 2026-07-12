@@ -3,31 +3,60 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useInView } from "@/hooks/useInView";
-import { Monitor, Search, Megaphone, ArrowRight, CheckCircle } from "lucide-react";
+import { Monitor, Search, Megaphone, ArrowRight, CheckCircle, Palette, Video, Cpu, Bot, Settings, TrendingUp } from "lucide-react";
 
-const FEATURED = [
-  {
-    icon: Monitor,
-    title: "Website Development",
-    desc: "High-performance, SEO-ready websites built with modern frameworks that convert visitors into customers.",
-    highlights: ["Custom responsive design", "PageSpeed 95+ score", "CMS integration"],
-  },
-  {
-    icon: Search,
-    title: "SEO & Digital Marketing",
-    desc: "Data-driven strategies to grow your organic reach, run profitable paid ads, and dominate your market.",
-    highlights: ["Technical SEO audits", "Google & Meta Ads", "Monthly reports"],
-  },
-  {
-    icon: Megaphone,
-    title: "Branding & Design",
-    desc: "Visual identities, UI/UX design, and marketing creatives that make your brand instantly recognizable.",
-    highlights: ["Logo & brand kit", "UI/UX design", "Social media creatives"],
-  },
-];
+const ICON_MAP: Record<string, any> = {
+  Monitor,
+  Search,
+  Megaphone,
+  Palette,
+  Video,
+  Cpu,
+  Bot,
+  Settings,
+  TrendingUp
+};
 
-export default function FeaturedServices() {
+interface FeaturedServicesProps {
+  services?: Array<{
+    id: string;
+    title: string;
+    description: string;
+    icon: string;
+    features: string[];
+  }>;
+}
+
+export default function FeaturedServices({ services }: FeaturedServicesProps) {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.05 });
+
+  const list = (services || []).slice(0, 3).map(s => ({
+    icon: ICON_MAP[s.icon] || Monitor,
+    title: s.title,
+    desc: s.description,
+    highlights: s.features || []
+  }));
+
+  const displayList = list.length > 0 ? list : [
+    {
+      icon: Monitor,
+      title: "Website Development",
+      desc: "High-performance, SEO-ready websites built with modern frameworks that convert visitors into customers.",
+      highlights: ["Custom responsive design", "PageSpeed 95+ score", "CMS integration"],
+    },
+    {
+      icon: Search,
+      title: "SEO & Digital Marketing",
+      desc: "Data-driven strategies to grow your organic reach, run profitable paid ads, and dominate your market.",
+      highlights: ["Technical SEO audits", "Google & Meta Ads", "Monthly reports"],
+    },
+    {
+      icon: Megaphone,
+      title: "Branding & Design",
+      desc: "Visual identities, UI/UX design, and marketing creatives that make your brand instantly recognizable.",
+      highlights: ["Logo & brand kit", "UI/UX design", "Social media creatives"],
+    },
+  ];
 
   return (
     <section id="services" className="section-padding bg-alternate" aria-label="Featured services">
@@ -50,8 +79,8 @@ export default function FeaturedServices() {
         </div>
 
         {/* Cards */}
-        <div ref={ref} className="grid gap-6 md:grid-cols-3 max-w-6xl mx-auto">
-          {FEATURED.map((service, i) => {
+        <div ref={ref} className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 max-w-6xl mx-auto">
+          {displayList.map((service, i) => {
             const Icon = service.icon;
             return (
               <motion.div
@@ -69,7 +98,7 @@ export default function FeaturedServices() {
                 </h3>
                 <p className="text-paragraph text-[15px] mb-6 flex-1">{service.desc}</p>
                 <ul className="space-y-2 border-t border-border pt-5">
-                  {service.highlights.map((h) => (
+                  {service.highlights.slice(0, 3).map((h) => (
                     <li key={h} className="flex items-center gap-2 text-[13px] text-secondary-foreground">
                       <CheckCircle className="h-3.5 w-3.5 text-accent shrink-0" />
                       {h}

@@ -1,10 +1,24 @@
 import type { Metadata } from "next";
-export const metadata: Metadata = { title: "Footer Manager" };
-export default function FooterPage() {
-  return (
-    <div className="space-y-6">
-      <div><h2 className="text-xl font-bold text-gray-900">Footer Manager</h2><p className="text-sm text-gray-500">Edit company info, social links, and footer columns.</p></div>
-      <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 text-sm text-amber-700">Connect your database to enable footer editing.</div>
-    </div>
-  );
+import { checkDbConnection } from "@/lib/db";
+import FooterClient from "./_client";
+import DatabaseWarning from "@/components/admin/DatabaseWarning";
+
+export const metadata: Metadata = { title: "Footer Settings Editor" };
+
+export default async function FooterCMSPage() {
+  const dbStatus = await checkDbConnection();
+
+  if (!dbStatus.isConnected) {
+    return (
+      <div className="space-y-6">
+        <div>
+          <h2 className="text-xl font-bold text-gray-900">Footer Settings</h2>
+          <p className="text-sm text-gray-500">Edit copyright statements, terms of service, and official social media handles.</p>
+        </div>
+        <DatabaseWarning errorType={dbStatus.errorType || "UNKNOWN"} errorMessage={dbStatus.errorMessage} />
+      </div>
+    );
+  }
+
+  return <FooterClient />;
 }

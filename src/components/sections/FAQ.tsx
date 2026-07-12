@@ -12,7 +12,13 @@ import { FAQS } from "@/constants";
 /**
  * FAQ section using shadcn Accordion with smooth expand/collapse.
  */
-export default function FAQ() {
+interface FAQProps {
+  faqs?: Array<{ question: string; answer: string }>;
+}
+
+export default function FAQ({ faqs }: FAQProps) {
+  const list = faqs || FAQS;
+
   return (
     <section
       id="faq"
@@ -28,7 +34,7 @@ export default function FAQ() {
 
         <div className="mx-auto max-w-3xl">
           <Accordion className="space-y-3" defaultValue={["faq-0"]}>
-            {FAQS.map((faq, i) => (
+            {list.map((faq, i) => (
               <AccordionItem
                 key={i}
                 value={`faq-${i}`}

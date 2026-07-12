@@ -54,7 +54,6 @@ const NAV_ITEMS: NavItem[] = [
     children: [
       { label: "Homepage", href: "/admin/content/homepage", icon: Home },
       { label: "Services", href: "/admin/content/services", icon: Code },
-      { label: "Pricing", href: "/admin/content/pricing", icon: DollarSign },
       { label: "About", href: "/admin/content/about", icon: BookOpen },
       { label: "Case Studies", href: "/admin/content/case-studies", icon: Briefcase },
       { label: "Careers", href: "/admin/content/careers", icon: Users },
@@ -70,7 +69,7 @@ const NAV_ITEMS: NavItem[] = [
     label: "Leads",
     icon: MessageSquare,
     children: [
-      { label: "Contact Leads", href: "/admin/leads/contact", icon: MessageSquare },
+      { label: "Contact Leads", href: "/admin/leads", icon: MessageSquare },
       { label: "Career Applications", href: "/admin/leads/careers", icon: FileText },
     ],
   },
@@ -155,7 +154,7 @@ function NavItemComponent({ item, collapsed, depth = 0 }: NavItemComponentProps)
   );
 }
 
-export default function AdminSidebar({ user }: { user: SidebarUser }) {
+export default function AdminSidebar({ user, onClose }: { user: SidebarUser; onClose?: () => void }) {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
@@ -167,17 +166,35 @@ export default function AdminSidebar({ user }: { user: SidebarUser }) {
     >
       {/* Logo */}
       <div className={cn(
-        "flex items-center gap-3 px-4 py-5 border-b border-gray-100",
-        collapsed && "justify-center"
+        "relative flex items-center gap-3 px-4 py-5 border-b border-gray-100",
+        collapsed ? "justify-center" : "justify-between",
+        onClose && "pr-14"
       )}>
-        <div className="w-8 h-8 rounded-lg bg-[#3B5BFF] flex items-center justify-center text-white text-sm font-bold shrink-0">
-          A
-        </div>
-        {!collapsed && (
-          <div className="min-w-0">
-            <p className="text-sm font-bold text-gray-900 truncate">AST Digitally</p>
-            <p className="text-xs text-gray-400 truncate">Admin CMS</p>
+        <Link href="/admin" className="flex items-center gap-3 min-w-0">
+          <div className="relative h-8 overflow-hidden shrink-0 flex items-center" style={{ width: collapsed ? '32px' : 'auto' }}>
+            <img
+              src="/AST Logo.png"
+              alt="AST Digitally"
+              className="h-8 object-contain object-left shrink-0"
+              style={{ maxWidth: collapsed ? 'none' : '100%', width: collapsed ? '120px' : 'auto' }}
+            />
           </div>
+          {!collapsed && (
+            <div className="min-w-0">
+              <p className="text-xs text-gray-400 truncate">Admin CMS</p>
+            </div>
+          )}
+        </Link>
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="absolute top-3 right-3 w-11 h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-gray-700 hover:bg-gray-100 border border-gray-100 bg-white shadow-sm z-50 cursor-pointer lg:hidden shrink-0"
+            aria-label="Close menu"
+          >
+            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
         )}
       </div>
 
@@ -217,7 +234,7 @@ export default function AdminSidebar({ user }: { user: SidebarUser }) {
       {/* Collapse Toggle */}
       <button
         onClick={() => setCollapsed((c) => !c)}
-        className="absolute bottom-24 -right-3 w-6 h-6 bg-white border border-gray-200 rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
+        className="absolute bottom-24 -right-3 w-6 h-6 bg-white border border-gray-200 rounded-full hidden lg:flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
         style={{ position: "absolute", bottom: "90px", right: "-12px" }}
       >
         {collapsed ? <ChevronRight size={12} /> : <ChevronLeft size={12} />}

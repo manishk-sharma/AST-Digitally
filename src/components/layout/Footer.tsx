@@ -6,7 +6,27 @@ import { BRAND, NAV_LINKS } from "@/constants";
 import { Separator } from "@/components/ui/separator";
 import { ArrowRight } from "lucide-react";
 
-export default function Footer() {
+interface FooterProps {
+  navLinks?: readonly { label: string; href: string }[];
+  footerData?: {
+    copyright: string;
+    facebook?: string;
+    instagram?: string;
+    twitter?: string;
+    linkedin?: string;
+    youtube?: string;
+  };
+  contactInfo?: {
+    email: string;
+    phone: string;
+    address: string;
+  };
+}
+
+export default function Footer({ navLinks, footerData, contactInfo }: FooterProps) {
+  const links = navLinks || NAV_LINKS;
+  const contact = contactInfo || { email: BRAND.email, phone: BRAND.phone, address: BRAND.address };
+  
   const currentYear = new Date().getFullYear();
   const [emailInput, setEmailInput] = useState("");
 
@@ -17,7 +37,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-divider bg-card py-[100px]" role="contentinfo">
+    <footer className="relative border-t border-divider bg-card py-12 md:py-16 lg:py-[100px]" role="contentinfo">
       <div className="container-wide">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
 
@@ -58,7 +78,7 @@ export default function Footer() {
               Quick Links
             </h3>
             <ul className="space-y-3">
-              {NAV_LINKS.map((link) => (
+              {links.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -85,21 +105,21 @@ export default function Footer() {
               Contact Us
             </h3>
             <ul className="space-y-4">
-              <li className="text-[15px] text-secondary-foreground">{BRAND.address}</li>
+              <li className="text-[15px] text-secondary-foreground">{contact.address}</li>
               <li>
                 <a
-                  href={`tel:${BRAND.phone}`}
+                  href={`tel:${contact.phone}`}
                   className="text-[15px] text-secondary-foreground transition-colors hover:text-accent"
                 >
-                  {BRAND.phone}
+                  {contact.phone}
                 </a>
               </li>
               <li>
                 <a
-                  href={`mailto:${BRAND.email}`}
+                  href={`mailto:${contact.email}`}
                   className="text-[15px] text-secondary-foreground transition-colors hover:text-accent"
                 >
-                  {BRAND.email}
+                  {contact.email}
                 </a>
               </li>
             </ul>
@@ -114,7 +134,7 @@ export default function Footer() {
               {[
                 {
                   label: "Facebook",
-                  href: "https://facebook.com",
+                  href: footerData?.facebook || "https://facebook.com",
                   svg: (
                     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
@@ -123,7 +143,7 @@ export default function Footer() {
                 },
                 {
                   label: "Twitter",
-                  href: "https://x.com",
+                  href: footerData?.twitter || "https://x.com",
                   svg: (
                     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
@@ -132,7 +152,7 @@ export default function Footer() {
                 },
                 {
                   label: "Instagram",
-                  href: "https://instagram.com",
+                  href: footerData?.instagram || "https://instagram.com",
                   svg: (
                     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -143,7 +163,7 @@ export default function Footer() {
                 },
                 {
                   label: "LinkedIn",
-                  href: "https://linkedin.com",
+                  href: footerData?.linkedin || "https://linkedin.com",
                   svg: (
                     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
@@ -173,9 +193,9 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-[14px] text-secondary-foreground">
-            © {currentYear} {BRAND.name}. All rights reserved.
+            © {currentYear} {footerData?.copyright || `${BRAND.name}. All rights reserved.`}
           </p>
-          <div className="flex gap-6">
+          <div className="flex gap-4 sm:gap-6 flex-wrap justify-center md:justify-start">
             {[
               { label: "Privacy Policy", href: "/privacy" },
               { label: "Terms & Conditions", href: "/terms" },

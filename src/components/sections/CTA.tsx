@@ -5,8 +5,28 @@ import { useInView } from "@/hooks/useInView";
 import Link from "next/link";
 import { ArrowRight, Mail, MessageCircle } from "lucide-react";
 
-export default function CTA() {
+interface CTAProps {
+  ctaData?: {
+    badge: string;
+    title: string;
+    description: string;
+    buttonText: string;
+    buttonUrl: string;
+    email: string;
+    whatsapp: string;
+  };
+}
+
+export default function CTA({ ctaData }: CTAProps) {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.05 });
+
+  const badge = ctaData?.badge || "Free Consultation";
+  const title = ctaData?.title || "Any questions about growing your business?";
+  const description = ctaData?.description || "Feel free to reach out — we'd love to talk strategy.";
+  const buttonText = ctaData?.buttonText || "Book a call";
+  const buttonUrl = ctaData?.buttonUrl || "/#contact";
+  const email = ctaData?.email || "astdigitally@gmail.com";
+  const whatsapp = ctaData?.whatsapp || "918084158221";
 
   return (
     <section className="py-24 relative overflow-hidden bg-background" aria-label="Call to action banner">
@@ -46,26 +66,24 @@ export default function CTA() {
           <div className="w-full lg:w-[55%] space-y-5 text-left relative z-10">
             <div className="inline-flex items-center gap-2 text-accent">
               <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-              <span className="text-[12px] font-mono font-bold tracking-wider uppercase">Free Consultation</span>
+              <span className="text-[12px] font-mono font-bold tracking-wider uppercase">{badge}</span>
             </div>
-            <h2 className="text-[40px] md:text-[48px] font-heading font-extrabold tracking-tight text-white leading-[1.1]">
-              Any questions about{" "}
-              <br className="hidden sm:block" />
-              growing your business?
+            <h2 className="text-[28px] sm:text-[36px] md:text-[48px] font-heading font-extrabold tracking-tight text-white leading-[1.1]">
+              {title}
             </h2>
             <p className="text-[16px] text-white/60">
-              Feel free to reach out — we'd love to talk strategy.
+              {description}
             </p>
 
             <div className="flex items-center gap-4 pt-2 flex-wrap">
               {/* Primary CTA */}
-              <Link href="/#contact" className="btn-primary">
-                Book a call <ArrowRight className="h-4 w-4" />
+              <Link href={buttonUrl} className="btn-primary">
+                {buttonText} <ArrowRight className="h-4 w-4" />
               </Link>
 
               {/* Email */}
               <a
-                href="mailto:astdigitally@gmail.com"
+                href={`mailto:${email}`}
                 className="flex h-12 w-12 items-center justify-center rounded-lg border border-white/20 bg-white/10 text-white hover:bg-accent hover:border-accent transition-all duration-300"
                 aria-label="Email us"
               >
@@ -74,7 +92,7 @@ export default function CTA() {
 
               {/* WhatsApp */}
               <a
-                href="https://wa.me/918084158221"
+                href={`https://wa.me/${whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-12 w-12 items-center justify-center rounded-lg border border-white/20 bg-white/10 text-white hover:bg-accent hover:border-accent transition-all duration-300"

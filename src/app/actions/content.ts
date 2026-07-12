@@ -22,6 +22,7 @@ export async function createTestimonial(data: Partial<Testimonial>) {
       },
     });
     revalidatePath("/admin/content/testimonials");
+    revalidatePath("/");
     return { success: true, data: item };
   } catch {
     return { success: false, data: null };
@@ -45,6 +46,7 @@ export async function updateTestimonial(id: string, data: Partial<Testimonial>) 
       },
     });
     revalidatePath("/admin/content/testimonials");
+    revalidatePath("/");
     return { success: true, data: item };
   } catch {
     return { success: false, data: null };
@@ -55,6 +57,7 @@ export async function deleteTestimonial(id: string) {
   try {
     await db.testimonial.delete({ where: { id } });
     revalidatePath("/admin/content/testimonials");
+    revalidatePath("/");
     return { success: true };
   } catch {
     return { success: false };
@@ -75,6 +78,8 @@ export async function createFAQ(data: Partial<FAQ>) {
       },
     });
     revalidatePath("/admin/content/faq");
+    revalidatePath("/");
+    revalidatePath("/services");
     return { success: true, data: item };
   } catch {
     return { success: false, data: null };
@@ -94,6 +99,8 @@ export async function updateFAQ(id: string, data: Partial<FAQ>) {
       },
     });
     revalidatePath("/admin/content/faq");
+    revalidatePath("/");
+    revalidatePath("/services");
     return { success: true, data: item };
   } catch {
     return { success: false, data: null };
@@ -104,6 +111,8 @@ export async function deleteFAQ(id: string) {
   try {
     await db.fAQ.delete({ where: { id } });
     revalidatePath("/admin/content/faq");
+    revalidatePath("/");
+    revalidatePath("/services");
     return { success: true };
   } catch {
     return { success: false };

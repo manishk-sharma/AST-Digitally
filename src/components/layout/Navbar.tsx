@@ -7,7 +7,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { NAV_LINKS, BRAND } from "@/constants";
 import { cn } from "@/utils";
 
-export default function Navbar() {
+interface NavbarProps {
+  navLinks?: readonly { label: string; href: string }[];
+}
+
+export default function Navbar({ navLinks }: NavbarProps) {
+  const links = navLinks || NAV_LINKS;
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
@@ -63,7 +68,7 @@ export default function Navbar() {
 
         {/* Desktop Nav Links */}
         <ul className="hidden items-center gap-1 lg:flex" role="menubar">
-          {NAV_LINKS.map((link) => (
+          {links.map((link) => (
             <li key={link.href} role="none">
               <Link
                 href={link.href}
@@ -144,7 +149,7 @@ export default function Navbar() {
             >
               <nav className="container-wide py-6" aria-label="Mobile navigation">
                 <ul className="flex flex-col gap-1">
-                  {NAV_LINKS.map((link, i) => (
+                  {links.map((link, i) => (
                     <motion.li
                       key={link.href}
                       initial={{ opacity: 0, x: -8 }}

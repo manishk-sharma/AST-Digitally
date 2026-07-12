@@ -1,47 +1,85 @@
-"use client";
-
-import dynamic from "next/dynamic";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Hero from "@/components/sections/Hero";
+import Capabilities from "@/components/sections/Capabilities";
+import WhyUs from "@/components/sections/WhyUs";
+import GrowthFramework from "@/components/sections/GrowthFramework";
+import FeaturedServices from "@/components/sections/FeaturedServices";
+import CaseStudies from "@/components/sections/CaseStudies";
+import Testimonials from "@/components/sections/Testimonials";
+import Integrations from "@/components/sections/Integrations";
+import FAQ from "@/components/sections/FAQ";
+import CTA from "@/components/sections/CTA";
+import Contact from "@/components/sections/Contact";
+import SmoothScroll from "@/components/layout/SmoothScroll";
+import ScrollToTop from "@/components/layout/ScrollToTop";
+import type { Metadata } from "next";
+import { getSeoConfigByPage } from "@/app/actions/seo";
 
-// Core homepage sections
-const Hero = dynamic(() => import("@/components/sections/Hero"), { ssr: false });
-const Capabilities = dynamic(() => import("@/components/sections/Capabilities"), { ssr: false });
-const WhyUs = dynamic(() => import("@/components/sections/WhyUs"), { ssr: false });
-const GrowthFramework = dynamic(() => import("@/components/sections/GrowthFramework"), { ssr: false });
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getSeoConfigByPage("Homepage");
+  if (!seo) return {};
+  return {
+    title: seo.metaTitle || undefined,
+    description: seo.metaDesc || undefined,
+    alternates: { canonical: seo.canonical || undefined },
+    keywords: seo.keywords || undefined,
+    openGraph: seo.ogImage ? { images: [{ url: seo.ogImage }] } : undefined,
+  };
+}
 
-// Preview sections linking to dedicated pages
-const FeaturedServices = dynamic(() => import("@/components/sections/FeaturedServices"), { ssr: false });
+import {
+  getNavbarLinks,
+  getFooterData,
+  getContactInfo,
+  getHomepageData,
+  getServicesFull,
+  getCaseStudies,
+  getTestimonials,
+  getFAQs
+} from "@/lib/cms";
 
-// Social proof & conversion sections
-const CaseStudies = dynamic(() => import("@/components/sections/CaseStudies"), { ssr: false });
-const Testimonials = dynamic(() => import("@/components/sections/Testimonials"), { ssr: false });
-const Integrations = dynamic(() => import("@/components/sections/Integrations"), { ssr: false });
-const FAQ = dynamic(() => import("@/components/sections/FAQ"), { ssr: false });
-const CTA = dynamic(() => import("@/components/sections/CTA"), { ssr: false });
-const Contact = dynamic(() => import("@/components/sections/Contact"), { ssr: false });
-const SmoothScroll = dynamic(() => import("@/components/layout/SmoothScroll"), { ssr: false });
-const ScrollToTop = dynamic(() => import("@/components/layout/ScrollToTop"), { ssr: false });
+export default async function HomePage() {
+  // Fetch all CMS content from database with fallback constants
+  const [
+    navLinks,
+    footerData,
+    contactInfo,
+    homepage,
+    services,
+    caseStudies,
+    testimonials,
+    faqs
+  ] = await Promise.all([
+    getNavbarLinks(),
+    getFooterData(),
+    getContactInfo(),
+    getHomepageData(),
+    getServicesFull(),
+    getCaseStudies(),
+    getTestimonials(),
+    getFAQs()
+  ]);
 
-export default function HomePage() {
   return (
     <SmoothScroll>
-      <Navbar />
+      <Navbar navLinks={navLinks} />
       <main id="main-content">
-        <Hero />
-        <FeaturedServices />
+        <Hero heroData={homepage.hero} statsData={homepage.statistics} />
+        <FeaturedServices services={services} />
         <Capabilities />
         <GrowthFramework />
         <WhyUs />
-        <CaseStudies />
-        <Testimonials />
+        <CaseStudies caseStudies={caseStudies} />
+        <Testimonials testimonials={testimonials} />
         <Integrations />
-        <FAQ />
-        <CTA />
-        <Contact />
+        <FAQ faqs={faqs} />
+        <CTA ctaData={homepage.cta} />
+        <Contact contactInfo={contactInfo} />
       </main>
-      <Footer />
+      <Footer navLinks={navLinks} footerData={footerData} contactInfo={contactInfo} />
       <ScrollToTop />
     </SmoothScroll>
   );
 }
+

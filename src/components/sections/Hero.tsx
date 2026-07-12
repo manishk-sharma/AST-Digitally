@@ -5,8 +5,31 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import StatNumber from "@/components/ui/StatNumber";
 
-export default function Hero() {
-  const tickerStats = [
+interface HeroProps {
+  heroData?: {
+    badge: string;
+    title: string;
+    description: string;
+    ctaPrimaryText: string;
+    ctaPrimaryUrl: string;
+    ctaSecondaryText: string;
+    ctaSecondaryUrl: string;
+  };
+  statsData?: {
+    stats: Array<{ label: string; value: string }>;
+  };
+}
+
+export default function Hero({ heroData, statsData }: HeroProps) {
+  const badge = heroData?.badge || "Digital Growth Partner";
+  const title = heroData?.title || "Transform Your Business with Digital Marketing & Smart Technology";
+  const description = heroData?.description || "We design, market, automate, and scale businesses with creative strategies and custom digital solutions that deliver real results.";
+  const ctaPrimaryText = heroData?.ctaPrimaryText || "Book Free Consultation";
+  const ctaPrimaryUrl = heroData?.ctaPrimaryUrl || "/#contact";
+  const ctaSecondaryText = heroData?.ctaSecondaryText || "Explore Services";
+  const ctaSecondaryUrl = heroData?.ctaSecondaryUrl || "/services";
+
+  const tickerStats = statsData?.stats || [
     { value: "500+", label: "Projects Delivered" },
     { value: "98%", label: "Client Satisfaction" },
     { value: "24/7", label: "Project Support" },
@@ -26,7 +49,7 @@ export default function Hero() {
       }} />
 
       {/* Blue glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-accent/5 rounded-full blur-[100px] pointer-events-none z-0" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] max-w-[90vw] h-[400px] bg-accent/5 rounded-full blur-[100px] pointer-events-none z-0" />
 
       {/* Content */}
       <div className="container-wide w-full relative z-10 flex-1 flex flex-col justify-center items-center text-center mt-12">
@@ -39,7 +62,7 @@ export default function Hero() {
             transition={{ duration: 0.6 }}
             className="mb-8"
           >
-            <span className="section-badge">Digital Growth Partner</span>
+            <span className="section-badge">{badge}</span>
           </motion.div>
 
           {/* Heading */}
@@ -49,8 +72,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="mb-8 text-hero"
           >
-            Transform Your Business with Digital Marketing &{" "}
-            <span className="text-accent">Smart Technology</span>
+            {title}
           </motion.h1>
 
           {/* Description */}
@@ -60,7 +82,7 @@ export default function Hero() {
             transition={{ duration: 0.4, delay: 0.2 }}
             className="mb-14 text-paragraph max-w-[640px] mx-auto"
           >
-            We design, market, automate, and scale businesses with creative strategies and custom digital solutions that deliver real results.
+            {description}
           </motion.p>
 
           {/* CTAs */}
@@ -70,17 +92,17 @@ export default function Hero() {
             transition={{ duration: 0.4, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Link href="/#contact" className="btn-primary">
-              Book Free Consultation <ArrowRight className="h-4 w-4" />
+            <Link href={ctaPrimaryUrl} className="btn-primary">
+              {ctaPrimaryText} <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link href="/services" className="btn-secondary">
-              Explore Services
+            <Link href={ctaSecondaryUrl} className="btn-secondary">
+              {ctaSecondaryText}
             </Link>
           </motion.div>
         </div>
 
         {/* Stats */}
-        <div className="mt-24 md:mt-32 w-full relative z-10 max-w-[1000px] mx-auto">
+        <div className="mt-16 md:mt-24 lg:mt-32 w-full relative z-10 max-w-[1000px] mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {tickerStats.map((stat, i) => (
               <motion.div
@@ -88,7 +110,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.4 + i * 0.1 }}
-                className="premium-card flex flex-col items-center justify-center text-center !p-8 group"
+                className="premium-card flex flex-col items-center justify-center text-center !p-5 sm:!p-8 group"
               >
                 <StatNumber
                     value={stat.value}

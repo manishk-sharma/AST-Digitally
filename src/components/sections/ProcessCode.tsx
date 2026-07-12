@@ -138,7 +138,7 @@ await AST.scale({
                       {step.title}
                     </h3>
                   </div>
-                  <p className="text-label leading-relaxed text-secondary-foreground pl-[44px] break-words">
+                  <p className="text-label leading-relaxed text-secondary-foreground pl-0 sm:pl-[44px] break-words">
                     {step.desc}
                   </p>
                 </div>

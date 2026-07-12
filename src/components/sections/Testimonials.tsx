@@ -5,10 +5,26 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import { useInView } from "@/hooks/useInView";
 import { Star } from "lucide-react";
 
-export default function Testimonials() {
+interface TestimonialsProps {
+  testimonials?: Array<{
+    id: string | number;
+    name: string;
+    role: string;
+    avatar: string;
+    content: string;
+  }>;
+}
+
+export default function Testimonials({ testimonials }: TestimonialsProps) {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.02 });
 
-  const testimonials = [
+  const displayList = (testimonials && testimonials.length > 0) ? testimonials.map(t => ({
+    id: t.id,
+    name: t.name,
+    role: t.role,
+    avatar: t.avatar || t.name.charAt(0),
+    quote: t.content
+  })) : [
     {
       id: 1,
       name: "Briana Patton",
@@ -71,7 +87,7 @@ export default function Testimonials() {
           ref={ref}
           className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 [column-fill:_balance] w-full max-w-6xl mx-auto"
         >
-          {testimonials.map((t, i) => (
+          {displayList.map((t, i) => (
             <motion.div
               key={t.id}
               initial={{ opacity: 0, y: 20 }}

@@ -1,35 +1,57 @@
 import type { Metadata } from "next";
+import { db } from "@/lib/db";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
+import SettingsClient from "./_client";
 
 export const metadata: Metadata = { title: "Settings" };
 
-export default function SettingsPage() {
+async function getSettings() {
+  try {
+    const keys = ["general_settings", "business_info", "contact_info", "smtp_config", "analytics_config"];
+    const items = await db.siteSettings.findMany({
+      where: { key: { in: keys } },
+    });
+
+    const settings: Record<string, any> = {};
+    items.forEach((item) => {
+      // Map keys to simpler property names
+      if (item.key === "general_settings") settings.general = item.value;
+      if (item.key === "business_info") settings.business = item.value;
+      if (item.key === "contact_info") settings.contact = item.value;
+      if (item.key === "smtp_config") settings.smtp = item.value;
+      if (item.key === "analytics_config") settings.analytics = item.value;
+    });
+
+    return settings;
+  } catch {
+    return {};
+  }
+}
+
+export default async function SettingsPage() {
+  const session = await auth();
+  if (!session?.user?.email) {
+    redirect("/admin/login");
+  }
+
+  const initialSettings = await getSettings();
+  const currentUser = {
+    name: session.user.name || "Admin",
+    email: session.user.email,
+  };
+
   return (
     <div className="space-y-6">
       <div>
         <h2 className="text-xl font-bold text-gray-900">Settings</h2>
-        <p className="text-sm text-gray-500">Configure your site settings and preferences.</p>
+        <p className="text-sm text-gray-500">Configure global site settings, contacts, and security credentials.</p>
       </div>
-      <div className="bg-white rounded-2xl border border-gray-100 divide-y divide-gray-50">
-        {[
-          { label: "Site Title", desc: "The name shown in browser tabs", placeholder: "AST Digitally" },
-          { label: "Contact Email", desc: "Where leads are forwarded to", placeholder: "astdigitally@gmail.com" },
-          { label: "Contact Phone", desc: "Displayed in the footer", placeholder: "+91 80841 58221" },
-        ].map((setting) => (
-          <div key={setting.label} className="flex items-center justify-between gap-6 p-5">
-            <div>
-              <p className="text-sm font-semibold text-gray-900">{setting.label}</p>
-              <p className="text-xs text-gray-400">{setting.desc}</p>
-            </div>
-            <input
-              className="w-64 px-3 py-2 text-sm rounded-xl border border-gray-200 focus:border-[#3B5BFF] outline-none"
-              placeholder={setting.placeholder}
-            />
-          </div>
-        ))}
-      </div>
-      <button className="px-5 py-2.5 text-sm font-semibold text-white bg-[#3B5BFF] rounded-xl hover:bg-[#2d4cef] transition-colors">
-        Save Settings
-      </button>
+
+      <SettingsClient 
+        initialSettings={initialSettings} 
+        currentUser={currentUser} 
+      />
     </div>
   );
 }

@@ -229,7 +229,7 @@ export default function ROICalculator() {
                     <p className="text-[13px] font-bold uppercase tracking-wider text-background/80">
                       Estimated Annual Impact
                     </p>
-                    <p className="mt-3 text-[42px] font-heading font-extrabold text-white">
+                    <p className="mt-3 text-[32px] sm:text-[42px] font-heading font-extrabold text-white">
                       $
                       {(
                         (results.additionalRevenue * 12 +

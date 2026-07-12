@@ -1,10 +1,28 @@
 import type { Metadata } from "next";
-export const metadata: Metadata = { title: "Navigation Manager" };
-export default function NavigationPage() {
-  return (
-    <div className="space-y-6">
-      <div><h2 className="text-xl font-bold text-gray-900">Navigation Manager</h2><p className="text-sm text-gray-500">Edit header and footer navigation links.</p></div>
-      <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 text-sm text-amber-700">Connect your database to enable drag-and-drop navigation editing.</div>
-    </div>
-  );
+import { checkDbConnection } from "@/lib/db";
+import { getNavLinks } from "@/app/actions/navigation";
+import NavigationClient from "./_client";
+import DatabaseWarning from "@/components/admin/DatabaseWarning";
+
+export const metadata: Metadata = { title: "Navigation Editor" };
+
+export default async function NavigationCMSPage() {
+  const dbStatus = await checkDbConnection();
+
+  if (!dbStatus.isConnected) {
+    return (
+      <div className="space-y-6">
+        <div>
+          <h2 className="text-xl font-bold text-gray-900">Header Navigation Editor</h2>
+          <p className="text-sm text-gray-500">Edit the menu items displayed in your website header.</p>
+        </div>
+        <DatabaseWarning errorType={dbStatus.errorType || "UNKNOWN"} errorMessage={dbStatus.errorMessage} />
+      </div>
+    );
+  }
+
+  const linksRes = await getNavLinks();
+  const links = linksRes.success ? linksRes.data : [];
+
+  return <NavigationClient initialLinks={links} />;
 }

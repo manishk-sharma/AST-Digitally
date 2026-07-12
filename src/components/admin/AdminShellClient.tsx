@@ -1,0 +1,80 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import AdminSidebar from "@/components/admin/Sidebar";
+import AdminHeader from "@/components/admin/Header";
+
+interface AdminShellClientProps {
+  user: {
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+    role?: string;
+  };
+  children: React.ReactNode;
+}
+
+export default function AdminShellClient({ user, children }: AdminShellClientProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Lock body scroll and handle Escape key to close drawer
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") setMobileMenuOpen(false);
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }
+  }, [mobileMenuOpen]);
+
+  return (
+    <div className="flex h-screen overflow-hidden bg-[#F8F9FA]">
+      {/* Desktop sidebar — always visible on lg+ */}
+      <div className="hidden lg:flex">
+        <AdminSidebar user={user} />
+      </div>
+
+      {/* Mobile sidebar overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <div className="fixed inset-0 z-50 lg:hidden flex">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            {/* Drawer */}
+            <motion.div
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 220 }}
+              className="relative z-10 h-full w-64 shadow-2xl bg-white"
+            >
+              <AdminSidebar user={user} onClose={() => setMobileMenuOpen(false)} />
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
+        <AdminHeader
+          user={user}
+          onMenuToggle={() => setMobileMenuOpen((o) => !o)}
+        />
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+          {children}
+        </main>
+      </div>
+    </div>
+  );
+}

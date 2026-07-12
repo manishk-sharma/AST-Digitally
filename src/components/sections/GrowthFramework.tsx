@@ -93,7 +93,7 @@ export default function GrowthFramework() {
                         {step.stats.map((stat) => (
                           <div
                             key={stat.label}
-                            className="flex flex-col items-center rounded-lg border border-accent/20 bg-accent/5 px-5 py-4 text-center min-w-[100px]"
+                            className="flex flex-col items-center rounded-lg border border-accent/20 bg-accent/5 px-4 py-3 sm:px-5 sm:py-4 text-center min-w-[80px] sm:min-w-[100px]"
                           >
                             <StatNumber
                               value={stat.value}

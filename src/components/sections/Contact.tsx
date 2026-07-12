@@ -8,10 +8,20 @@ import { Label } from "@/components/ui/label";
 import { BRAND } from "@/constants";
 import { useInView } from "@/hooks/useInView";
 
-export default function Contact() {
+interface ContactProps {
+  contactInfo?: {
+    email: string;
+    phone: string;
+    address: string;
+  };
+}
+
+export default function Contact({ contactInfo }: ContactProps) {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.05 });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const contact = contactInfo || { email: BRAND.email, phone: BRAND.phone, address: BRAND.address };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -82,14 +92,14 @@ export default function Contact() {
                 </li>
                 <li>
                   <span className="text-foreground font-bold">Phone:</span>{" "}
-                  <a href={`tel:${BRAND.phone}`} className="hover:text-accent transition-colors">
-                    {BRAND.phone}
+                  <a href={`tel:${contact.phone}`} className="hover:text-accent transition-colors">
+                    {contact.phone}
                   </a>
                 </li>
                 <li>
                   <span className="text-foreground font-bold">Email:</span>{" "}
-                  <a href={`mailto:${BRAND.email}`} className="hover:text-accent transition-colors">
-                    {BRAND.email}
+                  <a href={`mailto:${contact.email}`} className="hover:text-accent transition-colors">
+                    {contact.email}
                   </a>
                 </li>
                 <li>
