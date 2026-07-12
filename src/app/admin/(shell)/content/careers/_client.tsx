@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { deleteJobPosting } from "@/app/actions/careers";
 import { Plus, Pencil, Trash2, Briefcase } from "lucide-react";
 import { toast } from "sonner";
 import type { JobPosting } from "@prisma/client";
@@ -36,10 +37,13 @@ export default function CareersClient({ jobs: init }: Props) {
     if (!confirm("Delete this job posting?")) return;
     startTransition(async () => {
       try {
-        const { db } = await import("@/lib/db");
-        await db.jobPosting.delete({ where: { id } });
-        setJobs((prev) => prev.filter((j) => j.id !== id));
-        toast.success("Deleted.");
+        const res = await deleteJobPosting(id);
+        if (res.success) {
+          setJobs((prev) => prev.filter((j) => j.id !== id));
+          toast.success("Deleted.");
+        } else {
+          toast.error("Failed to delete.");
+        }
       } catch {
         toast.error("Failed to delete.");
       }

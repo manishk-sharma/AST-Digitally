@@ -1,9 +1,10 @@
 import NextAuth, { type DefaultSession } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "@/lib/db";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
+
+import { authConfig } from "./auth.config";
 
 // Extend NextAuth session types
 declare module "next-auth" {
@@ -18,35 +19,14 @@ declare module "next-auth" {
   }
 }
 
-
 const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
 });
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: PrismaAdapter(db),
+  ...authConfig,
   session: { strategy: "jwt" },
-  pages: {
-    signIn: "/admin/login",
-    error: "/admin/login",
-  },
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.role = user.role;
-        token.id = user.id;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      if (session.user) {
-        session.user.role = (token.role as string) ?? "EDITOR";
-        session.user.id = (token.id as string) ?? "";
-      }
-      return session;
-    },
-  },
   providers: [
     Credentials({
       name: "credentials",
