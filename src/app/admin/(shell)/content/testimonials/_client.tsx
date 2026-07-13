@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect } from "react";
 import { Plus, Pencil, Trash2, Star, Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
+import { useSearchParams } from "next/navigation";
 import {
   createTestimonial,
   updateTestimonial,
@@ -30,10 +31,21 @@ export default function TestimonialsClient({ testimonials: init }: Props) {
   const [items, setItems] = useState(init);
   const [editing, setEditing] = useState<Partial<Testimonial> | null>(null);
   const [isPending, startTransition] = useTransition();
+  const searchParams = useSearchParams();
 
   function openNew() {
     setEditing({ ...EMPTY });
   }
+
+  useEffect(() => {
+    if (searchParams.get("action") === "new") {
+      openNew();
+      // Remove action=new from URL without reloading
+      const url = new URL(window.location.href);
+      url.searchParams.delete("action");
+      window.history.replaceState({}, "", url.pathname);
+    }
+  }, [searchParams]);
 
   function openEdit(t: Testimonial) {
     setEditing({ ...t });

@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect } from "react";
 import { deleteJobPosting } from "@/app/actions/careers";
 import { Plus, Pencil, Trash2, Briefcase } from "lucide-react";
 import { toast } from "sonner";
+import { useSearchParams } from "next/navigation";
 import type { JobPosting } from "@prisma/client";
 
 interface Props { jobs: JobPosting[] }
@@ -25,6 +26,17 @@ export default function CareersClient({ jobs: init }: Props) {
   const [jobs, setJobs] = useState(init);
   const [editing, setEditing] = useState<Partial<JobPosting> | null>(null);
   const [isPending, startTransition] = useTransition();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get("action") === "new") {
+      setEditing({ ...EMPTY });
+      // Remove action=new from URL without reloading
+      const url = new URL(window.location.href);
+      url.searchParams.delete("action");
+      window.history.replaceState({}, "", url.pathname);
+    }
+  }, [searchParams]);
 
   const statusColors: Record<string, string> = {
     DRAFT: "bg-gray-100 text-gray-600",

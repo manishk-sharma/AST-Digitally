@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
@@ -69,7 +69,7 @@ const NAV_ITEMS: NavItem[] = [
     label: "Leads",
     icon: MessageSquare,
     children: [
-      { label: "Contact Leads", href: "/admin/leads", icon: MessageSquare },
+      { label: "Contact Leads", href: "/admin/leads/contact", icon: MessageSquare },
       { label: "Career Applications", href: "/admin/leads/careers", icon: FileText },
     ],
   },
@@ -93,6 +93,17 @@ function NavItemComponent({ item, collapsed, depth = 0 }: NavItemComponentProps)
     return false;
   });
 
+  useEffect(() => {
+    if (item.children) {
+      const hasActiveChild = item.children.some(
+        (child) => child.href && pathname.startsWith(child.href)
+      );
+      if (hasActiveChild) {
+        setOpen(true);
+      }
+    }
+  }, [pathname, item.children]);
+
   const isActive = item.href ? (
     item.href === "/admin" ? pathname === "/admin" : pathname.startsWith(item.href)
   ) : false;
@@ -102,6 +113,8 @@ function NavItemComponent({ item, collapsed, depth = 0 }: NavItemComponentProps)
       <div>
         <button
           onClick={() => setOpen((o) => !o)}
+          aria-expanded={open}
+          aria-haspopup="true"
           className={cn(
             "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all",
             "text-gray-500 hover:bg-gray-100 hover:text-gray-900",
@@ -187,6 +200,7 @@ export default function AdminSidebar({ user, onClose }: { user: SidebarUser; onC
         </Link>
         {onClose && (
           <button
+            id="mobile-menu-close"
             onClick={onClose}
             className="absolute top-3 right-3 w-11 h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-gray-700 hover:bg-gray-100 border border-gray-100 bg-white shadow-sm z-50 cursor-pointer lg:hidden shrink-0"
             aria-label="Close menu"

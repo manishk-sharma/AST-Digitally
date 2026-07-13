@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { db, checkDbConnection } from "@/lib/db";
 import TestimonialsClient from "./_client";
 import DatabaseWarning from "@/components/admin/DatabaseWarning";
+import { Suspense } from "react";
 
 export const metadata: Metadata = { title: "Testimonials" };
 
@@ -29,6 +30,10 @@ export default async function TestimonialsPage() {
   }
 
   const testimonials = await getTestimonials();
-  return <TestimonialsClient testimonials={testimonials} />;
+  return (
+    <Suspense fallback={<div className="text-xs text-gray-400">Loading...</div>}>
+      <TestimonialsClient testimonials={testimonials} />
+    </Suspense>
+  );
 }
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { getOrganizationSchema, getServiceSchema, getFAQSchema } from "@/lib/seo";
 
@@ -85,6 +86,19 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-2SM6C2EZTG"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-2SM6C2EZTG');
+          `}
+        </Script>
         <div className="relative z-10 flex flex-col flex-1">
           {children}
         </div>

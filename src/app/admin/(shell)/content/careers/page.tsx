@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { db, checkDbConnection } from "@/lib/db";
 import CareersClient from "./_client";
 import DatabaseWarning from "@/components/admin/DatabaseWarning";
+import { Suspense } from "react";
 
 export const metadata: Metadata = { title: "Careers Manager" };
 
@@ -29,6 +30,10 @@ export default async function CareersPage() {
   }
 
   const jobs = await getJobs();
-  return <CareersClient jobs={jobs} />;
+  return (
+    <Suspense fallback={<div className="text-xs text-gray-400">Loading...</div>}>
+      <CareersClient jobs={jobs} />
+    </Suspense>
+  );
 }
 

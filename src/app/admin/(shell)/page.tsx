@@ -252,11 +252,11 @@ export default async function AdminDashboard() {
           <h3 className="text-sm font-semibold text-gray-900 mb-5">Quick Actions</h3>
           <div className="space-y-2">
             {[
-              { label: "Add Testimonial", href: "/admin/content/testimonials", icon: Star },
+              { label: "Add Testimonial", href: "/admin/content/testimonials/new", icon: Star },
               { label: "Edit Homepage", href: "/admin/content/homepage", icon: Eye },
               { label: "View Contact Leads", href: "/admin/leads/contact", icon: MessageSquare },
               { label: "Manage Services", href: "/admin/content/services", icon: TrendingUp },
-              { label: "Post a Job", href: "/admin/content/careers", icon: Users },
+              { label: "Post Job", href: "/admin/content/careers/new", icon: Users },
               { label: "Update SEO", href: "/admin/seo", icon: Clock },
             ].map((action) => (
               <Link

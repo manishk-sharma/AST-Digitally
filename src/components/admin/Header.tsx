@@ -51,7 +51,41 @@ export default function AdminHeader({
   onMenuToggle?: () => void;
 }) {
   const pathname = usePathname();
-  const pageTitle = BREADCRUMBS[pathname] ?? "Admin";
+  
+  const segments = pathname.split("/").filter(Boolean);
+  
+  const segmentLabels: Record<string, string> = {
+    admin: "Dashboard",
+    content: "Content",
+    homepage: "Homepage",
+    services: "Services",
+    about: "About",
+    "case-studies": "Case Studies",
+    careers: "Careers",
+    testimonials: "Testimonials",
+    faq: "FAQ",
+    navigation: "Navigation",
+    footer: "Footer",
+    media: "Media Library",
+    seo: "SEO Manager",
+    leads: "Leads",
+    contact: "Contact Leads",
+    analytics: "Analytics",
+    users: "Users",
+    settings: "Settings",
+    profile: "Profile",
+    activity: "Activity Log",
+  };
+
+  const nonClickablePaths = new Set(["/admin/content", "/admin/leads"]);
+
+  const breadcrumbs = segments.map((segment, idx) => {
+    const label = segmentLabels[segment] || segment.charAt(0).toUpperCase() + segment.slice(1);
+    const href = "/" + segments.slice(0, idx + 1).join("/");
+    return { label, href, isClickable: !nonClickablePaths.has(href) && idx < segments.length - 1 };
+  });
+
+  const pageTitle = breadcrumbs[breadcrumbs.length - 1]?.label ?? "Admin";
 
   const [profileOpen, setProfileOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
@@ -120,6 +154,7 @@ export default function AdminHeader({
       <div className="flex items-center gap-3 min-w-0">
         {onMenuToggle && (
           <button
+            id="mobile-menu-toggle"
             onClick={onMenuToggle}
             className="p-1.5 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 lg:hidden shrink-0 cursor-pointer"
             aria-label="Toggle menu"
@@ -129,9 +164,22 @@ export default function AdminHeader({
         )}
         <div className="min-w-0">
           <h1 className="text-sm sm:text-base font-semibold text-gray-900 truncate">{pageTitle}</h1>
-          <p className="text-[10px] sm:text-xs text-gray-400 truncate">
-            Admin CMS &rsaquo; {pageTitle}
-          </p>
+          <nav className="text-[10px] sm:text-xs text-gray-400 truncate flex items-center gap-1 mt-0.5" aria-label="Breadcrumb">
+            {breadcrumbs.map((crumb, idx) => (
+              <span key={crumb.href} className="flex items-center gap-1">
+                {idx > 0 && <span className="text-gray-300">&rsaquo;</span>}
+                {crumb.isClickable ? (
+                  <Link href={crumb.href} className="hover:text-gray-600 transition-colors">
+                    {crumb.label}
+                  </Link>
+                ) : (
+                  <span className={idx === breadcrumbs.length - 1 ? "text-gray-500 font-medium" : ""}>
+                    {crumb.label}
+                  </span>
+                )}
+              </span>
+            ))}
+          </nav>
         </div>
       </div>
 

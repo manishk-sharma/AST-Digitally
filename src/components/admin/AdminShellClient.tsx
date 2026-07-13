@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import AdminSidebar from "@/components/admin/Sidebar";
 import AdminHeader from "@/components/admin/Header";
@@ -17,14 +18,33 @@ interface AdminShellClientProps {
 
 export default function AdminShellClient({ user, children }: AdminShellClientProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
-  // Lock body scroll and handle Escape key to close drawer
+  // Close mobile sidebar on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
+
+  // Lock body scroll, manage focus, and handle Escape key to close drawer
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
+
+      // Focus the close button inside the drawer
+      setTimeout(() => {
+        document.getElementById("mobile-menu-close")?.focus();
+      }, 50);
+
       const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Escape") setMobileMenuOpen(false);
+        if (e.key === "Escape") {
+          setMobileMenuOpen(false);
+          // Return focus to hamburger toggle
+          setTimeout(() => {
+            document.getElementById("mobile-menu-toggle")?.focus();
+          }, 50);
+        }
       };
+
       window.addEventListener("keydown", handleKeyDown);
       return () => {
         document.body.style.overflow = "";
@@ -50,17 +70,30 @@ export default function AdminShellClient({ user, children }: AdminShellClientPro
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                setTimeout(() => {
+                  document.getElementById("mobile-menu-toggle")?.focus();
+                }, 50);
+              }}
             />
             {/* Drawer */}
             <motion.div
               initial={{ x: "-100%" }}
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 220 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
               className="relative z-10 h-full w-64 shadow-2xl bg-white"
             >
-              <AdminSidebar user={user} onClose={() => setMobileMenuOpen(false)} />
+              <AdminSidebar
+                user={user}
+                onClose={() => {
+                  setMobileMenuOpen(false);
+                  setTimeout(() => {
+                    document.getElementById("mobile-menu-toggle")?.focus();
+                  }, 50);
+                }}
+              />
             </motion.div>
           </div>
         )}
